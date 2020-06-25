@@ -1,8 +1,11 @@
 import React from 'react';
 import {Provider} from 'react-redux'
 import store from './redux/store'
-import Home from './pages/Home'
 import Header from './components/Header'
+
+import Home from './pages/Home'
+import KnowledgeBase_index from './pages/KnowledgeBase/knowledgeBase_index'
+import CreateArticle from './pages/KnowledgeBase/CreateArticle'
 
 import {
   BrowserRouter as Router,
@@ -19,6 +22,8 @@ function App() {
               <Header />
               <Switch>
                 <Route exact path="/" component={Home} />
+                <Route path="/KnowledgeBase_index" component={KnowledgeBase_index} />
+                <Route path="/CreateArticle" component={CreateArticle} />
                </Switch>
             </Router>
         </div>

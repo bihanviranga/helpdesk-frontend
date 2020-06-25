@@ -34,6 +34,7 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             Help DESK
             <Button ml={5} color="inherit" component={Link} to='/'>Home</Button>
+            <Button ml={5} color="inherit" component={Link} to='/KnowledgeBase_index'>Knowledge Base</Button>
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
