@@ -6,12 +6,15 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import KnowledgeBase_index from './pages/KnowledgeBase/knowledgeBase_index'
 import CreateArticle from './pages/KnowledgeBase/CreateArticle'
+import UserIndex from './pages/User/UserIndex';
+import UserRegistration from './pages/User/UserRegistration'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
+
 
 function App() {
   return (
@@ -24,6 +27,8 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route path="/KnowledgeBase_index" component={KnowledgeBase_index} />
                 <Route path="/CreateArticle" component={CreateArticle} />
+                <Route path="/User" component={UserIndex} />
+                <Route path="/UserRegistration" component={UserRegistration} />
                </Switch>
             </Router>
         </div>

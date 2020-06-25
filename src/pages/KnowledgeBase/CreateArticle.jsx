@@ -30,8 +30,6 @@ function CreateArticle() {
                     }
                 }>publish</button>     
             </form> 
-            {JSON.stringify(article)}
-            
         </div>
     )
 }
