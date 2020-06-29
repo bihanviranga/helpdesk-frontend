@@ -26,3 +26,20 @@ export const fetchAllUsers = () => {
         })
     }
 }
+
+export const loginUser = (loginDetails) => {
+    return dispatch => {
+        dispatch({
+            type:"LOGIN_USER",
+            payload : new Promise((resolve , reject)=>{
+                Axios.post("https://localhost:44351/User/Login" , loginDetails)
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(err => {
+                    const errMzg = err.message
+                })
+            })
+        })
+    }
+}

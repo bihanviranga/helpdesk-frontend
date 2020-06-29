@@ -35,8 +35,9 @@ export default function Header() {
             Help DESK
             <Button ml={5} color="inherit" component={Link} to='/'>Home</Button>
             <Button ml={5} color="inherit" component={Link} to='/KnowledgeBase_index'>Knowledge Base</Button>
+            <Button ml={5} color="inherit" component={Link} to='/User'>User</Button>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" component={Link} to='/UserLogin'>Login</Button>
         </Toolbar>
       </AppBar>
     </div>
