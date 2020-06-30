@@ -34,7 +34,7 @@ export const loginUser = (loginDetails) => {
             payload : new Promise((resolve , reject)=>{
                 Axios.post("https://localhost:44351/User/Login" , loginDetails)
                 .then(response => {
-                    console.log(response.data)
+                    resolve(response.data)
                 })
                 .catch(err => {
                     const errMzg = err.message

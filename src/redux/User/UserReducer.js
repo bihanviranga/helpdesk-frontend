@@ -1,5 +1,6 @@
 const initialState = {
-    users:null
+    users:null,
+    currentUser : null
 }
 
 const userReducer = (state = initialState , action) => {
@@ -7,6 +8,14 @@ const userReducer = (state = initialState , action) => {
         return {
             ...state,
             users : action.payload
+        }
+    }else if(action.type == "LOGIN_USER_FULFILLED"){
+
+        //storing token in localStorage ....
+        localStorage.setItem('Token', action.payload.token)
+        return {
+            ...state,
+            currentUser : action.payload
         }
     }
     else{
