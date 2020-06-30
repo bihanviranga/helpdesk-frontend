@@ -9,6 +9,7 @@ import CreateArticle from './pages/KnowledgeBase/CreateArticle'
 import UserIndex from './pages/User/UserIndex';
 import UserRegistration from './pages/User/UserRegistration'
 import UserLogin from './pages/User/UserLogin'
+import CreateTicket from './pages/Ticket/CreateTicket'
 
 import {
   BrowserRouter as Router,
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/User" component={UserIndex} />
                 <Route path="/UserRegistration" component={UserRegistration} />
                 <Route path="/UserLogin" component={UserLogin} />
+                <Route path="/CreateTicket" component={CreateTicket} />
                </Switch>
             </Router>
         </div>

@@ -22,6 +22,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
+  
+  function LoginCheck(){
+    if(localStorage.getItem('Token') == null){
+      return ( <Button color="inherit" component={Link} to='/UserLogin'>Login</Button> )
+    }else{
+      return ( <Button color="inherit" onClick={()=>{
+        localStorage.removeItem('Token')
+      }} >Log Out</Button> )
+    }
+  }
+
   const classes = useStyles();
 
   return (
@@ -36,8 +47,9 @@ export default function Header() {
             <Button ml={5} color="inherit" component={Link} to='/'>Home</Button>
             <Button ml={5} color="inherit" component={Link} to='/KnowledgeBase_index'>Knowledge Base</Button>
             <Button ml={5} color="inherit" component={Link} to='/User'>User</Button>
+            <Button ml={5} color="inherit" component={Link} to='/CreateTicket'>Create Ticket</Button>
           </Typography>
-          <Button color="inherit" component={Link} to='/UserLogin'>Login</Button>
+          <LoginCheck />
         </Toolbar>
       </AppBar>
     </div>
