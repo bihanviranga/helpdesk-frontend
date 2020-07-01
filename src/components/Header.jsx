@@ -37,9 +37,9 @@ export default function Header() {
       
       dispatch(getProfile())
     }
-      return()=>{
+    return()=>{
 
-      }
+    }
   },[_userReducer.userProfile , localStorage.getItem('Token') ])
   
   function LoginCheck(){
@@ -50,6 +50,12 @@ export default function Header() {
         dispatch(logOutUser())
       }} >Log Out</Button> )
     }
+  }
+
+  function CreateTicket(){
+    if(_userReducer.userProfile == null){
+      return null
+    }else{ return (<Button ml={5} color="inherit" component={Link} to='/CreateTicket'>Create Ticket</Button>) }
   }
 
   const classes = useStyles();
@@ -66,9 +72,13 @@ export default function Header() {
             <Button ml={5} color="inherit" component={Link} to='/'>Home</Button>
             <Button ml={5} color="inherit" component={Link} to='/KnowledgeBase_index'>Knowledge Base</Button>
             <Button ml={5} color="inherit" component={Link} to='/User'>User</Button>
-            <Button ml={5} color="inherit" component={Link} to='/CreateTicket'>Create Ticket</Button>
+            
+            <CreateTicket />
+
           </Typography>
+
           <LoginCheck />
+
         </Toolbar>
       </AppBar>
     </div>

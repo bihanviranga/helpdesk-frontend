@@ -52,7 +52,7 @@ export const getProfile = () =>{
                 Axios.get("https://localhost:44351/user/GetProfile", {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
             }).then(res => {
-                console.log(res.data)
+                resolve(res.data)
             })
             })
         })

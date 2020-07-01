@@ -5,6 +5,7 @@ import { createTicket } from '../../redux'
 function CreateTicket() {
 
     const dispatch = useDispatch();
+    const _userReducer = useSelector(state=>state.user)
     const initTicket = {
         CompanyId : "ubhcsw",
         ProductId : "csooxqs",
@@ -15,7 +16,7 @@ function CreateTicket() {
         TktContent : null,
         TktStatus : "cwnj",
         TktPriority : "okmo",
-        TktCreatedBy : "cwom",
+        TktCreatedBy :_userReducer.userProfile.userName,
         TktAssignedTo : "ckw",
         TktCreatedDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
         TktClosedDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
@@ -27,7 +28,7 @@ function CreateTicket() {
 
     const [ticket , setTicket] = useState(initTicket);
 
-    const _userReducer = useSelector(state=>state.user)
+    
     useEffect(()=>{
         // dispatch(fetchAllUsers())
         return()=>{
@@ -38,7 +39,7 @@ function CreateTicket() {
     return (
         <div>
             <h3>Create Ticket</h3>
-            {localStorage.getItem('Token')}
+
             <div>
                 <form action="">
                     <label htmlFor="">Ticket Subject : </label>
@@ -47,7 +48,11 @@ function CreateTicket() {
                     <input type="text" name="TktContent" placeholder="Tkt Content" onChange={e=>  setTicket({ ...ticket , TktContent : e.target.value })} /><br/>
                     <button onClick={(e)=>{
                         e.preventDefault();
-                        dispatch(createTicket(ticket))
+                       if(localStorage.getItem("Token") != null) {
+                            dispatch(createTicket(ticket))
+                        }else{
+                            alert("logFirst")
+                        }
                     }} >Create</button>
                 </form>
             </div>

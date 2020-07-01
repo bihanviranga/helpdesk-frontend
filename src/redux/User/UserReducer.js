@@ -21,6 +21,11 @@ const userReducer = (state = initialState , action) => {
         localStorage.removeItem('Token')
  
         return { ...state }
+    }else if(action.type == "GET_PROFILE_FULFILLED" ){
+        return {
+            ...state,
+            userProfile : action.payload
+        }
     }
     else{
         return state
