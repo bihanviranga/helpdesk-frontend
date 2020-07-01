@@ -1,4 +1,8 @@
-import React from 'react';
+import React , {useEffect} from 'react';
+import {useSelector , useDispatch} from 'react-redux'
+import { getProfile , logOutUser} from '../redux/index'
+
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,14 +25,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function Header() {
+
+  const dispatch = useDispatch();
+  const _userReducer = useSelector(state=>state.user)
+
+  useEffect(()=>{
+    if(_userReducer.userProfile == null && localStorage.getItem('Token') != null){
+      
+      dispatch(getProfile())
+    }
+      return()=>{
+
+      }
+  },[_userReducer.userProfile , localStorage.getItem('Token') ])
   
   function LoginCheck(){
     if(localStorage.getItem('Token') == null){
       return ( <Button color="inherit" component={Link} to='/UserLogin'>Login</Button> )
     }else{
       return ( <Button color="inherit" onClick={()=>{
-        localStorage.removeItem('Token')
+        dispatch(logOutUser())
       }} >Log Out</Button> )
     }
   }

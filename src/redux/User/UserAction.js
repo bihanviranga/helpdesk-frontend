@@ -43,3 +43,25 @@ export const loginUser = (loginDetails) => {
         })
     }
 }
+
+export const getProfile = () =>{
+    return dispatch => {
+        dispatch({
+            type : "GET_PROFILE",
+            payload : new Promise ((resolve , reject) => {
+                Axios.get("https://localhost:44351/user/GetProfile", {
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+            }).then(res => {
+                console.log(res.data)
+            })
+            })
+        })
+    }
+}
+
+export const logOutUser = () => {
+    return  {
+        type : "LOGOUT_USER",
+        payload : null
+    }
+}

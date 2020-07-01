@@ -5,7 +5,9 @@ export {
 export { 
     createUser ,
     fetchAllUsers , 
-    loginUser 
+    loginUser ,
+    logOutUser,
+    getProfile
 } from './User/UserAction'
 
 export {

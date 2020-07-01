@@ -1,4 +1,7 @@
-import React from 'react';
+import React , {useEffect} from 'react';
+import {useSelector , useDispatch} from 'react-redux'
+
+
 import {Provider} from 'react-redux'
 import store from './redux/store'
 import Header from './components/Header'
@@ -19,6 +22,7 @@ import {
 
 
 function App() {
+
   return (
     <>
       <Provider store={store}>
