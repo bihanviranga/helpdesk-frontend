@@ -1,4 +1,8 @@
-import React from 'react';
+import React , {useEffect} from 'react';
+import {useSelector , useDispatch} from 'react-redux'
+import { getProfile , logOutUser} from '../redux/index'
+
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,7 +25,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function Header() {
+
+  const dispatch = useDispatch();
+  const _userReducer = useSelector(state=>state.user)
+
+  useEffect(()=>{
+    if(_userReducer.userProfile == null && localStorage.getItem('Token') != null){
+      
+      dispatch(getProfile())
+    }
+    return()=>{
+
+    }
+  },[_userReducer.userProfile , localStorage.getItem('Token') ])
+  
+  function LoginCheck(){
+    if(localStorage.getItem('Token') == null){
+      return ( <Button color="inherit" component={Link} to='/UserLogin'>Login</Button> )
+    }else{
+      return ( <Button color="inherit" onClick={()=>{
+        dispatch(logOutUser())
+      }} >Log Out</Button> )
+    }
+  }
+
+  function CreateTicket(){
+    if(_userReducer.userProfile == null){
+      return null
+    }else{ return (<Button ml={5} color="inherit" component={Link} to='/CreateTicket'>Create Ticket</Button>) }
+  }
+
   const classes = useStyles();
 
   return (
@@ -35,8 +71,14 @@ export default function Header() {
             Help DESK
             <Button ml={5} color="inherit" component={Link} to='/'>Home</Button>
             <Button ml={5} color="inherit" component={Link} to='/KnowledgeBase_index'>Knowledge Base</Button>
+            <Button ml={5} color="inherit" component={Link} to='/User'>User</Button>
+            
+            <CreateTicket />
+
           </Typography>
-          <Button color="inherit">Login</Button>
+
+          <LoginCheck />
+
         </Toolbar>
       </AppBar>
     </div>

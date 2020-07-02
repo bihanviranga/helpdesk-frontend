@@ -1,6 +1,15 @@
-export { changeData } from './example/exampleAction'
-export { getData } from './example/exampleAction'
+export { 
+    createArticle
+ } from './KnowledgeBase/KnowledgeBaseAction'
 
-export { createArticle } from './KnowledgeBase/KnowledgeBaseAction'
+export { 
+    createUser ,
+    fetchAllUsers , 
+    loginUser ,
+    logOutUser,
+    getProfile
+} from './User/UserAction'
 
-export { createUser , fetchAllUsers } from './User/UserAction'
+export {
+    createTicket
+} from './Ticket/TicketAction'

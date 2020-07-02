@@ -26,3 +26,42 @@ export const fetchAllUsers = () => {
         })
     }
 }
+
+export const loginUser = (loginDetails) => {
+    return dispatch => {
+        dispatch({
+            type:"LOGIN_USER",
+            payload : new Promise((resolve , reject)=>{
+                Axios.post("https://localhost:44351/User/Login" , loginDetails)
+                .then(response => {
+                    resolve(response.data)
+                })
+                .catch(err => {
+                    const errMzg = err.message
+                })
+            })
+        })
+    }
+}
+
+export const getProfile = () =>{
+    return dispatch => {
+        dispatch({
+            type : "GET_PROFILE",
+            payload : new Promise ((resolve , reject) => {
+                Axios.get("https://localhost:44351/user/GetProfile", {
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+            }).then(res => {
+                resolve(res.data)
+            })
+            })
+        })
+    }
+}
+
+export const logOutUser = () => {
+    return  {
+        type : "LOGOUT_USER",
+        payload : null
+    }
+}
