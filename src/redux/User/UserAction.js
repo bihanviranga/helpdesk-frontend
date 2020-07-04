@@ -59,6 +59,21 @@ export const getProfile = () =>{
     }
 }
 
+export const getUserByUserName = () =>{
+    return dispatch => {
+        dispatch({
+            type : "GET_USER_BY_USER_NAME",
+            payload : new Promise ((resolve , reject) => {
+                Axios.get(`https://localhost:44351/user/${ JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName }` , {
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+            }).then(res => {
+                resolve(res.data)
+            })
+            })
+        })
+    }
+}
+
 export const logOutUser = () => {
     return  {
         type : "LOGOUT_USER",
