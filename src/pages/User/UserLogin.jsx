@@ -15,7 +15,7 @@ function UserLogin() {
     return (
         <div>
             <form>
-                <input type="text" name="UserNameOrEmail" placeholder="User Name" onChange={e=>  setLoginDetails({ ...LoginDetails , UserNameOrEmail : e.target.value })}/>
+                <input type="text" name="UserNameOrEmail" placeholder="User Name Or Email" onChange={e=>  setLoginDetails({ ...LoginDetails , UserNameOrEmail : e.target.value })}/>
                 <input type="password" name="password" placeholder="password" onChange={e=>  setLoginDetails({ ...LoginDetails , password : e.target.value })}/>
                 <button onClick={(e)=>{
                     dispatch(loginUser(LoginDetails))

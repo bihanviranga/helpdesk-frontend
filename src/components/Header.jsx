@@ -34,7 +34,6 @@ export default function Header() {
 
   useEffect(()=>{
     if(_userReducer.userProfile == null && localStorage.getItem('Token') != null){
-      
       dispatch(getProfile())
     }
     return()=>{
@@ -53,7 +52,7 @@ export default function Header() {
   }
 
   function CreateTicket(){
-    if(_userReducer.userProfile == null){
+    if(localStorage.getItem("Token") == null){
       return null
     }else{ return (<Button ml={5} color="inherit" component={Link} to='/CreateTicket'>Create Ticket</Button>) }
   }

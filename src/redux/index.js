@@ -13,3 +13,7 @@ export {
 export {
     createTicket
 } from './Ticket/TicketAction'
+
+export {
+    fetchAllCompanies
+} from './Company/CompanyAction'

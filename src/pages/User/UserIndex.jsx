@@ -11,26 +11,53 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+//dialog box component
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import {Link} from 'react-router-dom'
 
 function UserIndex() {
     const dispatch = useDispatch()
     const _userReducer = useSelector(state=>state.user)
+   
+    const [open, setOpen] = useState(false);
+
+    const initSelectedUser = {}
+    const [selectedUser , setSelectedUser] = useState(initSelectedUser)
+
     useEffect(()=>{
-        dispatch(fetchAllUsers())
-        return()=>{
-
+        if(_userReducer.users.length == 0){
+            dispatch(fetchAllUsers())
         }
-    },[])
-
+      return()=>{
+  
+      }   
+    },[_userReducer.users.length])
 
     function Users(){
-        if(_userReducer.users == null ){ return (<p>loading ...</p>) }
+        if(_userReducer.users.length == 0 ){
+            
+            return (
+                <TableRow >
+                    <TableCell component="th" scope="row"> Loading ... </TableCell>    
+                </TableRow>
+            ) }
         else { 
            return (
                 _userReducer.users.map((row)=>(
-                    <TableRow key={row.companyId} >
-                        <TableCell component="th" scope="row"> {row.userName} </TableCell>
+                    <TableRow key={row.userName} >
+                        <TableCell component="th" scope="row"> 
+                            <Button variant="outlined" color="primary" onClick={()=>{
+                                setSelectedUser({...selectedUser ,selectedUser : row })
+                                setOpen(true)
+                            }}>
+                                {row.userName}
+                            </Button>
+                        </TableCell>
                         <TableCell align="right">{row.companyId}</TableCell>
                         <TableCell align="right">{row.fullName}</TableCell>
                         <TableCell align="right">{row.email}</TableCell>
@@ -40,7 +67,7 @@ function UserIndex() {
                     )
                 ))  
             }
-    }
+    }    
 
     return (
         <div>
@@ -51,7 +78,7 @@ function UserIndex() {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell><b>fullName</b></TableCell>
+                                <TableCell><b>User Name</b></TableCell>
                                 <TableCell align="right"><b>Company Id</b></TableCell>
                                 <TableCell align="right"><b>Full Name</b></TableCell>
                                 <TableCell align="right"><b>Email</b></TableCell>
@@ -64,6 +91,34 @@ function UserIndex() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                
+            </div>
+            
+            {/* // user information dialog box */}
+
+            <div>
+                
+                <Dialog
+                    open={open}
+                    onClose={()=>{setOpen(false)}}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"User Information"}</DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        { JSON.stringify(selectedUser) }
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={()=>{setOpen(false)}} color="primary">
+                        Disagree
+                    </Button>
+                    <Button onClick={()=>{setOpen(false)}} color="primary" autoFocus>
+                        Agree
+                    </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         </div>
     )
