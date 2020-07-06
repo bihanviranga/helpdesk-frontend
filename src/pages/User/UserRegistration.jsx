@@ -1,6 +1,7 @@
 import React , {useState , useEffect }from 'react'
 import {useSelector , useDispatch} from 'react-redux'
 import { createUser , fetchAllCompanies } from '../../redux'
+import { useHistory } from "react-router";
 
 function UserRegistration() {
     const dispatch = useDispatch();
@@ -18,8 +19,21 @@ function UserRegistration() {
         Password : null,
         ConfirmPassword : null
     }
-
+    const history = useHistory();
     const [user , setUser] = useState(initUser);
+
+    const registerUser = (e) =>{
+        e.preventDefault();
+        if(user.UserRole.length > 0 && user.UserType.length > 0 && user.CompanyId.length > 0 ){
+            dispatch(createUser(user))  
+            history.push({
+                pathname:  "/User"
+                })
+        }else{
+            alert("fill all ")
+        }
+    }
+    
     useEffect(()=>{
           if(_companyReducer.comapnies.length == 0){
             dispatch(fetchAllCompanies())
@@ -76,12 +90,7 @@ function UserRegistration() {
                 <input type="password" name="ConfirmPassword" placeholder="Confirmed Password" onChange={e=>  setUser({ ...user , ConfirmPassword : e.target.value })} /><br/>
                 
                 <button onClick={(e)=>{
-                    e.preventDefault();
-                    if(user.UserRole.length > 0 && user.UserType.length > 0 && user.CompanyId.length > 0 ){
-                        dispatch(createUser(user))
-                    }else{
-                        alert("fill all ")
-                    }
+                    registerUser(e)
                 }}>Register</button>
             </form>
         </div>

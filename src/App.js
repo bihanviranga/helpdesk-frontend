@@ -12,6 +12,7 @@ import CreateArticle from './pages/KnowledgeBase/CreateArticle'
 import UserIndex from './pages/User/UserIndex';
 import UserRegistration from './pages/User/UserRegistration'
 import UserLogin from './pages/User/UserLogin'
+import MyProfile from './pages/User/MyProfile'
 import CreateTicket from './pages/Ticket/CreateTicket'
 
 import {
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/UserRegistration" component={UserRegistration} />
                 <Route path="/UserLogin" component={UserLogin} />
                 <Route path="/CreateTicket" component={CreateTicket} />
+                <Route path="/MyProfile" component={MyProfile} />
                </Switch>
             </Router>
         </div>

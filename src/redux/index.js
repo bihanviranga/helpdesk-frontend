@@ -7,7 +7,8 @@ export {
     fetchAllUsers , 
     loginUser ,
     logOutUser,
-    getProfile
+    deleteUser,
+    getUserByUserName
 } from './User/UserAction'
 
 export {

@@ -1,10 +1,28 @@
 const initialState = {
     users:[],
+    user:null,
     userProfile : null
 }
 
 const userReducer = (state = initialState , action) => {
-    if(action.type == "FETCH_USERS_SUCCESS_FULFILLED"){
+
+    if(action.type == "CREATE_USER_FULFILLED" ){
+        
+        return {
+            ...state,
+            users : [...state.users , action.payload]   
+        }
+
+    } 
+    else if(action.type == "DELETE_USER_FULFILLED"){
+      
+         return {
+                ...state,
+                users : [ ...state.users.filter(function(value){ return value.userName != action.payload.userName;}) ]
+        }
+        
+    }
+    else if(action.type == "FETCH_USERS_SUCCESS_FULFILLED"){
         return {
             ...state,
             users : action.payload
@@ -21,10 +39,10 @@ const userReducer = (state = initialState , action) => {
         localStorage.removeItem('Token')
  
         return { ...state }
-    }else if(action.type == "GET_PROFILE_FULFILLED" ){
+    }else if(action.type == "GET_USER_BY_USER_NAME_FULFILLED" ){
         return {
             ...state,
-            userProfile : action.payload
+            user : action.payload
         }
     }
     else{

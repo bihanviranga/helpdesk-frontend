@@ -1,10 +1,13 @@
 import React , {useState , useEffect }from 'react'
 import {useSelector , useDispatch} from 'react-redux'
+import { useHistory } from "react-router";
 import { createTicket } from '../../redux'
 
 function CreateTicket() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const _userReducer = useSelector(state=>state.user)
     const initTicket = {
         CompanyId : "ubhcsw",
@@ -24,7 +27,12 @@ function CreateTicket() {
 
     
     useEffect(()=>{
-        // dispatch(fetchAllUsers())
+        //validate if user log or not
+        if(localStorage.getItem("Token") == undefined){
+            history.push({
+                pathname:  "/UserLogin"
+            })  
+        }
         return()=>{
 
         }
