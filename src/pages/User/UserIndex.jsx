@@ -1,6 +1,6 @@
 import React , {useEffect , useState} from 'react'
 import {useSelector , useDispatch} from 'react-redux'
-import { fetchAllUsers } from '../../redux'
+import { fetchAllUsers , deleteUser } from '../../redux'
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -29,18 +29,9 @@ function UserIndex() {
     const initSelectedUser = {}
     const [selectedUser , setSelectedUser] = useState(initSelectedUser)
 
-    useEffect(()=>{
-        if(_userReducer.users.length == 0){
-            dispatch(fetchAllUsers())
-        }
-      return()=>{
-  
-      }   
-    },[_userReducer.users.length])
-
     function Users(){
         if(_userReducer.users.length == 0 ){
-            
+            dispatch(fetchAllUsers())
             return (
                 <TableRow >
                     <TableCell component="th" scope="row"> Loading ... </TableCell>    
@@ -52,7 +43,7 @@ function UserIndex() {
                     <TableRow key={row.userName} >
                         <TableCell component="th" scope="row"> 
                             <Button variant="outlined" color="primary" onClick={()=>{
-                                setSelectedUser({...selectedUser ,selectedUser : row })
+                                setSelectedUser(row)
                                 setOpen(true)
                             }}>
                                 {row.userName}
@@ -111,11 +102,14 @@ function UserIndex() {
                     </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                    <Button onClick={()=>{setOpen(false)}} color="primary">
-                        Disagree
+                    <Button onClick={()=>{
+                        setOpen(false)
+                        dispatch(deleteUser(selectedUser.userName))
+                    }} color="primary">
+                        Delete User
                     </Button>
                     <Button onClick={()=>{setOpen(false)}} color="primary" autoFocus>
-                        Agree
+                       Close
                     </Button>
                     </DialogActions>
                 </Dialog>

@@ -1,13 +1,41 @@
 import Axios from "axios"
 
 export const createUser = (user) => {
-    return ()=>{
-        Axios.post("https://localhost:44351/User/Register",user)
-        .then(res=>{
-            console.log(res.data)
+    return dispatch=>{
+        dispatch({
+            type:"CREATE_USER",
+            payload : new Promise((resolve , reject) => {
+                Axios.post("https://localhost:44351/User/Register",user)
+                .then(res=>{
+                    resolve(res.data)
+                })
+                .catch(err => {
+                    const errMzg = err.message
+                })
+            })
         })
     }
 }
+
+
+export const deleteUser = (user) => {
+    return dispatch =>{
+        dispatch({
+            type:"DELETE_USER",
+            payload: new Promise((resolve , reject)=>{
+                Axios.delete(`https://localhost:44351/User/${user}`)
+                .then(response => {
+                    const users = response.data
+                    resolve(users)
+                })
+                .catch(err => {
+                    const errMzg = err.message
+                })
+            })
+        })
+    }
+}
+
 
 export const fetchAllUsers = () => {
     return dispatch =>{
@@ -44,27 +72,12 @@ export const loginUser = (loginDetails) => {
     }
 }
 
-export const getProfile = () =>{
-    return dispatch => {
-        dispatch({
-            type : "GET_PROFILE",
-            payload : new Promise ((resolve , reject) => {
-                Axios.get("https://localhost:44351/user/GetProfile", {
-                headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
-            }).then(res => {
-                resolve(res.data)
-            })
-            })
-        })
-    }
-}
-
-export const getUserByUserName = () =>{
+export const getUserByUserName = (userName) =>{
     return dispatch => {
         dispatch({
             type : "GET_USER_BY_USER_NAME",
             payload : new Promise ((resolve , reject) => {
-                Axios.get(`https://localhost:44351/user/${ JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName }` , {
+                Axios.get(`https://localhost:44351/user/${ userName }` , {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
             }).then(res => {
                 resolve(res.data)
