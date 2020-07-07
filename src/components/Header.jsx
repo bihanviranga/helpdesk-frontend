@@ -30,17 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
 
   const dispatch = useDispatch();
-  const _userReducer = useSelector(state=>state.user)
 
-  useEffect(()=>{
-    if(_userReducer.userProfile == null && localStorage.getItem('Token') != null){
-      dispatch(getProfile())
-    }
-    return()=>{
-
-    }
-  },[_userReducer.userProfile , localStorage.getItem('Token') ])
-  
   function LoginCheck(){
     if(localStorage.getItem('Token') == null){
       return ( <Button color="inherit" component={Link} to='/UserLogin'>Login</Button> )
@@ -51,10 +41,18 @@ export default function Header() {
     }
   }
 
-  function CreateTicket(){
+  // navigation components
+
+  function CreateTicketComponent(){
     if(localStorage.getItem("Token") == null){
       return null
     }else{ return (<Button ml={5} color="inherit" component={Link} to='/CreateTicket'>Create Ticket</Button>) }
+  }
+
+
+  function MyProfileComponent(){
+    if(localStorage.getItem("Token") == null){ return null }
+    else { return (<Button ml={5} color="inherit" component={Link} to='/MyProfile'>My Profile</Button>) }
   }
 
   const classes = useStyles();
@@ -72,10 +70,11 @@ export default function Header() {
             <Button ml={5} color="inherit" component={Link} to='/KnowledgeBase_index'>Knowledge Base</Button>
             <Button ml={5} color="inherit" component={Link} to='/User'>User</Button>
             
-            <CreateTicket />
+            <CreateTicketComponent />
 
           </Typography>
 
+          <MyProfileComponent />
           <LoginCheck />
 
         </Toolbar>
