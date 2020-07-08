@@ -18,7 +18,7 @@ function CreateTicket() {
         TktSubject : null,
         TktContent : null,
         TktStatus : "New Ticket",
-        TktCreatedBy :JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName,
+        TktCreatedBy : localStorage.getItem("Token") == null ? null : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName,
         TktCreatedDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
         TktAttachment : null
     }
@@ -44,6 +44,15 @@ function CreateTicket() {
 
             <div>
                 <form action="">
+
+                    {/* <label htmlFor="">Clent : </label>
+                    <select name="Client" onChange={e=>  setUser({ ...user , CompanyId : e.target.value })} >
+                        <option value="">pleace select</option>
+                        {_companyReducer.comapnies.map((company)=>(
+                            <option value={company.companyId}>{ company.companyName }</option>
+                        ))}    
+                    </select> */}
+                    <br/>
                         
                     <label htmlFor="">Ticket Subject : </label>
                     <input type="text" name="TktSubject" placeholder="Tkt Subject" onChange={e=>  setTicket({ ...ticket , TktSubject : e.target.value })} /><br/>

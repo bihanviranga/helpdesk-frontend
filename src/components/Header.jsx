@@ -30,6 +30,15 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
 
   const dispatch = useDispatch();
+  const _userReducer = useSelector(state=>state.user)
+
+  // bind userReducer effects
+  useEffect(()=>{
+  
+    return()=>{
+
+    }   
+  },[_userReducer])
 
   function LoginCheck(){
     if(localStorage.getItem('Token') == null){
@@ -55,6 +64,11 @@ export default function Header() {
     else { return (<Button ml={5} color="inherit" component={Link} to='/MyProfile'>My Profile</Button>) }
   }
 
+  function CompanyComponent(){
+    if(localStorage.getItem("Token") == null){return null}
+    else { return (<Button ml={5} color="inherit" component={Link} to='/Company'>Company</Button>) }
+  }
+
   const classes = useStyles();
 
   return (
@@ -70,7 +84,9 @@ export default function Header() {
             <Button ml={5} color="inherit" component={Link} to='/KnowledgeBase_index'>Knowledge Base</Button>
             <Button ml={5} color="inherit" component={Link} to='/User'>User</Button>
             
+            
             <CreateTicketComponent />
+            <CompanyComponent />
 
           </Typography>
 

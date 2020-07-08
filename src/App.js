@@ -14,6 +14,7 @@ import UserRegistration from './pages/User/UserRegistration'
 import UserLogin from './pages/User/UserLogin'
 import MyProfile from './pages/User/MyProfile'
 import CreateTicket from './pages/Ticket/CreateTicket'
+import Company from './pages/Company/CompanyIndex'
 
 import {
   BrowserRouter as Router,
@@ -31,14 +32,15 @@ function App() {
             <Router>
               <Header />
               <Switch> 
-                <Route exact path="/" component={Home} />
-                <Route path="/KnowledgeBase_index" component={KnowledgeBase_index} />
-                <Route path="/CreateArticle" component={CreateArticle} />
-                <Route path="/User" component={UserIndex} />
-                <Route path="/UserRegistration" component={UserRegistration} />
-                <Route path="/UserLogin" component={UserLogin} />
-                <Route path="/CreateTicket" component={CreateTicket} />
-                <Route path="/MyProfile" component={MyProfile} />
+                  <Route exact path="/" component={Home} />
+                  <Route path="/KnowledgeBase_index" component={KnowledgeBase_index} />
+                  <Route path="/CreateArticle" component={CreateArticle} />
+                  <Route path="/User" component={UserIndex} />
+                  <Route path="/UserRegistration" component={UserRegistration} />
+                  <Route path="/UserLogin" component={UserLogin} />
+                  <Route path="/CreateTicket" component={CreateTicket} />
+                  <Route path="/MyProfile" component={MyProfile} />
+                  <Route path="/Company" component={Company} />
                </Switch>
             </Router>
         </div>

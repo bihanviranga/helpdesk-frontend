@@ -35,7 +35,7 @@ function UserRegistration() {
     }
     
     useEffect(()=>{
-          if(_companyReducer.comapnies.length == 0){
+          if(_companyReducer.companies.length == 0){
             dispatch(fetchAllCompanies())
           }
         return()=>{
@@ -58,20 +58,20 @@ function UserRegistration() {
                 <select name="UserRole" onChange={e=>  setUser({ ...user , UserRole : e.target.value })} >
                     <option value="">pleace select</option>
                     <option value="Manager">Manager</option>
-                    <option value="CEO">CEO</option>
+                    <option value="User">User</option>
                 </select><br/>
                 
                 <label htmlFor="">User Type : </label>
                 <select defaultValue={{ label: "Select Dept", value: 0 }} name="UserType" onChange={e=>  setUser({ ...user , UserType : e.target.value })}>
                     <option value="">pleace select</option>
                     <option value="Clien">Clien</option>
-                    <option selected value="Customer">Customer</option>
+                    <option selected value="HelpDesk">Help Desk</option>
                 </select><br/>
 
                 <label htmlFor="">User Comapny : </label>
                 <select name="CompanyName" onChange={e=>  setUser({ ...user , CompanyId : e.target.value })} >
                     <option value="">pleace select</option>
-                    {_companyReducer.comapnies.map((company)=>(
+                    {_companyReducer.companies.map((company)=>(
                         <option value={company.companyId}>{ company.companyName }</option>
                     ))}    
                 </select>

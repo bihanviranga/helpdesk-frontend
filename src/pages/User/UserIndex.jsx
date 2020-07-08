@@ -29,7 +29,8 @@ function UserIndex() {
     const initSelectedUser = {}
     const [selectedUser , setSelectedUser] = useState(initSelectedUser)
 
-    function Users(){
+    // Component
+    function UserListComponent(){
         if(_userReducer.users.length == 0 ){
             dispatch(fetchAllUsers())
             return (
@@ -78,7 +79,11 @@ function UserIndex() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <Users />
+
+
+                            <UserListComponent />
+
+                            
                         </TableBody>
                     </Table>
                 </TableContainer>
