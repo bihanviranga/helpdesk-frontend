@@ -1,41 +1,41 @@
 import React , {useEffect} from 'react';
 import {useSelector , useDispatch} from 'react-redux'
-import {  logOutUser} from '../redux/index'
-import { useHistory } from "react-router";
+import { getProfile , logOutUser} from '../redux/index'
 
-
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-
-
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem'; 
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
+import f from '../pages/Home'
 
-
+import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom'
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
   },
   title: {
-        flexGrow: 1,
-      },
+    flexGrow: 1,
+  },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -87,20 +87,17 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-  contanerStyle : {
-    width : "970px"
-  }
 }));
 
 
 
-export default function Header() {
+export default function TestComponent() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const _userReducer = useSelector(state=>state.user)
-  const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
 
   // bind userReducer effects
   useEffect(()=>{
@@ -110,16 +107,6 @@ export default function Header() {
     }   
   },[_userReducer])
 
-  function LoginCheck(){
-    if(localStorage.getItem('Token') == null){
-      return ( <Button color="inherit" component={Link} to='/UserLogin'>Login</Button> )
-    }else{
-      return ( <Button color="inherit" onClick={()=>{
-        dispatch(logOutUser())
-      }} >Log Out</Button> )
-    }
-  }
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -128,9 +115,9 @@ export default function Header() {
     setOpen(false);
   };
 
-  // navigation components
+   // navigation components
 
-  function CreateTicketComponent(){
+ function CreateTicketComponent(){
     if(localStorage.getItem("Token") == null){
       return null
     }else{ return (<Button ml={5} color="inherit" component={Link} to='/CreateTicket'>Create Ticket</Button>) }
@@ -147,13 +134,27 @@ export default function Header() {
     else { return (<Button ml={5} color="inherit" component={Link} to='/Company'>Company</Button>) }
   }
 
-  const classes = useStyles();
+  function LoginCheck(){
+    if(localStorage.getItem('Token') == null){
+      return ( <Button color="inherit" component={Link} to='/UserLogin'>Login</Button> )
+    }else{
+      return ( <Button color="inherit" onClick={()=>{
+        dispatch(logOutUser())
+      }} >Log Out</Button> )
+    }
+  }
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
         <Toolbar>
-        <IconButton
+          <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -162,13 +163,14 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            <span onClick={()=>{history.push({  pathname:  "/" })}}>Help DESK</span>
-            
+          <Typography variant="h6" noWrap>
+            Help Desk
+            <Button ml={5} color="inherit" component={Link} to='/'>Home</Button>
+            <Button ml={5} color="inherit" component={Link} to='/KnowledgeBase_index'>Knowledge Base</Button>
+            <Button ml={5} color="inherit" component={Link} to='/User'>User</Button>
             
             <CreateTicketComponent />
             <CompanyComponent />
-
           </Typography>
 
           <MyProfileComponent />
@@ -187,40 +189,47 @@ export default function Header() {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            Main Manue
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />
         <List>
-          <ListItem button >
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-            <ListItemText primary={"Knowledge Base"} onClick = {()=>{ 
-              history.push({  pathname:  "/KnowledgeBase_index" }) 
-              handleDrawerClose()
-            }}  />
-          </ListItem>
-          <ListItem button >
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-            <ListItemText primary={"User"} onClick = {()=>{ 
-              history.push({  pathname:  "/User" }) 
-              handleDrawerClose()
-            }}  />
-          </ListItem>
-         
-          
-        </List>
-        <Divider />
-        <List>
-          {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
-          ))} */}
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
         </List>
       </Drawer>
-     
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.drawerHeader} />
+        <Typography paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
+          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
+          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
+          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
+          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
+          donec massa sapien faucibus et molestie ac.
+        </Typography>
+      </main>
     </div>
   );
 }

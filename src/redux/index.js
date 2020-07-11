@@ -16,5 +16,7 @@ export {
 } from './Ticket/TicketAction'
 
 export {
-    fetchAllCompanies
+    createCompany,
+    fetchAllCompanies,
+    deleteCompany
 } from './Company/CompanyAction'
