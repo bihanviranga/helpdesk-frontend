@@ -40,15 +40,20 @@ export const deleteUser = (user) => {
 export const fetchAllUsers = () => {
     return dispatch =>{
         dispatch({
-            type:"FETCH_USERS_SUCCESS",
+            type:"FETCH_USERS",
             payload: new Promise((resolve , reject)=>{
-                Axios.get('https://localhost:44351/User/')
+                Axios.get('https://localhost:44351/User/' , {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                })
                 .then(response => {
-                    const users = response.data
-                    resolve(users)
+                    console.log(response)
+                    resolve(response.data)
+
                 })
                 .catch(err => {
-                    const errMzg = err.message
+                    
+                    resolve(err.response.data)
+                    
                 })
             })
         })

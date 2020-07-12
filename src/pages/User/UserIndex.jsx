@@ -30,14 +30,28 @@ function UserIndex() {
     const [selectedUser , setSelectedUser] = useState(initSelectedUser)
 
     // Component
+
+    function UserRegistrarionButtonComponet(){
+        if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "Manager"){
+            return( <Button color="inherit" component={Link} to='/UserRegistration'>Register New User</Button> )
+        }else { return null }
+    }
+
     function UserListComponent(){
-        if(_userReducer.users.length == 0 ){
+        if(_userReducer.users.length == 0 && _userReducer.errs.fetchUserError == null ){
             dispatch(fetchAllUsers())
             return (
                 <TableRow >
                     <TableCell component="th" scope="row"> Loading ... </TableCell>    
                 </TableRow>
             ) }
+            else if(_userReducer.errs.fetchUserError != null || JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole != "Manager"){
+                return(
+                    <TableRow >
+                        <TableCell component="th" scope="row"> {_userReducer.errs.fetchUserError} </TableCell>    
+                    </TableRow>
+                )
+            }
         else { 
            return (
                 _userReducer.users.map((row)=>(
@@ -64,7 +78,7 @@ function UserIndex() {
     return (
         <div>
             <h3>Users</h3>
-            <div><Button color="inherit" component={Link} to='/UserRegistration'>Register New User</Button></div>
+            <div> <UserRegistrarionButtonComponet /> </div>
             <div>
                 <TableContainer component={Paper} >
                     <Table aria-label="simple table">

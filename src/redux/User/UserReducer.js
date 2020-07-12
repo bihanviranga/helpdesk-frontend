@@ -1,5 +1,8 @@
 const initialState = {
     users:[],
+    errs : {
+       fetchUserError : null, 
+    },
     user:null,
     userProfile : null
 }
@@ -22,11 +25,19 @@ const userReducer = (state = initialState , action) => {
         }
         
     }
-    else if(action.type == "FETCH_USERS_SUCCESS_FULFILLED"){
-        return {
-            ...state,
-            users : action.payload
+    else if(action.type == "FETCH_USERS_FULFILLED"){
+        if(action.payload == '401 Unauthorized  Access'){
+            return {
+                ...state ,
+                errs : { ...state.errs , fetchUserError : action.payload }
+            }
+        }else{
+            return {
+                ...state,
+                users : action.payload
+            }
         }
+        
     }else if(action.type == "LOGIN_USER_FULFILLED"){
 
         //storing token in localStorage ....
