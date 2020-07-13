@@ -1,6 +1,7 @@
 import React , {useEffect , useState} from 'react'
 import {useSelector , useDispatch} from 'react-redux'
 import { fetchAllUsers , deleteUser } from '../../redux'
+import { useHistory } from "react-router";
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,18 +24,28 @@ import {Link} from 'react-router-dom'
 function UserIndex() {
     const dispatch = useDispatch()
     const _userReducer = useSelector(state=>state.user)
+    const history =  useHistory()
    
     const [open, setOpen] = useState(false);
 
     const initSelectedUser = {}
     const [selectedUser , setSelectedUser] = useState(initSelectedUser)
 
+
+    
+
     // Component
 
     function UserRegistrarionButtonComponet(){
-        if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "Manager"){
-            return( <Button color="inherit" component={Link} to='/UserRegistration'>Register New User</Button> )
-        }else { return null }
+        if(localStorage.getItem("Token") != null){
+           return JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "Manager" ?
+                ( <Button color="inherit" component={Link} to='/UserRegistration'>Register New User</Button> ) : null
+            
+        }else { 
+            history.push({ pathname:  "/UserLogin" })           
+            return null
+         }
+
     }
 
     function UserListComponent(){
@@ -64,7 +75,7 @@ function UserIndex() {
                                 {row.userName}
                             </Button>
                         </TableCell>
-                        <TableCell align="right">{row.companyId}</TableCell>
+                        <TableCell align="right">{row.companyName}</TableCell>
                         <TableCell align="right">{row.fullName}</TableCell>
                         <TableCell align="right">{row.email}</TableCell>
                         <TableCell align="right">{row.userRole}</TableCell>
@@ -85,7 +96,7 @@ function UserIndex() {
                         <TableHead>
                             <TableRow>
                                 <TableCell><b>User Name</b></TableCell>
-                                <TableCell align="right"><b>Company Id</b></TableCell>
+                                <TableCell align="right"><b>Company</b></TableCell>
                                 <TableCell align="right"><b>Full Name</b></TableCell>
                                 <TableCell align="right"><b>Email</b></TableCell>
                                 <TableCell align="right"><b>User Role</b></TableCell>

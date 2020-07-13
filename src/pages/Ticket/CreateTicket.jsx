@@ -1,18 +1,16 @@
 import React , {useState , useEffect }from 'react'
 import {useSelector , useDispatch} from 'react-redux'
-import { useHistory } from "react-router";
-import { createTicket  , fetchAllCompanies} from '../../redux'
+import { 
+    createTicket  , fetchAllCompanies ,
+     fetchProductsByComapnyId , fetchCategoriesByComapnyId,
+     fetchModulesByComapnyId
+} from '../../redux'
 
 
-
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -45,20 +43,23 @@ const useStyles = makeStyles((theme) => ({
 function CreateTicket() {
 
     const dispatch = useDispatch();
-    const history = useHistory();
     const classes = useStyles();
 
     const _companyReducer = useSelector(state=>state.company)
+    const _productReducer = useSelector(state=>state.product)
+    const _categoryReducer = useSelector(state=>state.category)
+    const _moduleReducer = useSelector(state=>state.module)
+
     const initTicket = {
         CompanyId : "",
-        ProductId : "csooxqs",
-        ModuleId : "cwdokm",
-        BrandId : "cwkj",
-        CategoryId : "cwkom",
+        ProductId : "",
+        ModuleId : "",
+        BrandId : "",
+        CategoryId : "",
         TktSubject : null,
         TktContent : null,
         TktStatus : "New Ticket",
-        TktCreatedBy : localStorage.getItem("Token") == null ? null : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName,
+        TktCreatedBy : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName,
         TktCreatedDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
         TktAttachment : null
     }
@@ -67,12 +68,7 @@ function CreateTicket() {
 
     
     useEffect(()=>{
-        //validate if user log or not
-        if(localStorage.getItem("Token") == undefined){
-            history.push({
-                pathname:  "/UserLogin"
-            })  
-        }else if(_companyReducer.companies.length == 0){
+        if(_companyReducer.companies.length == 0){  
             dispatch(fetchAllCompanies())
         }
         return()=>{
@@ -80,26 +76,72 @@ function CreateTicket() {
         }
     },[])
 
+    // custom function
+
+    const SelectCompany = (e) => {
+        if(e.target.value.length > 0){
+            dispatch(fetchProductsByComapnyId(e.target.value))
+            dispatch(fetchCategoriesByComapnyId(e.target.value))
+            dispatch(fetchModulesByComapnyId(e.target.value))
+        }  
+
+        setTicket({ ...ticket , CompanyId : e.target.value })
+    } 
+
     return (
         <div>
-            <Container component="main" maxWidth="sm">
+            <Container component="main" maxWidth="md">
                 <CssBaseline />
                     <div className={classes.paper}>
                         
-                        <Typography component="h1" variant="h5"> Create New Ticket </Typography>
+                        <Typography component="h1" variant="h5"> Create A New Ticket </Typography>
                         <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
                             <Grid item xs={12} >
-                                    <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                        <InputLabel  >Company</InputLabel>
-                                        <Select  native  label="CompanyName" name="CompanyName" onChange={e=>  setTicket({ ...ticket , CompanyId : e.target.value })} >
-                                            <option value=""></option>
-                                            {_companyReducer.companies.map((company)=>(
-                                                <option value={company.companyId}>{ company.companyName }</option>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
+                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                    <InputLabel  >Company</InputLabel>
+                                    <Select  native  label="CompanyName" name="CompanyName" onChange={ (e)=>{ SelectCompany(e) } } >
+                                        <option value=""></option>
+                                        {_companyReducer.companies.map((company)=>(
+                                            <option key={company.companyId} value={company.companyId}>{ company.companyName }</option>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                <InputLabel  >Product Name</InputLabel>
+                                    <Select  native  label="product Name Name" name="productName" onChange={ (e)=>{ setTicket({ ...ticket , productId : e.target.value }) } } >
+                                        <option value=""></option>
+                                        {_productReducer.productsOfSelectedCompany.map((product)=>(
+                                            <option key={product.productId} value={product.productId}>{ product.productName }</option>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                    <InputLabel  >categoryName</InputLabel>
+                                    <Select  native  label="category Name" name="categoryName" onChange={ (e)=>{ setTicket({ ...ticket , categoryId : e.target.value }) } }  >
+                                        <option value=""></option>
+                                        {_categoryReducer.categoriesOfSelectedCompany.map((category)=>(
+                                            <option key={category.categoryId} value={category.categoryId}>{ category.categoryName }</option>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                <InputLabel  >Module Name</InputLabel>
+                                    <Select  native  label="module Name" name="moduleName" onChange={ (e)=>{ setTicket({ ...ticket , moduleId : e.target.value }) } }  >
+                                        <option value=""></option>
+                                        {_moduleReducer.modulesOfSelectedCompany.map((module)=>(
+                                            <option key={module.moduleId} value={module.moduleId}>{ module.moduleName }</option>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                           
                             <Grid item xs={12} >
                                 <TextField
                                     variant="outlined" required fullWidth  label="Subject" autoFocus

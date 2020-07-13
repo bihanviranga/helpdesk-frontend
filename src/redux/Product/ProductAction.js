@@ -1,11 +1,11 @@
 import Axios from "axios"
 
-export const fetchCategoriesByComapnyId = (id) => {
+export const fetchProductsByComapnyId = (id) => {
     return dispatch=>{
         dispatch({
-            type:"FETCH_CATEGORIES_BY_COMPANY_ID",
+            type:"FETCH_PRODUCTS_BY_COMPANY_ID",
             payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Category/GetCategoriesByCompanyId/${id}`)
+                Axios.get(`https://localhost:44351/Product/GetProductsByCompanyId/${id}`)
                 .then(res=>{
                     resolve(res.data);
                     
