@@ -19,3 +19,20 @@ export const fetchCategoriesByComapnyId = (id) => {
         })
     }
 }
+
+export const fetchCategories = () => {
+    return dispatch => {
+        dispatch({
+            type : "FETCH_CATEGORIES",
+            payload : new Promise((resolve , reject) => {
+                Axios.get(`https://localhost:44351/Category/`)
+                .then( res => {
+                    resolve(res.data)
+                } )
+                .catch(err => {
+                    resolve([])
+                })
+            })
+        })
+    }
+}

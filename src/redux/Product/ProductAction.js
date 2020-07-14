@@ -19,3 +19,20 @@ export const fetchProductsByComapnyId = (id) => {
         })
     }
 }
+
+export const fetchProducts = () => {
+    return dispatch => {
+        dispatch({
+            type : "FETCH_PRODUCTS",
+            payload : new Promise((resolve , reject) => {
+                Axios.get(`https://localhost:44351/Product/`)
+                .then( res => {
+                    resolve(res.data)
+                } )
+                .catch(err => {
+                    resolve([])
+                })
+            })
+        })
+    }
+}

@@ -1,7 +1,4 @@
 import React , {useEffect} from 'react';
-import {useSelector , useDispatch} from 'react-redux'
-import { useHistory } from "react-router"
-
 
 import {Provider} from 'react-redux'
 import store from './redux/store'
@@ -18,12 +15,14 @@ import CreateTicket from './pages/Ticket/CreateTicket'
 import Company from './pages/Company/CompanyIndex'
 import TestComponent from './components/TestComponent'
 import Container from '@material-ui/core/Container';
+import Product from './pages/product/ProductIndex'
+import Module from './pages/Module/ModuleIndex'
+import Category from './pages/Category/CategoryIndex'
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route ,
-  
+  Route 
 } from 'react-router-dom'
 
 
@@ -56,6 +55,9 @@ function App() {
                         <Route  path="/CreateTicket" >{isLogin() ? <CreateTicket /> : <UserLogin /> }</Route >
                         <Route  path="/MyProfile" >{isLogin() ?  <MyProfile /> : <UserLogin /> }</Route >
                         <Route  path="/Company" >{isLogin() ? <Company /> : <UserLogin />  }</Route >
+                        <Route  path="/Product" >{isLogin() ? <Product /> : <UserLogin />  }</Route >
+                        <Route  path="/Module" >{isLogin() ? <Module /> : <UserLogin />  }</Route >
+                        <Route  path="/Category" >{isLogin() ? <Category /> : <UserLogin />  }</Route >
                         <Route  path="/TestComponent" >{isLogin() ? <TestComponent /> :  <UserLogin /> }</Route >
                     </Switch>
                   </Container>

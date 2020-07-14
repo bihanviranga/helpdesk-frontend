@@ -20,3 +20,20 @@ export const fetchModulesByComapnyId = (id) => {
         })
     }
 }
+
+export const fetchModules = () => {
+    return dispatch => {
+        dispatch({
+            type : "FETCH_MODULES",
+            payload : new Promise((resolve , reject) => {
+                Axios.get(`https://localhost:44351/Module/`)
+                .then( res => {
+                    resolve(res.data)
+                } )
+                .catch(err => {
+                    resolve([])
+                })
+            })
+        })
+    }
+}

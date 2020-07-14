@@ -1,4 +1,5 @@
 const initialState = {
+    modules:[],
     modulesOfSelectedCompany : []
 }
 
@@ -7,6 +8,11 @@ const moduleReducer = (state = initialState , action) => {
         return {
             ...state,
             modulesOfSelectedCompany : action.payload
+        }
+    }else if(action.type == "FETCH_MODULES_FULFILLED"){
+        return{
+            ...state,
+            modules : action.payload
         }
     }else{
         return state

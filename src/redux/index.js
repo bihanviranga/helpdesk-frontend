@@ -22,13 +22,16 @@ export {
 } from './Company/CompanyAction'
 
 export {
-    fetchProductsByComapnyId
+    fetchProductsByComapnyId,
+    fetchProducts
 } from './Product/ProductAction'
 
 export {
-    fetchCategoriesByComapnyId
+    fetchCategoriesByComapnyId,
+    fetchCategories
 } from './Category/CategoryAction'
 
 export {
-    fetchModulesByComapnyId
+    fetchModulesByComapnyId,
+    fetchModules
 } from './Module/ModuleAction'

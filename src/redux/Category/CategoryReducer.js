@@ -1,4 +1,5 @@
 const initialState = {
+    categories : [],
     categoriesOfSelectedCompany : []
 }
 
@@ -7,6 +8,11 @@ const categoryReducer = (state = initialState , action) => {
         return {
             ...state,
             categoriesOfSelectedCompany : action.payload
+        }
+    }else if(action.type == "FETCH_CATEGORIES_FULFILLED"){
+        return {
+            ...state,
+            categories : action.payload
         }
     }else{
         return state
