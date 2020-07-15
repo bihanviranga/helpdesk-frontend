@@ -5,7 +5,7 @@ export const fetchCategoriesByComapnyId = (id) => {
         dispatch({
             type:"FETCH_CATEGORIES_BY_COMPANY_ID",
             payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Category/GetCategoriesByCompanyId/${id}`)
+                Axios.get(`https://localhost:44351/Category/Company/${id}`)
                 .then(res=>{
                     resolve(res.data);
                     

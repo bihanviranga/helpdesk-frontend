@@ -5,7 +5,7 @@ export const fetchProductsByComapnyId = (id) => {
         dispatch({
             type:"FETCH_PRODUCTS_BY_COMPANY_ID",
             payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Product/GetProductsByCompanyId/${id}`)
+                Axios.get(`https://localhost:44351/Product/Company/${id}`)
                 .then(res=>{
                     resolve(res.data);
                     
