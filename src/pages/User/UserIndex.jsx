@@ -1,6 +1,7 @@
 import React , {useEffect , useState} from 'react'
 import {useSelector , useDispatch} from 'react-redux'
 import { fetchAllUsers , deleteUser } from '../../redux'
+import { useHistory } from "react-router";
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,21 +24,45 @@ import {Link} from 'react-router-dom'
 function UserIndex() {
     const dispatch = useDispatch()
     const _userReducer = useSelector(state=>state.user)
+    const history =  useHistory()
    
     const [open, setOpen] = useState(false);
 
     const initSelectedUser = {}
     const [selectedUser , setSelectedUser] = useState(initSelectedUser)
 
+
+    
+
     // Component
+
+    function UserRegistrarionButtonComponet(){
+        if(localStorage.getItem("Token") != null){
+           return JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "Manager" ?
+                ( <Button color="inherit" component={Link} to='/UserRegistration'>Register New User</Button> ) : null
+            
+        }else { 
+            history.push({ pathname:  "/UserLogin" })           
+            return null
+         }
+
+    }
+
     function UserListComponent(){
-        if(_userReducer.users.length == 0 ){
+        if(_userReducer.users.length == 0 && _userReducer.errs.fetchUserError == null ){
             dispatch(fetchAllUsers())
             return (
                 <TableRow >
                     <TableCell component="th" scope="row"> Loading ... </TableCell>    
                 </TableRow>
             ) }
+            else if(_userReducer.errs.fetchUserError != null || JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole != "Manager"){
+                return(
+                    <TableRow >
+                        <TableCell component="th" scope="row"> {_userReducer.errs.fetchUserError} </TableCell>    
+                    </TableRow>
+                )
+            }
         else { 
            return (
                 _userReducer.users.map((row)=>(
@@ -50,7 +75,7 @@ function UserIndex() {
                                 {row.userName}
                             </Button>
                         </TableCell>
-                        <TableCell align="right">{row.companyId}</TableCell>
+                        <TableCell align="right">{row.companyName}</TableCell>
                         <TableCell align="right">{row.fullName}</TableCell>
                         <TableCell align="right">{row.email}</TableCell>
                         <TableCell align="right">{row.userRole}</TableCell>
@@ -64,14 +89,14 @@ function UserIndex() {
     return (
         <div>
             <h3>Users</h3>
-            <div><Button color="inherit" component={Link} to='/UserRegistration'>Register New User</Button></div>
+            <div> <UserRegistrarionButtonComponet /> </div>
             <div>
                 <TableContainer component={Paper} >
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
                                 <TableCell><b>User Name</b></TableCell>
-                                <TableCell align="right"><b>Company Id</b></TableCell>
+                                <TableCell align="right"><b>Company</b></TableCell>
                                 <TableCell align="right"><b>Full Name</b></TableCell>
                                 <TableCell align="right"><b>Email</b></TableCell>
                                 <TableCell align="right"><b>User Role</b></TableCell>

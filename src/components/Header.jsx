@@ -168,6 +168,7 @@ export default function Header() {
             
             <CreateTicketComponent />
             <CompanyComponent />
+           
 
           </Typography>
 
@@ -194,16 +195,37 @@ export default function Header() {
         <Divider />
         <List>
           <ListItem button >
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+            {/* for Icon */}
             <ListItemText primary={"Knowledge Base"} onClick = {()=>{ 
               history.push({  pathname:  "/KnowledgeBase_index" }) 
               handleDrawerClose()
             }}  />
           </ListItem>
           <ListItem button >
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+            {/* for Icon */}
             <ListItemText primary={"User"} onClick = {()=>{ 
               history.push({  pathname:  "/User" }) 
+              handleDrawerClose()
+            }}  />
+          </ListItem>
+          <ListItem button >
+            {/* for Icon */}
+            <ListItemText primary={"Product"} onClick = {()=>{ 
+              history.push({  pathname:  "/Product" }) 
+              handleDrawerClose()
+            }}  />
+          </ListItem>
+          <ListItem button >
+            {/* for Icon */}
+            <ListItemText primary={"Module"} onClick = {()=>{ 
+              history.push({  pathname:  "/Module" }) 
+              handleDrawerClose()
+            }}  />
+          </ListItem>
+          <ListItem button >
+            {/* for Icon */}
+            <ListItemText primary={"Category"} onClick = {()=>{ 
+              history.push({  pathname:  "/Category" }) 
               handleDrawerClose()
             }}  />
           </ListItem>

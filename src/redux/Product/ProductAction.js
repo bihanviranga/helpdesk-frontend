@@ -1,11 +1,11 @@
 import Axios from "axios"
 
-export const fetchCategoriesByComapnyId = (id) => {
+export const fetchProductsByComapnyId = (id) => {
     return dispatch=>{
         dispatch({
-            type:"FETCH_CATEGORIES_BY_COMPANY_ID",
+            type:"FETCH_PRODUCTS_BY_COMPANY_ID",
             payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Category/Company/${id}`)
+                Axios.get(`https://localhost:44351/Product/Company/${id}`)
                 .then(res=>{
                     resolve(res.data);
                     
@@ -20,12 +20,12 @@ export const fetchCategoriesByComapnyId = (id) => {
     }
 }
 
-export const fetchCategories = () => {
+export const fetchProducts = () => {
     return dispatch => {
         dispatch({
-            type : "FETCH_CATEGORIES",
+            type : "FETCH_PRODUCTS",
             payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Category/`)
+                Axios.get(`https://localhost:44351/Product/`)
                 .then( res => {
                     resolve(res.data)
                 } )
