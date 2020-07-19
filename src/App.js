@@ -1,6 +1,6 @@
-import React , {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import store from './redux/store'
 import Header from './components/Header'
 
@@ -18,11 +18,12 @@ import Container from '@material-ui/core/Container';
 import Product from './pages/product/ProductIndex'
 import Module from './pages/Module/ModuleIndex'
 import Category from './pages/Category/CategoryIndex'
+import ListTickets from './pages/Ticket/ListTickets';
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route 
+  Route
 } from 'react-router-dom'
 
 
@@ -30,38 +31,39 @@ import {
 function App() {
 
   const isLogin = () => {
-    if(localStorage.getItem("Token") == null){
+    if (localStorage.getItem("Token") == null) {
       return false
-    }else{
+    } else {
       return true
     }
   }
 
   return (
     <>
-      <Provider store={store}>
-        <div className="App"> 
-            <Router>
-              <Header />
-            
-                  <Container  maxWidth={"xl"}>
-                    <Switch> 
-                        <Route exact path="/" component={Home} />
-                        <Route path="/KnowledgeBase_index" component={KnowledgeBase_index} />
-                        <Route  path="/CreateArticle" >{isLogin() ?  <CreateArticle /> :  <UserLogin /> }</Route >
-                        <Route  path="/User" >{isLogin() ? <UserIndex /> : <UserLogin /> }</Route >
-                        <Route  path="/UserRegistration" >{isLogin() ?  <UserRegistration /> : <UserLogin /> }</Route >
-                        <Route  path="/UserLogin" >{  <UserLogin />}</Route >
-                        <Route  path="/CreateTicket" >{isLogin() ? <CreateTicket /> : <UserLogin /> }</Route >
-                        <Route  path="/MyProfile" >{isLogin() ?  <MyProfile /> : <UserLogin /> }</Route >
-                        <Route  path="/Company" >{isLogin() ? <Company /> : <UserLogin />  }</Route >
-                        <Route  path="/Product" >{isLogin() ? <Product /> : <UserLogin />  }</Route >
-                        <Route  path="/Module" >{isLogin() ? <Module /> : <UserLogin />  }</Route >
-                        <Route  path="/Category" >{isLogin() ? <Category /> : <UserLogin />  }</Route >
-                        <Route  path="/TestComponent" >{isLogin() ? <TestComponent /> :  <UserLogin /> }</Route >
-                    </Switch>
-                  </Container>
-            </Router>
+      <Provider store={ store }>
+        <div className="App">
+          <Router>
+            <Header />
+
+            <Container maxWidth={ "xl" }>
+              <Switch>
+                <Route exact path="/" component={ Home } />
+                <Route path="/KnowledgeBase_index" component={ KnowledgeBase_index } />
+                <Route path="/CreateArticle" >{ isLogin() ? <CreateArticle /> : <UserLogin /> }</Route >
+                <Route path="/User" >{ isLogin() ? <UserIndex /> : <UserLogin /> }</Route >
+                <Route path="/UserRegistration" >{ isLogin() ? <UserRegistration /> : <UserLogin /> }</Route >
+                <Route path="/UserLogin" >{ <UserLogin /> }</Route >
+                <Route path="/CreateTicket" >{ isLogin() ? <CreateTicket /> : <UserLogin /> }</Route >
+                <Route path="/MyProfile" >{ isLogin() ? <MyProfile /> : <UserLogin /> }</Route >
+                <Route path="/Company" >{ isLogin() ? <Company /> : <UserLogin /> }</Route >
+                <Route path="/Product" >{ isLogin() ? <Product /> : <UserLogin /> }</Route >
+                <Route path="/Module" >{ isLogin() ? <Module /> : <UserLogin /> }</Route >
+                <Route path="/Category" >{ isLogin() ? <Category /> : <UserLogin /> }</Route >
+                <Route path="/TestComponent" >{ isLogin() ? <TestComponent /> : <UserLogin /> }</Route >
+                <Route path="/Tickets" > <ListTickets /> </Route>
+              </Switch>
+            </Container>
+          </Router>
         </div>
       </Provider>
     </>
