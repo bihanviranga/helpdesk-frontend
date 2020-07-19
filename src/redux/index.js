@@ -1,18 +1,19 @@
-export { 
+export {
     createArticle
- } from './KnowledgeBase/KnowledgeBaseAction'
+} from './KnowledgeBase/KnowledgeBaseAction'
 
-export { 
-    createUser ,
-    fetchAllUsers , 
-    loginUser ,
+export {
+    createUser,
+    fetchAllUsers,
+    loginUser,
     logOutUser,
     deleteUser,
     getUserByUserName
 } from './User/UserAction'
 
 export {
-    createTicket
+    createTicket,
+    fetchAllTickets
 } from './Ticket/TicketAction'
 
 export {

@@ -19,7 +19,7 @@ export default function TicketListCard({ tktData }) {
     return (
         <Card variant="outlined" className={ classes.card }>
             <div className={ classes.tktSubject }>{ tktData.tktSubject }</div>
-            <div>{ tktData.tktCategory }</div>
+            <div>{ tktData.categoryId }</div>
             <Chip label={ "Status: " + tktData.tktStatus } size="small" />
             <Chip label={ "Priority: " + tktData.tktPriority } size="small" />
         </Card>
