@@ -43,8 +43,9 @@ function CompanyIndex() {
     //components
 
     function ComapanyListComponent(){
+        dispatch(fetchAllCompanies())
         if(_companyReducer.companies.length == 0){
-            dispatch(fetchAllCompanies())
+            
             return (<p> Loading Companies ... ! </p>)
         }
         else{

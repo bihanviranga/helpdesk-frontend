@@ -49,8 +49,9 @@ function UserIndex() {
     }
 
     function UserListComponent(){
+        dispatch(fetchAllUsers())
         if(_userReducer.users.length == 0 && _userReducer.errs.fetchUserError == null ){
-            dispatch(fetchAllUsers())
+            
             return (
                 <TableRow >
                     <TableCell component="th" scope="row"> Loading ... </TableCell>    

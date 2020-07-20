@@ -60,8 +60,9 @@ export default function ModuleIndex() {
 
   //component
   function CategoryListComponent(){
+    dispatch(fetchCategories())
     if(_categoryReducer.categories.length == 0){
-        dispatch(fetchCategories())
+        
         return (<>
             <StyledTableRow>
                 <StyledTableCell align="right">Loading ...!</StyledTableCell>

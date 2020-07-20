@@ -48,6 +48,7 @@ function UserRegistration() {
     const classes = useStyles();
 
     const _companyReducer = useSelector(state=>state.company)
+    dispatch(fetchAllCompanies())
 
     const initUser = {
         CompanyId : '',
@@ -75,14 +76,6 @@ function UserRegistration() {
         }
     }
     
-    useEffect(()=>{
-          if(_companyReducer.companies.length == 0){
-            dispatch(fetchAllCompanies())
-          }
-        return()=>{
-    
-        }   
-      },[])
 
       function Copyright() {
         return (
