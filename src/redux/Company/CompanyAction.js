@@ -5,7 +5,9 @@ export const fetchAllCompanies = () => {
         dispatch({
             type:"FETCH_COMPANIES",
             payload: new Promise((resolve , reject)=>{
-                Axios.get('https://localhost:44351/Company/')
+                Axios.get('https://localhost:44351/Company/',{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                })
                 .then(response => {
                     const companies = response.data
                     resolve(companies)

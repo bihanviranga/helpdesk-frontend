@@ -48,7 +48,6 @@ function UserRegistration() {
     const classes = useStyles();
 
     const _companyReducer = useSelector(state=>state.company)
-    dispatch(fetchAllCompanies())
 
     const initUser = {
         CompanyId : '',
@@ -76,6 +75,14 @@ function UserRegistration() {
         }
     }
     
+    useEffect(()=>{
+          
+            dispatch(fetchAllCompanies())
+         
+        return()=>{
+    
+        }   
+      },[])
 
       function Copyright() {
         return (
@@ -139,7 +146,7 @@ function UserRegistration() {
                                         <Select  native  label="CompanyName" name="CompanyName" onChange={e=>  setUser({ ...user , CompanyId : e.target.value })} >
                                             <option value=""></option>
                                             {_companyReducer.companies.map((company)=>(
-                                                <option value={company.companyId}>{ company.companyName }</option>
+                                                <option key={company.companyId} value={company.companyId}>{ company.companyName }</option>
                                             ))} 
                                         </Select>
                                     </FormControl>

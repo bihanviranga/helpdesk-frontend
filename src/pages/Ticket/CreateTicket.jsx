@@ -50,7 +50,12 @@ function CreateTicket() {
     const _categoryReducer = useSelector(state=>state.category)
     const _moduleReducer = useSelector(state=>state.module)
 
-    dispatch(fetchAllCompanies())
+    useEffect(()=>{
+        dispatch(fetchAllCompanies())
+        return ()=>{}
+    },[])
+
+    
 
     const initTicket = {
         CompanyId : "",

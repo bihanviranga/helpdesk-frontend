@@ -23,7 +23,9 @@ export const deleteUser = (user) => {
         dispatch({
             type:"DELETE_USER",
             payload: new Promise((resolve , reject)=>{
-                Axios.delete(`https://localhost:44351/User/${user}`)
+                Axios.delete(`https://localhost:44351/User/${user}`,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                })
                 .then(response => {
                     const users = response.data
                     resolve(users)
