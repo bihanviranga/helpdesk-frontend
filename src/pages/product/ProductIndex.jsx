@@ -60,8 +60,9 @@ export default function ProductIndex() {
 
   //component
   function ProductListComponent(){
+    dispatch(fetchProducts())
     if(_productReducer.products.length == 0){
-        dispatch(fetchProducts())
+        
         return (<>
             <StyledTableRow>
                 <StyledTableCell align="right">Loading ...!</StyledTableCell>

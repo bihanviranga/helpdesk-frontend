@@ -5,7 +5,9 @@ export const fetchCategoriesByComapnyId = (id) => {
         dispatch({
             type:"FETCH_CATEGORIES_BY_COMPANY_ID",
             payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Category/Company/${id}`)
+                Axios.get(`https://localhost:44351/Category/Company/${id}`,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                })
                 .then(res=>{
                     resolve(res.data);
                     
@@ -25,7 +27,9 @@ export const fetchCategories = () => {
         dispatch({
             type : "FETCH_CATEGORIES",
             payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Category/`)
+                Axios.get(`https://localhost:44351/Category/`,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                })
                 .then( res => {
                     resolve(res.data)
                 } )

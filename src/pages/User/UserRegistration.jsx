@@ -76,9 +76,9 @@ function UserRegistration() {
     }
     
     useEffect(()=>{
-          if(_companyReducer.companies.length == 0){
+          
             dispatch(fetchAllCompanies())
-          }
+         
         return()=>{
     
         }   
@@ -146,7 +146,7 @@ function UserRegistration() {
                                         <Select  native  label="CompanyName" name="CompanyName" onChange={e=>  setUser({ ...user , CompanyId : e.target.value })} >
                                             <option value=""></option>
                                             {_companyReducer.companies.map((company)=>(
-                                                <option value={company.companyId}>{ company.companyName }</option>
+                                                <option key={company.companyId} value={company.companyId}>{ company.companyName }</option>
                                             ))} 
                                         </Select>
                                     </FormControl>

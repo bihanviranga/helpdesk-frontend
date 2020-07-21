@@ -25,6 +25,7 @@ function UserIndex() {
     const dispatch = useDispatch()
     const _userReducer = useSelector(state=>state.user)
     const history =  useHistory()
+    
    
     const [open, setOpen] = useState(false);
 
@@ -32,6 +33,10 @@ function UserIndex() {
     const [selectedUser , setSelectedUser] = useState(initSelectedUser)
 
 
+    useEffect(()=>{
+        dispatch(fetchAllUsers())
+        return () => {}
+    },[])
     
 
     // Component
@@ -47,10 +52,12 @@ function UserIndex() {
          }
 
     }
+    
 
     function UserListComponent(){
+        
         if(_userReducer.users.length == 0 && _userReducer.errs.fetchUserError == null ){
-            dispatch(fetchAllUsers())
+            
             return (
                 <TableRow >
                     <TableCell component="th" scope="row"> Loading ... </TableCell>    
