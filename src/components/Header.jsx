@@ -1,6 +1,6 @@
-import React , {useEffect} from 'react';
-import {useSelector , useDispatch} from 'react-redux'
-import {  logOutUser} from '../redux/index'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { logOutUser } from '../redux/index'
 import { useHistory } from "react-router";
 
 
@@ -20,12 +20,12 @@ import Divider from '@material-ui/core/Divider';
 
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem'; 
+import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   title: {
-        flexGrow: 1,
-      },
+    flexGrow: 1,
+  },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -87,8 +87,8 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-  contanerStyle : {
-    width : "970px"
+  contanerStyle: {
+    width: "970px"
   }
 }));
 
@@ -98,25 +98,25 @@ export default function Header() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const _userReducer = useSelector(state=>state.user)
+  const _userReducer = useSelector(state => state.user)
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
 
   // bind userReducer effects
-  useEffect(()=>{
-  
-    return()=>{
+  useEffect(() => {
 
-    }   
-  },[_userReducer])
+    return () => {
 
-  function LoginCheck(){
-    if(localStorage.getItem('Token') == null){
-      return ( <Button color="inherit" component={Link} to='/UserLogin'>Login</Button> )
-    }else{
-      return ( <Button color="inherit" onClick={()=>{
+    }
+  }, [_userReducer])
+
+  function LoginCheck() {
+    if (localStorage.getItem('Token') == null) {
+      return (<Button color="inherit" component={ Link } to='/UserLogin'>Login</Button>)
+    } else {
+      return (<Button color="inherit" onClick={ () => {
         dispatch(logOutUser())
-      }} >Log Out</Button> )
+      } } >Log Out</Button>)
     }
   }
 
@@ -130,45 +130,45 @@ export default function Header() {
 
   // navigation components
 
-  function CreateTicketComponent(){
-    if(localStorage.getItem("Token") == null){
+  function CreateTicketComponent() {
+    if (localStorage.getItem("Token") == null) {
       return null
-    }else{ return (<Button ml={5} color="inherit" component={Link} to='/CreateTicket'>Create Ticket</Button>) }
+    } else { return (<Button ml={ 5 } color="inherit" component={ Link } to='/CreateTicket'>Create Ticket</Button>) }
   }
 
 
-  function MyProfileComponent(){
-    if(localStorage.getItem("Token") == null){ return null }
-    else { return (<Button ml={5} color="inherit" component={Link} to='/MyProfile'>My Profile</Button>) }
+  function MyProfileComponent() {
+    if (localStorage.getItem("Token") == null) { return null }
+    else { return (<Button ml={ 5 } color="inherit" component={ Link } to='/MyProfile'>My Profile</Button>) }
   }
 
-  function CompanyComponent(){
-    if(localStorage.getItem("Token") == null){return null}
-    else { return (<Button ml={5} color="inherit" component={Link} to='/Company'>Company</Button>) }
+  function CompanyComponent() {
+    if (localStorage.getItem("Token") == null) { return null }
+    else { return (<Button ml={ 5 } color="inherit" component={ Link } to='/Company'>Company</Button>) }
   }
 
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={ classes.root }>
       <AppBar position="static">
         <Toolbar>
-        <IconButton
+          <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={ handleDrawerOpen }
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={ clsx(classes.menuButton, open && classes.hide) }
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            <span onClick={()=>{history.push({  pathname:  "/" })}}>Help DESK</span>
-            
-            
+          <Typography variant="h6" className={ classes.title }>
+            <span onClick={ () => { history.push({ pathname: "/" }) } }>Help DESK</span>
+
+
             <CreateTicketComponent />
             <CompanyComponent />
-           
+
 
           </Typography>
 
@@ -178,59 +178,66 @@ export default function Header() {
         </Toolbar>
       </AppBar>
       <Drawer
-        className={classes.drawer}
+        className={ classes.drawer }
         variant="persistent"
         anchor="left"
-        open={open}
-        classes={{
+        open={ open }
+        classes={ {
           paper: classes.drawerPaper,
-        }}
+        } }
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+        <div className={ classes.drawerHeader }>
+          <IconButton onClick={ handleDrawerClose }>
             Main Manue
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            { theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
           </IconButton>
         </div>
         <Divider />
         <List>
           <ListItem button >
-            {/* for Icon */}
-            <ListItemText primary={"Knowledge Base"} onClick = {()=>{ 
-              history.push({  pathname:  "/KnowledgeBase_index" }) 
+            {/* for Icon */ }
+            <ListItemText primary={ "Knowledge Base" } onClick={ () => {
+              history.push({ pathname: "/KnowledgeBase_index" })
               handleDrawerClose()
-            }}  />
+            } } />
           </ListItem>
           <ListItem button >
-            {/* for Icon */}
-            <ListItemText primary={"User"} onClick = {()=>{ 
-              history.push({  pathname:  "/User" }) 
+            {/* for Icon */ }
+            <ListItemText primary={ "User" } onClick={ () => {
+              history.push({ pathname: "/User" })
               handleDrawerClose()
-            }}  />
+            } } />
           </ListItem>
           <ListItem button >
-            {/* for Icon */}
-            <ListItemText primary={"Product"} onClick = {()=>{ 
-              history.push({  pathname:  "/Product" }) 
+            {/* for Icon */ }
+            <ListItemText primary={ "Product" } onClick={ () => {
+              history.push({ pathname: "/Product" })
               handleDrawerClose()
-            }}  />
+            } } />
           </ListItem>
           <ListItem button >
-            {/* for Icon */}
-            <ListItemText primary={"Module"} onClick = {()=>{ 
-              history.push({  pathname:  "/Module" }) 
+            {/* for Icon */ }
+            <ListItemText primary={ "Module" } onClick={ () => {
+              history.push({ pathname: "/Module" })
               handleDrawerClose()
-            }}  />
+            } } />
           </ListItem>
           <ListItem button >
-            {/* for Icon */}
-            <ListItemText primary={"Category"} onClick = {()=>{ 
-              history.push({  pathname:  "/Category" }) 
+            {/* for Icon */ }
+            <ListItemText primary={ "Category" } onClick={ () => {
+              history.push({ pathname: "/Category" })
               handleDrawerClose()
-            }}  />
+            } } />
           </ListItem>
-         
-          
+          <ListItem button >
+            {/* for Icon */ }
+            <ListItemText primary={ "Tickets" } onClick={ () => {
+              history.push({ pathname: "/Tickets" })
+              handleDrawerClose()
+            } } />
+          </ListItem>
+
+
         </List>
         <Divider />
         <List>
@@ -242,7 +249,7 @@ export default function Header() {
           ))} */}
         </List>
       </Drawer>
-     
+
     </div>
   );
 }

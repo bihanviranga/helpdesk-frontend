@@ -19,6 +19,7 @@ import Product from './pages/product/ProductIndex'
 import Module from './pages/Module/ModuleIndex'
 import Category from './pages/Category/CategoryIndex'
 import ListTickets from './pages/Ticket/ListTickets';
+import DetailTicket from './pages/Ticket/DetailTicket';
 
 import {
   BrowserRouter as Router,
@@ -60,7 +61,8 @@ function App() {
                 <Route path="/Module" >{ isLogin() ? <Module /> : <UserLogin /> }</Route >
                 <Route path="/Category" >{ isLogin() ? <Category /> : <UserLogin /> }</Route >
                 <Route path="/TestComponent" >{ isLogin() ? <TestComponent /> : <UserLogin /> }</Route >
-                <Route path="/Tickets" > <ListTickets /> </Route>
+                <Route path="/Tickets" exact> <ListTickets /> </Route>
+                <Route path="/Tickets/:ticketId"> <DetailTicket /> </Route>
               </Switch>
             </Container>
           </Router>
