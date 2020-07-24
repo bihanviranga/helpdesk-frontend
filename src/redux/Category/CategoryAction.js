@@ -1,22 +1,23 @@
 import Axios from "axios"
+import API_PATH from '../api'
 
 export const fetchCategoriesByComapnyId = (id) => {
-    return dispatch=>{
+    return dispatch => {
         dispatch({
-            type:"FETCH_CATEGORIES_BY_COMPANY_ID",
-            payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Category/Company/${id}`,{
+            type: "FETCH_CATEGORIES_BY_COMPANY_ID",
+            payload: new Promise((resolve, reject) => {
+                Axios.get(`${API_PATH}/Category/Company/${id}`, {
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
                 })
-                .then(res=>{
-                    resolve(res.data);
-                    
-                })
-                .catch(err => {
-                    if(err.response.data == "Not Found"){
-                        resolve([])
-                    }
-                })
+                    .then(res => {
+                        resolve(res.data);
+
+                    })
+                    .catch(err => {
+                        if (err.response.data == "Not Found") {
+                            resolve([])
+                        }
+                    })
             })
         })
     }
@@ -25,17 +26,17 @@ export const fetchCategoriesByComapnyId = (id) => {
 export const fetchCategories = () => {
     return dispatch => {
         dispatch({
-            type : "FETCH_CATEGORIES",
-            payload : new Promise((resolve , reject) => {
-                Axios.get(`https://localhost:44351/Category/`,{
+            type: "FETCH_CATEGORIES",
+            payload: new Promise((resolve, reject) => {
+                Axios.get(`${API_PATH}/Category/`, {
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
                 })
-                .then( res => {
-                    resolve(res.data)
-                } )
-                .catch(err => {
-                    resolve([])
-                })
+                    .then(res => {
+                        resolve(res.data)
+                    })
+                    .catch(err => {
+                        resolve([])
+                    })
             })
         })
     }
