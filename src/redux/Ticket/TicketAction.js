@@ -21,7 +21,24 @@ export const fetchAllTickets = () => {
                     })
                     .catch(err => {
                         const errorMsg = err.message
-                        console.log(errorMsg);
+                    })
+            })
+        })
+    }
+}
+
+export const fetchTicketById = (ticketId) => {
+    return dispatch => {
+        dispatch({
+            type: "FETCH_TICKET_BY_ID",
+            payload: new Promise((resolve, reject) => {
+                Axios.get(`https://localhost:5001/Ticket/${ticketId}`)
+                    .then(response => {
+                        const ticket = response.data
+                        resolve(ticket)
+                    })
+                    .catch(err => {
+                        const errorMsg = err.message
                     })
             })
         })
