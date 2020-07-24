@@ -6,6 +6,8 @@ import {
      fetchModulesByComapnyId
 } from '../../redux'
 
+import { useHistory } from "react-router";
+
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -55,6 +57,8 @@ function CreateTicket() {
         return ()=>{}
     },[])
 
+    const history =  useHistory()
+    
     
 
     const initTicket = {
@@ -167,6 +171,8 @@ function CreateTicket() {
                                 e.preventDefault();
                                if(localStorage.getItem("Token") != null) {
                                     dispatch(createTicket(ticket))
+                                    history.push({ pathname:  "/Tickets" })
+
                                 }else{
                                     alert("logFirst")
                                 }
