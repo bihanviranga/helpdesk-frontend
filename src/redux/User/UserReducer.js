@@ -4,7 +4,8 @@ const initialState = {
        fetchUserError : null, 
     },
     user:null,
-    userProfile : null
+    userProfile : null,
+    login : (localStorage.getItem("Token") != null ) ? true : false
 }
 
 const userReducer = (state = initialState , action) => {
@@ -42,14 +43,14 @@ const userReducer = (state = initialState , action) => {
 
         //storing token in localStorage ....
         localStorage.setItem('Token', action.payload)
-        
-        return { ...state }
+
+        return {  ...state , login : true  }
     }else if(action.type == "LOGOUT_USER"){
 
         //remove token from localStorage ....
         localStorage.removeItem('Token')
  
-        return { ...state }
+        return {  ...state , login : false  }
     }else if(action.type == "GET_USER_BY_USER_NAME_FULFILLED" ){
         return {
             ...state,

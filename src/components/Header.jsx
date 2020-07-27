@@ -102,19 +102,14 @@ export default function Header() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
 
-  // bind userReducer effects
-  useEffect(() => {
-
-    return () => {
-
-    }
-  }, [_userReducer])
 
   function LoginCheck() {
+     
     if (localStorage.getItem('Token') == null) {
       return (<Button color="inherit" component={ Link } to='/UserLogin'>Login</Button>)
     } else {
       return (<Button color="inherit" onClick={ () => {
+        history.push({ pathname: "/UserLogin" })
         dispatch(logOutUser())
       } } >Log Out</Button>)
     }
