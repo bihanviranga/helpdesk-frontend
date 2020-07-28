@@ -1,6 +1,7 @@
 import React , {useState , useEffect }from 'react'
 import {useSelector , useDispatch} from 'react-redux'
 import { loginUser } from '../../redux'
+import { useHistory } from "react-router";
 
 
 import Avatar from '@material-ui/core/Avatar';
@@ -56,14 +57,21 @@ const useStyles = makeStyles((theme) => ({
 function UserLogin() {
     const dispatch = useDispatch();
     const classes = useStyles();
+    const history =  useHistory()
+
+    const _userReducer = useSelector(state=>state.user)
 
     const intLoginDetails = {
         UserNameOrEmail:null,
         password:null
     }
 
-    const [LoginDetails , setLoginDetails] = useState(intLoginDetails);
+    useEffect(()=>{
+      if(_userReducer.login == true) history.push({ pathname:  "/" }) 
+      return () => { }
+    },[ _userReducer.login ]) 
 
+    const [LoginDetails , setLoginDetails] = useState(intLoginDetails);
 
     return (
         <div>

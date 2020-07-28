@@ -1,5 +1,7 @@
 import Axios from "axios"
 import API_PATH from '../api'
+import { useHistory } from "react-router";
+import { withRouter } from "react-router-dom";
 
 export const createUser = (user) => {
     return dispatch => {
@@ -46,7 +48,7 @@ export const fetchAllUsers = () => {
             type: "FETCH_USERS",
             payload: new Promise((resolve, reject) => {
                 Axios.get(`${API_PATH}/User/`, {
-                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
                 })
                     .then(response => {
                         console.log(response)
@@ -64,6 +66,7 @@ export const fetchAllUsers = () => {
 }
 
 export const loginUser = (loginDetails) => {
+    // const history =  useHistory()
     return dispatch => {
         dispatch({
             type: "LOGIN_USER",
@@ -71,6 +74,7 @@ export const loginUser = (loginDetails) => {
                 Axios.post(`${API_PATH}/User/Login`, loginDetails)
                     .then(response => {
                         resolve(response.data)
+                        // history.push({ pathname:  "/" })
                     })
                     .catch(err => {
                         const errMzg = err.message

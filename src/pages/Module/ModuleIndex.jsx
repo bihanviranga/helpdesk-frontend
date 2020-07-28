@@ -60,8 +60,9 @@ export default function ModuleIndex() {
 
   //component
   function ModuleListComponent(){
+    dispatch(fetchModules())
     if(_moduleReducer.modules.length == 0){
-        dispatch(fetchModules())
+        
         return (<>
             <StyledTableRow>
                 <StyledTableCell align="right">Loading ...!</StyledTableCell>

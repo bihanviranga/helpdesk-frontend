@@ -135,7 +135,7 @@ function UserRegistration() {
                                     <InputLabel  >UserType</InputLabel>
                                     <Select native name="UserType" label="UserType" onChange={e=>  setUser({ ...user , UserType : e.target.value })} >
                                         <option value=""></option>
-                                        <option value="Clien">Clien</option>
+                                        <option value="Client">Client</option>
                                         <option value="HelpDesk">Help Desk</option> 
                                     </Select>
                                 </FormControl>

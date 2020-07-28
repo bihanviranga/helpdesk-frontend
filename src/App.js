@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
 
 import { Provider } from 'react-redux'
 import store from './redux/store'
@@ -30,13 +31,11 @@ import {
 
 
 function App() {
-
+  
   const isLogin = () => {
-    if (localStorage.getItem("Token") == null) {
-      return false
-    } else {
-      return true
-    }
+    var Token = (localStorage.getItem("Token") != null ) ? true : false
+    if (Token )  return true
+    else return false
   }
 
   return (
@@ -50,19 +49,19 @@ function App() {
               <Switch>
                 <Route exact path="/" component={ Home } />
                 <Route path="/KnowledgeBase_index" component={ KnowledgeBase_index } />
-                <Route path="/CreateArticle" >{ isLogin() ? <CreateArticle /> : <UserLogin /> }</Route >
-                <Route path="/User" >{ isLogin() ? <UserIndex /> : <UserLogin /> }</Route >
-                <Route path="/UserRegistration" >{ isLogin() ? <UserRegistration /> : <UserLogin /> }</Route >
-                <Route path="/UserLogin" >{ <UserLogin /> }</Route >
-                <Route path="/CreateTicket" >{ isLogin() ? <CreateTicket /> : <UserLogin /> }</Route >
-                <Route path="/MyProfile" >{ isLogin() ? <MyProfile /> : <UserLogin /> }</Route >
-                <Route path="/Company" >{ isLogin() ? <Company /> : <UserLogin /> }</Route >
-                <Route path="/Product" >{ isLogin() ? <Product /> : <UserLogin /> }</Route >
-                <Route path="/Module" >{ isLogin() ? <Module /> : <UserLogin /> }</Route >
-                <Route path="/Category" >{ isLogin() ? <Category /> : <UserLogin /> }</Route >
-                <Route path="/TestComponent" >{ isLogin() ? <TestComponent /> : <UserLogin /> }</Route >
-                <Route path="/Tickets" exact> <ListTickets /> </Route>
-                <Route path="/Tickets/:ticketId"> <DetailTicket /> </Route>
+                <Route path="/CreateArticle"  component={ () => isLogin() ? <CreateArticle /> :<UserLogin /> } />
+                <Route path="/User" component={ () => isLogin() ? <UserIndex /> :<UserLogin /> } />
+                <Route path="/UserRegistration" component={ () => isLogin() ? <UserRegistration /> :<UserLogin /> } />
+                <Route path="/UserLogin" component={ () => isLogin() ? <UserLogin /> :<UserLogin /> } />
+                <Route path="/CreateTicket" component={ () => isLogin() ? <CreateTicket /> :<UserLogin /> } />
+                <Route path="/MyProfile" component={ () => isLogin() ? <MyProfile /> :<UserLogin /> } />
+                <Route path="/Company" component={ () => isLogin() ? <Company /> :<UserLogin /> } />
+                <Route path="/Product" component={ () => isLogin() ? <Product /> :<UserLogin /> } />
+                <Route path="/Module" component={ () => isLogin() ? <Module /> :<UserLogin /> } />
+                <Route path="/Category" component={ () => isLogin() ? <Category /> :<UserLogin /> } />
+                <Route path="/TestComponent" component={ () => isLogin() ? <TestComponent /> :<UserLogin /> } />
+                <Route path="/Tickets" component={ () => isLogin() ? <ListTickets /> :<UserLogin /> } /> 
+                <Route path="/Tickets/:ticketId" component={ () => isLogin() ? <DetailTicket /> :<UserLogin /> } /> 
               </Switch>
             </Container>
           </Router>
