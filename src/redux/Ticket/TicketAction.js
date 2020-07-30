@@ -3,7 +3,9 @@ import API_PATH from '../api'
 
 export const createTicket = (ticket) => {
     return () => {
-        Axios.post(`${API_PATH}/Ticket/`, ticket)
+        Axios.post(`${API_PATH}/Ticket/`, ticket ,{
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
+        })
             .then(res => {
                 console.log(res.data)
             })
@@ -15,7 +17,9 @@ export const fetchAllTickets = () => {
         dispatch({
             type: "FETCH_TICKETS",
             payload: new Promise((resolve, reject) => {
-                Axios.get(`${API_PATH}/Ticket/`)
+                Axios.get(`${API_PATH}/Ticket/`,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
+                })
                     .then(response => {
                         const tickets = response.data
                         resolve(tickets)
@@ -33,7 +37,9 @@ export const fetchTicketById = (ticketId) => {
         dispatch({
             type: "FETCH_TICKET_BY_ID",
             payload: new Promise((resolve, reject) => {
-                Axios.get(`${API_PATH}/Ticket/${ticketId}`)
+                Axios.get(`${API_PATH}/Ticket/${ticketId}`,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
+                })
                     .then(response => {
                         const ticket = response.data
                         resolve(ticket)
@@ -51,7 +57,9 @@ export const deleteTicket = (ticketId) => {
         dispatch({
             type: "DELETE_TICKET",
             payload: new Promise((resolve, reject) => {
-                Axios.delete(`${API_PATH}/Ticket/${ticketId}`)
+                Axios.delete(`${API_PATH}/Ticket/${ticketId}`,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
+                })
                     .then(response => {
                         const ticket = response.data
                         resolve(ticketId)

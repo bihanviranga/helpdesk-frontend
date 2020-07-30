@@ -1,14 +1,14 @@
 import Axios from "axios"
 import API_PATH from '../api'
-import { useHistory } from "react-router";
-import { withRouter } from "react-router-dom";
 
 export const createUser = (user) => {
     return dispatch => {
         dispatch({
             type: "CREATE_USER",
             payload: new Promise((resolve, reject) => {
-                Axios.post(`${API_PATH}/User/Register`, user)
+                Axios.post(`${API_PATH}/User/Register`, user , {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
+                })
                     .then(res => {
                         resolve(res.data)
                     })

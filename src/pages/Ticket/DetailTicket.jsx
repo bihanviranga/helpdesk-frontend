@@ -15,6 +15,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 function DetailTicket() {
     const { ticketId } = useParams();
@@ -33,8 +34,12 @@ function DetailTicket() {
     const history =  useHistory()
 
     const selectedTicket = useSelector(state => {
-        return state.ticket.tickets.filter(tkt => tkt.ticketId == ticketId)[0];
-    }) || { tktSubject: "Loading" }
+        if(state.ticket.tickets.length !== 0 ) {
+            return state.ticket.tickets.filter(tkt => tkt.ticketId == ticketId)[0];
+        }else{
+            return null
+        }
+    }) 
 
     return (
         <div>
@@ -44,7 +49,7 @@ function DetailTicket() {
                     <Typography >
                         <Box  mb={5} >     
                             <Grid container spacing={3}>
-                                <Grid item xs={12}> <Box component="h1" display="inline" >   { selectedTicket.tktSubject }  </Box >  </Grid>
+                                <Grid item xs={12}> <Box component="h1" display="inline" >   { selectedTicket != null ?  selectedTicket.tktSubject : 'Loading ... !' }  </Box >  </Grid>
                                 <Grid item xs={5}>  
                                     <Box component="h3" display="inline" >   Ticket no :   </Box > 
                                     <Box component="p" display="inline" >   { ticketId }  </Box > 
@@ -54,10 +59,14 @@ function DetailTicket() {
                                     <Box display="inline" mx={2} >   Transferring  </Box > 
                                     <Box display="inline" mx={2} >   Conversation  </Box > 
                                     <Box display="inline" mx={2} >   User Details  </Box > 
-                                    <Box display="inline" mx={2} onClick={ ()=>{
-                                        dispatch(deleteTicket(ticketId));
-                                        history.push({ pathname:  "/Tickets" })
-                                    } } >   Delete Ticket  </Box > 
+                                    <Box display="inline" mx={2} > 
+                                        <Button variant="contained" color="secondary" onClick={ ()=>{
+                                            dispatch(deleteTicket(ticketId));
+                                            history.push({ pathname:  "/Tickets" })
+                                        } } >
+                                            Delete Ticket
+                                        </Button>
+                                    </Box > 
                                 </Grid>
                                 
                             </Grid>
@@ -73,39 +82,39 @@ function DetailTicket() {
                        
                             <TableRow >
                                 <TableCell align="left">Category</TableCell>
-                                <TableCell align="left">{ selectedTicket.categoryId }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.categoryId : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Status</TableCell>
-                                <TableCell align="left">{ selectedTicket.tktStatus }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.tktStatus : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Product</TableCell>
-                                <TableCell align="left">{ selectedTicket.productId }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.productId : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Module</TableCell>
-                                <TableCell align="left">{ selectedTicket.moduleId }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.moduleId : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Brand</TableCell>
-                                <TableCell align="left">{ selectedTicket.brandId }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.brandId : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Created by</TableCell>
-                                <TableCell align="left">{ selectedTicket.tktCreatedBy }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.tktCreatedBy : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Created on</TableCell>
-                                <TableCell align="left">{ selectedTicket.tktCreatedDate }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.tktCreatedDate : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Created on</TableCell>
-                                <TableCell align="left">{ selectedTicket.tktCreatedDate }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.tktCreatedDate : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Assigned to</TableCell>
-                                <TableCell align="left">{ selectedTicket.tktAssignedTo }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.tktAssignedTo : 'Loading ... !' }</TableCell>
                             </TableRow>
                    
                         </TableBody>
@@ -122,7 +131,7 @@ function DetailTicket() {
 
                         
                         <Grid container spacing={3}>
-                            <Grid item xs={12}> <Box component="p" mx={5} >   { selectedTicket.tktContent }  </Box >  </Grid>
+                            <Grid item xs={12}> <Box component="p" mx={5} >   { selectedTicket != null ? selectedTicket.tktContent : 'Loading ... !' }  </Box >  </Grid>
                             <Grid item xs={12}>  
                                 {/* Ref Link Here */}
                             </Grid>
