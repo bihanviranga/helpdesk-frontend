@@ -60,8 +60,10 @@ function App() {
                 <Route path="/Module" component={ () => isLogin() ? <Module /> :<UserLogin /> } />
                 <Route path="/Category" component={ () => isLogin() ? <Category /> :<UserLogin /> } />
                 <Route path="/TestComponent" component={ () => isLogin() ? <TestComponent /> :<UserLogin /> } />
+                
+                <Route path="/Tickets/:ticketId" component={ () => isLogin() ? <DetailTicket /> :<UserLogin /> } />
                 <Route path="/Tickets" component={ () => isLogin() ? <ListTickets /> :<UserLogin /> } /> 
-                <Route path="/Tickets/:ticketId" component={ () => isLogin() ? <DetailTicket /> :<UserLogin /> } /> 
+                 
               </Switch>
             </Container>
           </Router>
