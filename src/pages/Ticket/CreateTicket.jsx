@@ -69,7 +69,7 @@ function CreateTicket() {
         CategoryId : "",
         TktSubject : null,
         TktContent : null,
-        TktStatus : "New Ticket",
+        TktStatus : "Open",
         TktCreatedBy : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName,
         TktCreatedDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
         TktAttachment : null
