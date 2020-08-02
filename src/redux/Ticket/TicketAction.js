@@ -33,6 +33,8 @@ export const fetchAllTickets = () => {
 }
 
 export const fetchTicketById = (ticketId) => {
+   
+    
     return dispatch => {
         dispatch({
             type: "FETCH_TICKET_BY_ID",
@@ -67,6 +69,26 @@ export const deleteTicket = (ticketId) => {
                     .catch(err => {
                         const errorMsg = err.message
                     })
+            })
+        })
+    }
+}
+
+export const updateTicket = (tkt) => {
+
+    return dispatch => {
+        dispatch({
+            type : "UPDATE_TICKET",
+            payload : new Promise((resolve , reject) => {
+                Axios.put(`${API_PATH}/Ticket/`, tkt , {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
+                }).then(response => {
+                    const ticket = response.data
+                    resolve(ticket)
+                })
+                .catch(err => {
+                    const errorMsg = err.message
+                })
             })
         })
     }

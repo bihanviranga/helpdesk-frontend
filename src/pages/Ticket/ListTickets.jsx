@@ -24,6 +24,11 @@ import Paper from '@material-ui/core/Paper';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+
 function ListTickets() {
 
     const useStyles = makeStyles({
@@ -46,7 +51,7 @@ function ListTickets() {
     useEffect(() => {
         dispatch(fetchAllTickets());
         dispatch(fetchAllCompanies())
-    }, []);
+    }, [ ]);
 
     var initFilters = {
         state : 'Open',
@@ -56,9 +61,10 @@ function ListTickets() {
         Product : 'All',
         Module : 'All',
         Brand : 'All',
+        MyTktOrAllTkt:'AllTkt'
     }
     const [init , setInit] = useState(initFilters);
-    const tkts = _ticketStore.tickets
+    var tkts = _ticketStore.tickets
 
     const selectCompany = (e) => {
 
@@ -70,26 +76,40 @@ function ListTickets() {
         
         _companyReducer.companies.forEach(element => {
             if( e.target.value == "All"){
-                setInit({ ...init , Company : e.target.value , Category : 'All', Product : 'All',  Module : 'All', Brand : 'All',})
+                setInit({ ...init , Company : e.target.value , Category : 'All', Product : 'All',  Module : 'All', Brand : 'All'})
                 return 0;
             }else if(element.companyId == e.target.value){ 
-                setInit({ ...init , Company : element.companyName , Category : 'All', Product : 'All',  Module : 'All', Brand : 'All',})
+                setInit({ ...init , Company : element.companyName , Category : 'All', Product : 'All',  Module : 'All', Brand : 'All'})
                 return 0;
             }
         });  
     }
     
-    function TicketList(){
+    function TicketListComponent(){
+        if(init.MyTktOrAllTkt == 'AllTkt'){
+            tkts = _ticketStore.tickets
+        }else if(init.MyTktOrAllTkt == 'MyTkt'){
+
+            tkts = _ticketStore.tickets
+            tkts = tkts.filter(function(value){ return value.tktCreatedBy == JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName;})
+    
+        }
+        var i = 0 ;
+
+       
+        
         return(
             <Box component="p" mx={5} > 
+            <></>
                 { tkts.map((tkt, index) => (
-
+                    
                     init.Company == "All" ?
                         init.state  == tkt.tktStatus ?
+                              
                             <TicketListCard key={ index } tktData={ tkt } />
                         : init.state  == 'All' ?
                             <TicketListCard key={ index } tktData={ tkt } />   
-                        : null
+                        :  null
                     : init.Company == tkt.companyName ?
                         init.Module == tkt.moduleName ? 
                             init.Category == tkt.categoryName ? 
@@ -159,7 +179,7 @@ function ListTickets() {
         );
     }
 
-    function MoreFilterOptions(){
+    function MoreFilterOptionsComponent(){
         if(init.Company != "All"){
             return(
                 <>
@@ -215,6 +235,25 @@ function ListTickets() {
         
     }
 
+    
+
+    const FilterMyTktOrAllTkt = () =>{
+        if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserType == "Client" && JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "User"){
+            return null
+        }else{
+            return(
+                <FormControl component="fieldset">
+                    <RadioGroup row  defaultValue="AllTkt"  onChange={ (e)=>{ setInit({ ...init , MyTktOrAllTkt : e.target.value }) } }>
+                        
+                        <FormControlLabel value="AllTkt" control={<Radio color="primary" />} label="All Tickets"   />
+                        <FormControlLabel value="MyTkt" control={<Radio color="primary" />} label="My Tickets"   />
+                        
+                    </RadioGroup>
+                </FormControl>
+            )
+        }
+    }
+
     return (
         <>
         
@@ -222,21 +261,13 @@ function ListTickets() {
                 <Grid item md={ 12 }>
                     <Typography >
                         <Box  mb={5} >     
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}> <Box component="h1" display="inline" > List of Tickets </Box >  </Grid>
+                            <Grid container spacing={3}>    
                                 
-
-                                <Grid item xs={5}>  
-                                    {/* <Box component="h3" display="inline" >   Ticket no :   </Box >  */}
-                                    <Box component="p" display="inline" >  {/* { ticketId } */}   </Box > 
-                                    
+                                <Grid item xs={8}>  
+                                    <Box component="h1" display="inline" > List of Tickets </Box > 
                                 </Grid>
-                                <Grid item xs={7}>
-                                    {/* <Box display="inline" mx={2} >   Reassignment  </Box > 
-                                    <Box display="inline" mx={2} >   Transferring  </Box >
-                                     */}
-
-                                     {/* {JSON.stringify(init)} */}
+                                <Grid item xs={4}>
+                                   { FilterMyTktOrAllTkt() }
                                 </Grid>
                                 
                             </Grid>
@@ -278,7 +309,7 @@ function ListTickets() {
                                         </FormControl>
                                     </TableCell>
                                 </TableRow>
-                                <MoreFilterOptions />
+                                { MoreFilterOptionsComponent() }
                              
                         </TableBody>
                         
@@ -290,16 +321,15 @@ function ListTickets() {
 
                 <Grid item xs={ 8 }>
                     
-                        {/* <Box display="inline" mx={2} >  { selectedTicket.tktContent } </Box >  */}
-
-                        
                         <Grid container spacing={3}>
-                            <Grid item xs={12}> 
-                                <TicketList />
-                            </Grid>
                             <Grid item xs={12}>  
-                                {/* Ref Link Here */}
+                                <Box mx={ 5 }> <b>Showing Results :</b> {TicketListComponent().props.children[1].filter(function(value){ return value  !== null}).length}  </Box>
                             </Grid>
+                            <Grid item xs={12}>
+                                
+                                { TicketListComponent() }
+                            </Grid>
+                            
                         </Grid>
 
                 </Grid>
