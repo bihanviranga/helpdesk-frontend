@@ -81,8 +81,12 @@ function DetailTicket() {
                         <TableBody>
                        
                             <TableRow >
+                                <TableCell align="left">Company</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.companyName : 'Loading ... !' }</TableCell>
+                            </TableRow>
+                            <TableRow >
                                 <TableCell align="left">Category</TableCell>
-                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.categoryId : 'Loading ... !' }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.categoryName : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Status</TableCell>
@@ -90,11 +94,11 @@ function DetailTicket() {
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Product</TableCell>
-                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.productId : 'Loading ... !' }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.productName : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Module</TableCell>
-                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.moduleId : 'Loading ... !' }</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.moduleName : 'Loading ... !' }</TableCell>
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Brand</TableCell>
