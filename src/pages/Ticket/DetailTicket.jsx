@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from "react-router";
-import { fetchTicketById , deleteTicket } from '../../redux/'
+import { fetchTicketById , deleteTicket , updateTicket} from '../../redux/'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -17,12 +17,16 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+
 function DetailTicket() {
     const { ticketId } = useParams();
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchTicketById(ticketId));
+      
     }, []);
 
     const useStyles = makeStyles({
@@ -40,6 +44,31 @@ function DetailTicket() {
             return null
         }
     }) 
+
+    const updateTkt = (e , selectedTicket) => {
+    
+        selectedTicket.tktStatus = e.target.value;
+
+        dispatch(updateTicket(selectedTicket))
+    }
+
+    function StatusDropdownComponent(){ 
+        if(selectedTicket != null){
+            return(
+                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                    <Select native onChange={ (e)=>{ updateTkt(e , selectedTicket ) } } >
+                        <option value="Open" selected={ selectedTicket.tktStatus == "Open" ? true : false } >Open</option>
+                        <option value="Closed" selected={ selectedTicket.tktStatus == "Closed" ? true : false } >Close</option>
+                        <option value="in-progress" selected={ selectedTicket.tktStatus == "in-progress" ? true : false } >in-progress</option> 
+                    </Select>
+                </FormControl>
+            )
+        }else{
+            return(<p> Loading ... ! </p>)
+        }
+        
+    }
+
 
     return (
         <div>
@@ -79,7 +108,12 @@ function DetailTicket() {
                     <Table className={classes.table} aria-label="simple table">
                         
                         <TableBody>
-                       
+                            <TableRow >
+                                <TableCell align="left">Status</TableCell>
+                                <TableCell align="left">
+                                        <StatusDropdownComponent />
+                                </TableCell>
+                            </TableRow>
                             <TableRow >
                                 <TableCell align="left">Company</TableCell>
                                 <TableCell align="left">{ selectedTicket != null ? selectedTicket.companyName : 'Loading ... !' }</TableCell>
@@ -88,10 +122,7 @@ function DetailTicket() {
                                 <TableCell align="left">Category</TableCell>
                                 <TableCell align="left">{ selectedTicket != null ? selectedTicket.categoryName : 'Loading ... !' }</TableCell>
                             </TableRow>
-                            <TableRow >
-                                <TableCell align="left">Status</TableCell>
-                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.tktStatus : 'Loading ... !' }</TableCell>
-                            </TableRow>
+                            
                             <TableRow >
                                 <TableCell align="left">Product</TableCell>
                                 <TableCell align="left">{ selectedTicket != null ? selectedTicket.productName : 'Loading ... !' }</TableCell>

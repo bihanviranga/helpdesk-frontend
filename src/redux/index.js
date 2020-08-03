@@ -15,7 +15,8 @@ export {
     createTicket,
     fetchAllTickets,
     deleteTicket,
-    fetchTicketById
+    fetchTicketById,
+    updateTicket
 } from './Ticket/TicketAction'
 
 export {
