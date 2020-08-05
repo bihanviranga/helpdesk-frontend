@@ -8,7 +8,7 @@ export {
     loginUser,
     logOutUser,
     deleteUser,
-    getUserByUserName
+    getUserByUserName, 
 } from './User/UserAction'
 
 export {
@@ -34,6 +34,11 @@ export {
     fetchCategoriesByComapnyId,
     fetchCategories
 } from './Category/CategoryAction'
+
+export {
+    fetchBrandsByComapnyId,
+    fetchBrands
+} from './Brand/BrandAction'
 
 export {
     fetchModulesByComapnyId,

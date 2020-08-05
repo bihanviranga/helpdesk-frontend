@@ -1,7 +1,14 @@
 import React , {useState , useEffect }from 'react'
 import {useSelector , useDispatch} from 'react-redux'
-import { createUser , fetchAllCompanies } from '../../redux'
+import { createUser , fetchAllCompanies ,} from '../../redux'
 import { useHistory } from "react-router";
+import Axios from "axios"
+import API_PATH from '../../redux/api'
+
+import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 import Avatar from '@material-ui/core/Avatar';
@@ -39,6 +46,13 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    root: {
+        width: '100%',
+        '& > * + *': {
+          marginTop: theme.spacing(2),
+        },
+      },
+     
   }));
 
 
@@ -47,12 +61,14 @@ function UserRegistration() {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const _companyReducer = useSelector(state=>state.company)
+    const _companyReducer = useSelector(state=>state.company) 
+ 
 
     const initUser = {
         CompanyId : '',
         FullName : null,
-        Email : null,
+        Email : '',
+        UserName : '',
         Phone : null,
         UserImage : null,
         UserRole : '',
@@ -61,28 +77,81 @@ function UserRegistration() {
         ConfirmPassword : null
     }
     const history = useHistory();
+    const [open, setOpen] = useState(true);
     const [user , setUser] = useState(initUser);
 
     const registerUser = (e) =>{
         e.preventDefault();
-        if(user.UserRole.length > 0 && user.UserType.length > 0 && user.CompanyId.length > 0 ){
-            dispatch(createUser(user))  
-            history.push({
-                pathname:  "/User"
-                })
+        if(_err.ErrMsg == "NotTakenYet" && _err.ErrMsg != null){
+            if(user.UserRole.length > 0 && user.UserType.length > 0 && user.CompanyId.length > 0 ){
+                if(user.Password == user.ConfirmPassword ){
+                    dispatch(createUser(user))  
+                    history.push({
+                        pathname:  "/User"
+                        })
+                }else{
+                    _setErr({ ..._err , ErrMsg : "Passwords not Match" })
+                }
+            }else{
+                _setErr({ ..._err , ErrMsg : "Fill All" })
+            }
         }else{
-            alert("fill all ")
+             alert(_err.ErrMsg)
         }
     }
-    
+
+    const [_err , _setErr] = useState({ ErrMsg: null });
+
+    const _checkAvaibality = () => {
+        if( user.Email.length !== 0 && user.UserName.length !== 0){ 
+            Axios.post(`${API_PATH}/user/CheckAvaibality` , { UserName: user.UserName, Email: user.Email } , {
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+            })
+            .then(res => {
+                if(res.data == "NotTakenYet"){ 
+                    setOpen(true)
+                    _setErr({ ..._err , ErrMsg : res.data })
+                }
+                else if(res.data  == "Email_AlreadyTaken"){ 
+                    _setErr({ ..._err , ErrMsg : 'Email Already Taken' })    
+                }
+                else if(res.data == "UserName_AlreadyTaken"){
+                    _setErr({ ..._err , ErrMsg : 'UserName Already Taken' })
+                }
+                else if(res.data == "Both_AlreadyTaken" ){ 
+                    _setErr({ ..._err , ErrMsg : 'UserName and Email AlreadyTaken' })
+                 }
+               
+            })
+        }
+    }
+
+    const errAtert = () =>{
+        if( _err.ErrMsg != 'NotTakenYet' && _err.ErrMsg != null ){
+
+            return(
+                <>
+                    <Collapse in={open}>
+                        <Alert severity="error" action={
+                            <IconButton aria-label="close"  color="inherit" size="small"
+                            onClick={() => { setOpen(false); }} >
+                            <CloseIcon fontSize="inherit" />
+                            </IconButton>
+                        }
+                        > {JSON.stringify(_err.ErrMsg)} </Alert>
+                    </Collapse> 
+                </>
+            )
+        }else{
+            
+            return( <></> )
+        }
+    }
+
     useEffect(()=>{
-          
-            dispatch(fetchAllCompanies())
-         
-        return()=>{
-    
-        }   
-      },[])
+        dispatch(fetchAllCompanies())
+        return()=>{ }   
+    },[ ])
 
       function Copyright() {
         return (
@@ -96,11 +165,18 @@ function UserRegistration() {
           </Typography>
         );
       }
-
+      
     return (
         <div>
             <>
-            <Container component="main" maxWidth="sm">
+            
+
+           <div className={classes.root}>
+                { errAtert() }
+            </div>
+
+
+            <Container component="main" maxWidth="md">
                 <CssBaseline />
                     <div className={classes.paper}>
                         <Avatar className={classes.avatar}>
@@ -115,10 +191,20 @@ function UserRegistration() {
                                     onChange={e=>  setUser({ ...user , FullName : e.target.value })}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
-                            <TextField  variant="outlined" required fullWidth label="Email"  name="Email"
-                            onChange={e=>  setUser({ ...user , Email : e.target.value })}   
-                            />
+                        
+                            <Grid item xs={12} sm={6}>
+                                <TextField   variant="outlined" required fullWidth label="Email"  name="Email"
+                                onBlur={ () =>{ _checkAvaibality() } }  
+                                onChange={e=> { setUser({ ...user , Email : e.target.value }) }}   
+                                />
+                            </Grid>
+                           
+                            <Grid  item xs={12} sm={6}>
+                                <TextField  variant="outlined" value={ user.UserName } required fullWidth label="UserName"  name="UserName"
+                                onBlur={ () =>{ _checkAvaibality() } }  
+                                onChange = { e=> { setUser({ ...user , UserName : e.target.value }) } }
+                                  
+                                />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth variant="outlined" className={classes.formControl}>
