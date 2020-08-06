@@ -158,7 +158,7 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={ classes.title }>
-            <span onClick={ () => { history.push({ pathname: "/" }) } }>Help DESK</span>
+            <span onClick={ () => { history.push({ pathname: "/" }) } }>HelpDesk</span>
 
 
             <CreateTicketComponent />
@@ -183,7 +183,7 @@ export default function Header() {
       >
         <div className={ classes.drawerHeader }>
           <IconButton onClick={ handleDrawerClose }>
-            Main Manue
+            Main Menu
             { theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
           </IconButton>
         </div>
