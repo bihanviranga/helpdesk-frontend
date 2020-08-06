@@ -84,6 +84,7 @@ function UserRegistration() {
         e.preventDefault();
         if(_err.ErrMsg == "NotTakenYet" && _err.ErrMsg != null){
             if(user.UserRole.length > 0 && user.UserType.length > 0 && user.CompanyId.length > 0 ){
+                console.log(user.Password, user.ConfirmPassword )
                 if(user.Password == user.ConfirmPassword ){
                     dispatch(createUser(user))  
                     history.push({
@@ -254,7 +255,7 @@ function UserRegistration() {
                                 </Grid>
                                 <Grid item xs={12}>
                                 <TextField variant="outlined" required fullWidth name="ConfirmPassword" label="Confirm Password"
-                                    type="password" onChange={e=>  setUser({ ...user , UserImage : e.target.value })}
+                                    type="password" onChange={e=>  setUser({ ...user , ConfirmPassword : e.target.value })}
                                 />
                             </Grid>
                         </Grid>
