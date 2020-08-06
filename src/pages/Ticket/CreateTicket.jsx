@@ -3,7 +3,7 @@ import {useSelector , useDispatch} from 'react-redux'
 import { 
     createTicket  , fetchAllCompanies ,
      fetchProductsByComapnyId , fetchCategoriesByComapnyId,
-     fetchModulesByComapnyId
+     fetchModulesByComapnyId , fetchBrandsByComapnyId 
 } from '../../redux'
 
 import { useHistory } from "react-router";
@@ -51,6 +51,7 @@ function CreateTicket() {
     const _productReducer = useSelector(state=>state.product)
     const _categoryReducer = useSelector(state=>state.category)
     const _moduleReducer = useSelector(state=>state.module)
+    const _brandReducer = useSelector(state=>state.brand)
 
     useEffect(()=>{
         dispatch(fetchAllCompanies())
@@ -85,6 +86,7 @@ function CreateTicket() {
             dispatch(fetchProductsByComapnyId(e.target.value))
             dispatch(fetchCategoriesByComapnyId(e.target.value))
             dispatch(fetchModulesByComapnyId(e.target.value))
+            dispatch(fetchBrandsByComapnyId(e.target.value))
         }  
 
         setTicket({ ...ticket , CompanyId : e.target.value })
@@ -139,6 +141,18 @@ function CreateTicket() {
                                         <option value=""></option>
                                         {_moduleReducer.modulesOfSelectedCompany.map((module)=>(
                                             <option key={module.moduleId} value={module.moduleId}>{ module.moduleName }</option>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+
+                            <Grid item xs={12} sm={3}>
+                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                <InputLabel  >Module Name</InputLabel>
+                                    <Select  native  label="module Name" name="moduleName" onChange={ (e)=>{ setTicket({ ...ticket , BrandId : e.target.value }) } }  >
+                                        <option value=""></option>
+                                        {_brandReducer.brandsOfSelectedCompany.map((brand , index)=>(
+                                            <option key={index} value={brand.brandId}>{ brand.brandName }</option>
                                         ))}
                                     </Select>
                                 </FormControl>

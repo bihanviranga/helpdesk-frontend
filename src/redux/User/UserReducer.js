@@ -4,7 +4,7 @@ const initialState = {
        fetchUserError : null, 
     },
     user:null,
-    userProfile : null,
+    userProfile : null, 
     login : (localStorage.getItem("Token") != null ) ? true : false
 }
 
