@@ -72,8 +72,9 @@ function CreateTicket() {
         TktContent : null,
         TktStatus : "Open",
         TktCreatedBy : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName,
+        TktCreatedByCompany : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).CompanyId,
         TktCreatedDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
-        TktAttachment : null
+        TktAttachment : null,
     }
 
     const [ticket , setTicket] = useState(initTicket);

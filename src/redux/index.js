@@ -27,12 +27,18 @@ export {
 
 export {
     fetchProductsByComapnyId,
-    fetchProducts
+    fetchProducts,
+    createProduct,
+    deleteProduct,
+    updateProduct
 } from './Product/ProductAction'
 
 export {
     fetchCategoriesByComapnyId,
-    fetchCategories
+    fetchCategories,
+    createCategory,
+    deleteCategory,
+    updateCategory
 } from './Category/CategoryAction'
 
 export {
@@ -42,5 +48,8 @@ export {
 
 export {
     fetchModulesByComapnyId,
-    fetchModules
+    fetchModules,
+    createModule,
+    deleteModule,
+    updateModule
 } from './Module/ModuleAction'

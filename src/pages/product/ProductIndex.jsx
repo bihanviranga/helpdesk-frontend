@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState , useEffect , useRef} from 'react';
 import {useSelector , useDispatch} from 'react-redux'
 import {fetchProducts} from '../../redux/'
 
@@ -19,11 +19,11 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
+
+import ProductCreate from '../../components/Product/ProductCreate'
+import ProductView from '../../components/Product/ProductView'
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -53,14 +53,19 @@ const useStyles = makeStyles({
 export default function ProductIndex() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  
+  const productCreateRef = useRef();
+  const productViewRef = useRef();
 
-  const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [ ]);
 
   const _productReducer = useSelector(state=>state.product)
 
   //component
-  function ProductListComponent(){
-    dispatch(fetchProducts())
+  var ProductListComponent = () => {
+    
     if(_productReducer.products.length == 0){
         
         return (<>
@@ -74,21 +79,23 @@ export default function ProductIndex() {
         return (<>
             {_productReducer.products.map((row) => (
                 <StyledTableRow key={row.productId}>
-                    <StyledTableCell component="th" scope="row"> <Link onClick={()=>{alert(row.productName)}} >{row.productId}</Link> </StyledTableCell>
+                    <StyledTableCell component="th" scope="row"> <Link onClick={ ()=>{ productViewRef.current.handleClickOpen(row) } } >{row.productId}</Link> </StyledTableCell>
                     <StyledTableCell align="right">{row.productName}</StyledTableCell>
-                    <StyledTableCell align="right">{row.companyId}</StyledTableCell>
+                    <StyledTableCell align="right">{row.companyName}</StyledTableCell>
                 </StyledTableRow>
             ))}
         </>)
     }
   }
 
+
+  
   return (
     <>
         <Box m={5}>
             <div>
                 <Box mb={3}>
-                    <Link onClick={()=>{ setOpen(true) }}> Add Product </Link>
+                    <Link onClick={() => productCreateRef.current.handleClickOpen()}> Add Product </Link>
                 </Box>
             </div>
             <div>
@@ -112,32 +119,14 @@ export default function ProductIndex() {
             </div>
         </Box >
 
-        {/* dialog box  for create new product */}
-
+        
         <div>
+          <div>
+            <ProductCreate ref={productCreateRef} />
             
-            <Dialog
-                open={open}
-                onClose={()=>{ setOpen(false) }}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Create New Product"}</DialogTitle>
-                <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Let Google help apps determine location. This means sending anonymous location data to
-                    Google, even when no apps are running.
-                </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={()=>{ setOpen(false) }} color="primary">
-                    Disagree
-                </Button>
-                <Button onClick={()=>{ setOpen(false) }} color="primary" autoFocus>
-                    Agree
-                </Button>
-                </DialogActions>
-            </Dialog>
+            <ProductView ref={productViewRef} />
+             
+          </div>
         </div>
 
     </>

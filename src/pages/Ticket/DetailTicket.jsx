@@ -81,7 +81,7 @@ function DetailTicket() {
                                 <Grid item xs={12}> <Box component="h1" display="inline" >   { selectedTicket != null ?  selectedTicket.tktSubject : 'Loading ... !' }  </Box >  </Grid>
                                 <Grid item xs={5}>  
                                     <Box component="h3" display="inline" >   Ticket no :   </Box > 
-                                    <Box component="p" display="inline" >   { ticketId }  </Box > 
+                                    <Box component="p" display="inline" >   { selectedTicket != null ?  selectedTicket.ticketCode  : 'Loading ... !' }  </Box > 
                                 </Grid>
                                 <Grid item xs={7}>
                                     <Box display="inline" mx={2} >   Reassignment  </Box > 
