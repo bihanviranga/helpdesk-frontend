@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect , useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from "react-router";
-import { fetchTicketById , deleteTicket , updateTicket} from '../../redux/'
+import { fetchTicketById , deleteTicket , updateTicket , getUserByUserName} from '../../redux/'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -19,15 +19,15 @@ import Button from '@material-ui/core/Button';
 
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
+import Link from '@material-ui/core/Link';
+
+import TicketOwnerDetails from '../../components/Ticket/TicketOwnerDetails'
 
 function DetailTicket() {
     const { ticketId } = useParams();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTicketById(ticketId));
-      
-    }, []);
+   
 
     const useStyles = makeStyles({
         table: {
@@ -44,6 +44,16 @@ function DetailTicket() {
             return null
         }
     }) 
+
+    const _userReducer = useSelector(state=>state.user)
+    const ticketOwnerDetailsRef = useRef();
+
+     useEffect(() => {
+        dispatch(fetchTicketById(ticketId));
+        if(_userReducer.user == null && localStorage.getItem("Token") != null) {
+            dispatch(getUserByUserName(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName))
+        }   
+    }, []);
 
     const updateTkt = (e , selectedTicket) => {
     
@@ -69,6 +79,17 @@ function DetailTicket() {
         
     }
 
+    
+
+    const deletePermission = () =>{
+        if (localStorage.getItem("Token") == null)  return false;
+        else 
+            if(selectedTicket != null && _userReducer.user != null )
+                if(_userReducer.user.userName == selectedTicket.tktCreatedBy && _userReducer.user.companyId == selectedTicket.tktCreatedByCompany ) return true;
+                else return false;
+            else return false;
+    } 
+
 
     return (
         <div>
@@ -81,20 +102,24 @@ function DetailTicket() {
                                 <Grid item xs={12}> <Box component="h1" display="inline" >   { selectedTicket != null ?  selectedTicket.tktSubject : 'Loading ... !' }  </Box >  </Grid>
                                 <Grid item xs={5}>  
                                     <Box component="h3" display="inline" >   Ticket no :   </Box > 
-                                    <Box component="p" display="inline" >   { selectedTicket != null ?  selectedTicket.ticketCode  : 'Loading ... !' }  </Box > 
+                                    <Box component="p" display="inline" >   { selectedTicket != null ?  JSON.stringify(selectedTicket.ticketCode)  : 'Loading ... !' }  </Box > 
                                 </Grid>
                                 <Grid item xs={7}>
-                                    <Box display="inline" mx={2} >   Reassignment  </Box > 
-                                    <Box display="inline" mx={2} >   Transferring  </Box > 
-                                    <Box display="inline" mx={2} >   Conversation  </Box > 
-                                    <Box display="inline" mx={2} >   User Details  </Box > 
+                                    <Box display="inline" mx={2} >   { false ? <>Reassignment</> : null}  </Box > 
+                                    <Box display="inline" mx={2} >   { false ? <>Transferring</> : null}  </Box > 
+                                    <Box display="inline" mx={2} >   { false ? <>Conversation</> : null}  </Box >  
+                                    
+                                    <Box display="inline" mx={2} >   
+                                        <Link onClick={ ()=>{ ticketOwnerDetailsRef.current.handleClickOpen(selectedTicket.tktCreatedBy) } } >Ticket Owner Details</Link>
+                                    </Box > 
                                     <Box display="inline" mx={2} > 
-                                        <Button variant="contained" color="secondary" onClick={ ()=>{
+                                        { deletePermission() ? (<><Button variant="contained" color="secondary" onClick={ ()=>{
                                             dispatch(deleteTicket(ticketId));
                                             history.push({ pathname:  "/Tickets" })
                                         } } >
                                             Delete Ticket
-                                        </Button>
+                                        </Button></>) : null }
+                                        
                                     </Box > 
                                 </Grid>
                                 
@@ -113,6 +138,12 @@ function DetailTicket() {
                                 <TableCell align="left">
                                         <StatusDropdownComponent />
                                 </TableCell>
+                            </TableRow>
+                            <TableRow >
+                                 
+                                <TableCell align="left">Priority</TableCell>
+                                <TableCell align="left">{ selectedTicket != null ? selectedTicket.tktPriority : 'Loading ... !' }</TableCell>
+                                 
                             </TableRow>
                             <TableRow >
                                 <TableCell align="left">Company</TableCell>
@@ -174,6 +205,9 @@ function DetailTicket() {
 
                 </Grid>
             </Grid>
+            <>
+             <TicketOwnerDetails  ref={ticketOwnerDetailsRef}/>
+            </>
         </div >
     );
 }

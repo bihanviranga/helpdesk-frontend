@@ -139,8 +139,22 @@ export default function Header() {
 
   function CompanyComponent() {
     if (localStorage.getItem("Token") == null) { return null }
-    else { return (<Button ml={ 5 } color="inherit" component={ Link } to='/Company'>Company</Button>) }
+    else { 
+      if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "User")  
+        return null
+      else return (<Button ml={ 5 } color="inherit" component={ Link } to='/Company'>Company</Button>) ;
+     
+    }
   }
+
+  const permission = (nav) =>{
+    if (localStorage.getItem("Token") == null)  return false;
+    else
+      if(nav != "Tickets") 
+        if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "User") return !true;
+        else return true;
+      else return true ;
+  } 
 
   const classes = useStyles();
 
@@ -158,7 +172,7 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={ classes.title }>
-            <span onClick={ () => { history.push({ pathname: "/" }) } }>HelpDesk</span>
+            <span onClick={ () => { history.push({ pathname: "/" }) } }>Help DESK</span>
 
 
             <CreateTicketComponent />
@@ -183,7 +197,7 @@ export default function Header() {
       >
         <div className={ classes.drawerHeader }>
           <IconButton onClick={ handleDrawerClose }>
-            Main Menu
+            Main Manue
             { theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
           </IconButton>
         </div>
@@ -196,41 +210,54 @@ export default function Header() {
               handleDrawerClose()
             } } />
           </ListItem>
-          <ListItem button >
+
+          { permission("User") ? (<><ListItem button >
             {/* for Icon */ }
             <ListItemText primary={ "User" } onClick={ () => {
               history.push({ pathname: "/User" })
               handleDrawerClose()
             } } />
-          </ListItem>
-          <ListItem button >
+          </ListItem></>) : null  }
+
+          
+          { permission("Product") ? (<><ListItem button >
             {/* for Icon */ }
-            <ListItemText primary={ "Product" } onClick={ () => {
+              <ListItemText primary={ "Product" } onClick={ () => {
               history.push({ pathname: "/Product" })
               handleDrawerClose()
             } } />
-          </ListItem>
-          <ListItem button >
+          </ListItem></>) : null  }
+          { permission("Module") ? (<><ListItem button >
             {/* for Icon */ }
-            <ListItemText primary={ "Module" } onClick={ () => {
+              <ListItemText primary={ "Module" } onClick={ () => {
               history.push({ pathname: "/Module" })
               handleDrawerClose()
             } } />
-          </ListItem>
-          <ListItem button >
+          </ListItem></>) : null  }
+          { (permission("Category") ) ? (<><ListItem button >
             {/* for Icon */ }
-            <ListItemText primary={ "Category" } onClick={ () => {
+              <ListItemText primary={ "Category" } onClick={ () => {
               history.push({ pathname: "/Category" })
               handleDrawerClose()
             } } />
-          </ListItem>
-          <ListItem button >
+          </ListItem></>) : null  }
+          { (permission("Brand") ) ? (<><ListItem button >
+            {/* for Icon */ }
+              <ListItemText primary={ "Brand" } onClick={ () => {
+              history.push({ pathname: "/Brand" })
+              handleDrawerClose()
+            } } />
+          </ListItem></>) : null  }
+
+          { (permission("Tickets") ) ? (<><ListItem button >
             {/* for Icon */ }
             <ListItemText primary={ "Tickets" } onClick={ () => {
               history.push({ pathname: "/Tickets" })
               handleDrawerClose()
             } } />
-          </ListItem>
+          </ListItem></>) : null  }
+
+          
 
 
         </List>

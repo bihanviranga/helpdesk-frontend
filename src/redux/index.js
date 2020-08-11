@@ -9,6 +9,7 @@ export {
     logOutUser,
     deleteUser,
     getUserByUserName, 
+    getTktOwnerByUserName
 } from './User/UserAction'
 
 export {
@@ -43,7 +44,10 @@ export {
 
 export {
     fetchBrandsByComapnyId,
-    fetchBrands
+    fetchBrands,
+    createBrand,
+    deleteBrand,
+    updateBrand
 } from './Brand/BrandAction'
 
 export {

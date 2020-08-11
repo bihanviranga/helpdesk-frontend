@@ -4,7 +4,7 @@ const initialState = {
        fetchUserError : null, 
     },
     user:null,
-    userProfile : null, 
+    tktOwner : null,
     login : (localStorage.getItem("Token") != null ) ? true : false
 }
 
@@ -50,14 +50,18 @@ const userReducer = (state = initialState , action) => {
         //remove token from localStorage ....
         localStorage.removeItem('Token')
  
-        return {  ...state , login : false  }
+        return {  ...state , login : false , user : null }
     }else if(action.type == "GET_USER_BY_USER_NAME_FULFILLED" ){
         return {
             ...state,
             user : action.payload
         }
-    }
-    else{
+    }else if(action.type == "GET_TKT_OWNER_BY_USER_NAME_FULFILLED" ){
+        return {
+            ...state,
+            tktOwner : action.payload
+        }
+    }else{
         return state
     }
 }
