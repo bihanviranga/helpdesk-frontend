@@ -41,3 +41,62 @@ export const fetchCategories = () => {
         })
     }
 }
+
+export const createCategory = (newCategory) => {
+    return dispatch => {
+        dispatch({
+            type : "CREATE_CATEGORY",
+            payload : new Promise((resolve , reject) => {
+                Axios.post(`${API_PATH}/Category/`, newCategory ,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                }).
+                then(res => {
+                    resolve(res.data)
+                }).
+                catch(err => {
+                    resolve([])
+                })
+            })
+        })
+    }
+}
+
+export const deleteCategory = (categoryId , companyId) => {
+    return dispatch => {
+        dispatch({
+            type : "DELETE_CATEGORY",
+            payload : new Promise((resolve , reject)=>{
+                Axios.delete(`${API_PATH}/Category/${categoryId}/${companyId}`,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                }).
+                then(res => {
+                    resolve(res.data)
+                }).
+                catch(err => {
+                    resolve([])
+                })
+            })
+        })
+    }
+}
+
+export const updateCategory = (updatedCategory) => {
+   
+    return dispatch => {
+        dispatch({
+            type : "UPDATE_CATEGORY",
+            payload : new Promise((resolve , reject)=>{
+                Axios.patch(`${API_PATH}/Category/`, updatedCategory ,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                }).
+                then( res => {
+                  
+                    resolve(res.data)
+                }). 
+                catch(err => {
+                    resolve([])
+                })
+            })
+        })
+    }
+} 

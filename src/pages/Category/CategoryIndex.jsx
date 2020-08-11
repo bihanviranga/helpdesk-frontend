@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState , useEffect , useRef} from 'react';
 import {useSelector , useDispatch} from 'react-redux'
 import {fetchCategories} from '../../redux/'
 
@@ -19,11 +19,11 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
+
+import CategoryCreate from '../../components/Category/CategoryCreate'
+import CategoryView from '../../components/Category/CategoryView'
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -50,17 +50,22 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ModuleIndex() {
+export default function CategoryIndex() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  
+  const categoryCreateRef = useRef();
+  const categoryViewRef = useRef();
 
-  const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    dispatch(fetchCategories())
+  }, [ ]);
 
   const _categoryReducer = useSelector(state=>state.category)
 
   //component
-  function CategoryListComponent(){
-    dispatch(fetchCategories())
+  var CategoryListComponent = () => {
+    
     if(_categoryReducer.categories.length == 0){
         
         return (<>
@@ -74,21 +79,23 @@ export default function ModuleIndex() {
         return (<>
             {_categoryReducer.categories.map((row) => (
                 <StyledTableRow key={row.categoryId}>
-                    <StyledTableCell component="th" scope="row"> <Link onClick={()=>{alert(row.categoryName)}} >{row.categoryId}</Link> </StyledTableCell>
+                    <StyledTableCell component="th" scope="row"> <Link onClick={ ()=>{ categoryViewRef.current.handleClickOpen(row) } } >{row.categoryId}</Link> </StyledTableCell>
                     <StyledTableCell align="right">{row.categoryName}</StyledTableCell>
-                    <StyledTableCell align="right">{row.companyId}</StyledTableCell>
+                    <StyledTableCell align="right">{row.companyName}</StyledTableCell>
                 </StyledTableRow>
             ))}
         </>)
     }
   }
 
+
+  
   return (
     <>
         <Box m={5}>
             <div>
                 <Box mb={3}>
-                    <Link onClick={()=>{ setOpen(true) }}> Add Category </Link>
+                    <Link onClick={() => categoryCreateRef.current.handleClickOpen()}> Add Category </Link>
                 </Box>
             </div>
             <div>
@@ -112,32 +119,14 @@ export default function ModuleIndex() {
             </div>
         </Box >
 
-        {/* dialog box  for create new product */}
-
+        
         <div>
+          <div>
+            <CategoryCreate ref={categoryCreateRef} />
             
-            <Dialog
-                open={open}
-                onClose={()=>{ setOpen(false) }}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Create New Module"}</DialogTitle>
-                <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Let Google help apps determine location. This means sending anonymous location data to
-                    Google, even when no apps are running.
-                </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={()=>{ setOpen(false) }} color="primary">
-                    Disagree
-                </Button>
-                <Button onClick={()=>{ setOpen(false) }} color="primary" autoFocus>
-                    Agree
-                </Button>
-                </DialogActions>
-            </Dialog>
+            <CategoryView ref={categoryViewRef} />
+             
+          </div>
         </div>
 
     </>
