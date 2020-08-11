@@ -71,6 +71,7 @@ function CreateTicket() {
         TktSubject : null,
         TktContent : null,
         TktStatus : "Open",
+        TktPriority:"",
         TktCreatedBy : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName,
         TktCreatedByCompany : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).CompanyId,
         TktCreatedDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
@@ -99,10 +100,10 @@ function CreateTicket() {
                 <CssBaseline />
                     <div className={classes.paper}>
                         
-                        <Typography component="h1" variant="h5"> Create A New Ticket </Typography>
+                        <Typography component="h1" variant="h5"> Create A New Ticket </Typography> 
                         <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} >
+                            <Grid item xs={12} sm={9}>
                                 <FormControl fullWidth variant="outlined" className={classes.formControl}>
                                     <InputLabel  >Company</InputLabel>
                                     <Select  native  label="CompanyName" name="CompanyName" onChange={ (e)=>{ SelectCompany(e) } } >
@@ -110,6 +111,18 @@ function CreateTicket() {
                                         {_companyReducer.companies.map((company)=>(
                                             <option key={company.companyId} value={company.companyId}>{ company.companyName }</option>
                                         ))}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                <InputLabel  >Priority</InputLabel>
+                                    <Select native name="Priority" label="Priority" onChange={ (e)=>{ setTicket({ ...ticket , TktPriority : e.target.value }) } } >
+                                        <option value="" >  </option>
+                                        <option  value="Urgent">Urgent</option>
+                                        <option value="High">High</option> 
+                                        <option value="Medium">Medium</option> 
+                                        <option value="Low">Low</option> 
                                     </Select>
                                 </FormControl>
                             </Grid>

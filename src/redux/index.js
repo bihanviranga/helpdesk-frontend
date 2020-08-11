@@ -9,6 +9,7 @@ export {
     logOutUser,
     deleteUser,
     getUserByUserName, 
+    getTktOwnerByUserName
 } from './User/UserAction'
 
 export {

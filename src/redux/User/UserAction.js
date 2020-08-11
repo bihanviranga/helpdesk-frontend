@@ -99,6 +99,22 @@ export const getUserByUserName = (userName) => {
     }
 }
 
+export const getTktOwnerByUserName = (userName) => {
+    
+    return dispatch => {
+        dispatch({
+            type: "GET_TKT_OWNER_BY_USER_NAME",
+            payload: new Promise((resolve, reject) => {
+                Axios.get(`${API_PATH}/user/${userName}`, {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                }).then(res => {
+                    resolve(res.data)
+                })
+            })
+        })
+    }
+}
+
 export const logOutUser = () => {
     return {
         type: "LOGOUT_USER",

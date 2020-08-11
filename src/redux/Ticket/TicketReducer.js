@@ -6,6 +6,7 @@ const initialState = {
 const ticketReducer = (state = initialState, action) => {
         switch (action.type) {
                 case "FETCH_TICKETS_FULFILLED":
+
                         return {
                                 ...state,
                                 tickets: action.payload

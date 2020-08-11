@@ -101,7 +101,7 @@ function ListTickets() {
         return(
             <Box component="p" mx={5} > 
             <></>
-                { tkts.map((tkt, index) => (
+                { tkts.sort((a,b) => (a.tktCreatedDate > b.tktCreatedDate) ? 1 : ((b.tktCreatedDate > a.tktCreatedDate) ? -1 : 0)).map((tkt, index) => (
                     
                     init.Company == "All" ?
                         init.state  == tkt.tktStatus ?
