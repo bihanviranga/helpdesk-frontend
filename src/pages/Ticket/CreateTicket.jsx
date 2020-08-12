@@ -162,8 +162,8 @@ function CreateTicket() {
 
                             <Grid item xs={12} sm={3}>
                                 <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                <InputLabel  >Module Name</InputLabel>
-                                    <Select  native  label="module Name" name="moduleName" onChange={ (e)=>{ setTicket({ ...ticket , BrandId : e.target.value }) } }  >
+                                <InputLabel  >Brand Name</InputLabel>
+                                    <Select  native  label="brand Name" name="brandName" onChange={ (e)=>{ setTicket({ ...ticket , BrandId : e.target.value }) } }  >
                                         <option value=""></option>
                                         {_brandReducer.brandsOfSelectedCompany.map((brand , index)=>(
                                             <option key={index} value={brand.brandId}>{ brand.brandName }</option>

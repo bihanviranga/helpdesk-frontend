@@ -3,7 +3,7 @@ import React, { useEffect ,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchAllTickets , fetchAllCompanies , fetchProductsByComapnyId , fetchCategoriesByComapnyId,
-    fetchModulesByComapnyId} from '../../redux';
+    fetchModulesByComapnyId , fetchBrandsByComapnyId} from '../../redux';
 
 import TicketListCard from '../../components/Ticket/TicketListCard';
 
@@ -46,6 +46,7 @@ function ListTickets() {
     const _productReducer = useSelector(state=>state.product)
     const _categoryReducer = useSelector(state=>state.category)
     const _moduleReducer = useSelector(state=>state.module)
+    const _brandReducer = useSelector(state=>state.brand)
     
 
     useEffect(() => {
@@ -72,6 +73,7 @@ function ListTickets() {
             dispatch(fetchProductsByComapnyId(e.target.value ))
             dispatch(fetchCategoriesByComapnyId(e.target.value ))
             dispatch(fetchModulesByComapnyId(e.target.value ))
+            dispatch(fetchBrandsByComapnyId(e.target.value ))
         }
         
         _companyReducer.companies.forEach(element => {
@@ -225,7 +227,16 @@ function ListTickets() {
                     </TableRow>
                     <TableRow >
                         <TableCell align="left">Brand</TableCell>
-                        <TableCell align="left">Not Dev yet</TableCell>
+                        <TableCell align="left">
+                            <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                <Select  native   onChange={ (e)=>{ setInit({ ...init , Brand : e.target.value }) } }  >
+                                    <option value="All">All Brand</option>
+                                    {_brandReducer.brandsOfSelectedCompany.map((brand)=>(
+                                        <option key={brand.brandId} value={brand.brandName}>{ brand.brandName }</option>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </TableCell>
                     </TableRow>
                 </>
             );

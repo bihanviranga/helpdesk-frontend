@@ -44,7 +44,10 @@ export {
 
 export {
     fetchBrandsByComapnyId,
-    fetchBrands
+    fetchBrands,
+    createBrand,
+    deleteBrand,
+    updateBrand
 } from './Brand/BrandAction'
 
 export {

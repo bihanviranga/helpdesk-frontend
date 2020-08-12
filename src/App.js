@@ -19,6 +19,7 @@ import Container from '@material-ui/core/Container';
 import Product from './pages/product/ProductIndex'
 import Module from './pages/Module/ModuleIndex'
 import Category from './pages/Category/CategoryIndex'
+import Brand from './pages/Brand/BrandIndex'
 import ListTickets from './pages/Ticket/ListTickets';
 import DetailTicket from './pages/Ticket/DetailTicket';
 
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/Product" component={ () => isLogin() ? <Product /> :<UserLogin /> } />
                 <Route path="/Module" component={ () => isLogin() ? <Module /> :<UserLogin /> } />
                 <Route path="/Category" component={ () => isLogin() ? <Category /> :<UserLogin /> } />
+                <Route path="/Brand" component={ () => isLogin() ? <Brand /> :<UserLogin /> } />
                 <Route path="/TestComponent" component={ () => isLogin() ? <TestComponent /> :<UserLogin /> } />
                 
                 <Route path="/Tickets/:ticketId" component={ () => isLogin() ? <DetailTicket /> :<UserLogin /> } />

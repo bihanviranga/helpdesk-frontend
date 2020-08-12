@@ -241,6 +241,14 @@ export default function Header() {
               handleDrawerClose()
             } } />
           </ListItem></>) : null  }
+          
+          { (permission("Brand") ) ? (<><ListItem button >
+            {/* for Icon */ }
+              <ListItemText primary={ "Brand" } onClick={ () => {
+              history.push({ pathname: "/Brand" })
+              handleDrawerClose()
+            } } />
+          </ListItem></>) : null  }
 
           { (permission("Tickets") ) ? (<><ListItem button >
             {/* for Icon */ }
