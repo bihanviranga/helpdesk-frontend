@@ -2,7 +2,7 @@ import Axios from "axios"
 import API_PATH from '../api'
 
 export const createTicket = (ticket) => {
-    return () => {
+    return dispatch => {
         // If we are sending files, the backend has to
         // receive them [FromForm] instead of [FromBody].
         // To do that we need to send mutipart/form-data content.
@@ -12,17 +12,22 @@ export const createTicket = (ticket) => {
         Object.keys(ticket).forEach(key => {
             formData.append(key, ticket[key]);
         });
-        console.log(ticket);
-        console.log(formData);
-        Axios.post(`${API_PATH}/Ticket/`, formData, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem("Token"),
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-            .then(res => {
-                console.log(res.data)
+
+        dispatch({
+            type : "CREATE_TICKET",
+            payload : new Promise((resolve , reject)=>{
+                Axios.post(`${API_PATH}/Ticket/`, formData, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("Token"),
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(res => {
+                    resolve(res.data)
+                })
             })
+        })
+        
+        
     }
 }
 
@@ -110,7 +115,7 @@ export const updateTicket = (tkt) => {
 
 export const getTicketAttachment = (ticketId) => {
     return dispatch => {
-        console.log("Called")
+       
         dispatch({
             type: "GET_TICKET_ATTACHMENT",
             payload: new Promise((resolve, reject) => {
@@ -118,7 +123,6 @@ export const getTicketAttachment = (ticketId) => {
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
                 }).then(response => {
                     const attachment = response.data
-                    console.log(attachment);
                     var fileURL = window.URL.createObjectURL(new Blob([attachment]));
                     var fileLink = document.createElement('a');
                     fileLink.href = fileURL;

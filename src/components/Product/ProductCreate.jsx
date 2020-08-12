@@ -81,6 +81,7 @@ const ProductCreate = forwardRef( (props , ref) => {
 
   const cretaeProduct = () =>{
     dispatch(createProduct(newProduct))
+    handleClose()
   }
 
   return (

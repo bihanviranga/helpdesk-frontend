@@ -81,6 +81,7 @@ const CategoryCreate = forwardRef( (props , ref) => {
 
   const cretaeCategory = () =>{
     dispatch(createCategory(newCategory))
+    handleClose()
   }
 
   return (

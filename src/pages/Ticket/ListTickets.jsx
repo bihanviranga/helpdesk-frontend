@@ -50,8 +50,12 @@ function ListTickets() {
     
 
     useEffect(() => {
-        dispatch(fetchAllTickets());
-        dispatch(fetchAllCompanies())
+
+        (async ()=>{
+           await dispatch(fetchAllTickets())
+           await dispatch(fetchAllCompanies())
+        })();
+        
     }, [ ]);
 
     var initFilters = {

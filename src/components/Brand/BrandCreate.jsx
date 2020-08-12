@@ -81,6 +81,7 @@ const BrandCreate = forwardRef( (props , ref) => {
 
   const cretaeBrand = () =>{
     dispatch(createBrand(newBrand))
+    handleClose()
   }
 
   return (

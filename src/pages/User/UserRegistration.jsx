@@ -84,7 +84,7 @@ function UserRegistration() {
         e.preventDefault();
         if(_err.ErrMsg == "NotTakenYet" && _err.ErrMsg != null){
             if(user.UserRole.length > 0 && user.UserType.length > 0 && user.CompanyId.length > 0 ){
-                console.log(user.Password, user.ConfirmPassword )
+                
                 if(user.Password == user.ConfirmPassword ){
                     dispatch(createUser(user))  
                     history.push({
