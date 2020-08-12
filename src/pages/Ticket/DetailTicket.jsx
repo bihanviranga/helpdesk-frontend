@@ -68,15 +68,23 @@ function DetailTicket() {
 
     function StatusDropdownComponent() {
         if (selectedTicket != null) {
-            return (
-                <FormControl fullWidth variant="outlined" className={ classes.formControl }>
-                    <Select native onChange={ (e) => { updateTkt(e, selectedTicket) } } >
-                        <option value="Open" selected={ selectedTicket.tktStatus == "Open" ? true : false } >Open</option>
-                        <option value="Closed" selected={ selectedTicket.tktStatus == "Closed" ? true : false } >Close</option>
-                        <option value="in-progress" selected={ selectedTicket.tktStatus == "in-progress" ? true : false } >in-progress</option>
-                    </Select>
-                </FormControl>
-            )
+            if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserType == "HelpDesk"){
+                return (
+                    <FormControl fullWidth variant="outlined" className={ classes.formControl }>
+                        <Select native onChange={ (e) => { updateTkt(e, selectedTicket) } } >
+                            <option value="Open" selected={ selectedTicket.tktStatus == "Open" ? true : false } >Open</option>
+                            <option value="Closed" selected={ selectedTicket.tktStatus == "Closed" ? true : false } >Close</option>
+                            <option value="in-progress" selected={ selectedTicket.tktStatus == "in-progress" ? true : false } >in-progress</option>
+                        </Select>
+                    </FormControl>
+                )
+            }else{
+                return(
+                    <>
+                        { selectedTicket != null ? selectedTicket.tktStatus : 'Loading ... !' }
+                    </>
+                )
+            }
         } else {
             return (<p> Loading ... ! </p>)
         }
