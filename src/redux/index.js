@@ -8,7 +8,7 @@ export {
     loginUser,
     logOutUser,
     deleteUser,
-    getUserByUserName, 
+    getUserByUserName,
     getTktOwnerByUserName
 } from './User/UserAction'
 
@@ -17,7 +17,8 @@ export {
     fetchAllTickets,
     deleteTicket,
     fetchTicketById,
-    updateTicket
+    updateTicket,
+    getTicketAttachment
 } from './Ticket/TicketAction'
 
 export {
