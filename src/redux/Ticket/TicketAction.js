@@ -107,3 +107,29 @@ export const updateTicket = (tkt) => {
         })
     }
 }
+
+export const getTicketAttachment = (ticketId) => {
+    return dispatch => {
+        console.log("Called")
+        dispatch({
+            type: "GET_TICKET_ATTACHMENT",
+            payload: new Promise((resolve, reject) => {
+                Axios.get(`${API_PATH}/Ticket/${ticketId}/attachment`, {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                }).then(response => {
+                    const attachment = response.data
+                    console.log(attachment);
+                    var fileURL = window.URL.createObjectURL(new Blob([attachment]));
+                    var fileLink = document.createElement('a');
+                    fileLink.href = fileURL;
+                    fileLink.setAttribute('download', `${ticketId}.txt`);
+                    document.body.appendChild(fileLink);
+                    fileLink.click();
+                })
+                    .catch(err => {
+                        const errorMsg = err.message
+                    })
+            })
+        })
+    }
+}
