@@ -10,13 +10,11 @@ export const createArticle = (article) => {
   article.AcceptedDate = "2016-09-09"
   article.LastEditedDate = "2016-09-09"
   article.LastEditedBy = "heycq567"
-  article.ProductID = "yuhcsa778878"
-  console.log(article)
+  article.ProductID = "yuhcsa778878" 
   return () => {
     Axios.post(`${API_PATH}/Article/`, article)
       .then(response => {
-        const posts = response.data
-        console.log(posts)
+        const posts = response.data 
       })
       .catch(err => {
         const errMzg = err.message

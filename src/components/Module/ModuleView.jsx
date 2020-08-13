@@ -95,22 +95,22 @@ const ModuleView = forwardRef( (props , ref) => {
 
           
           { updateState == false ? 
-            (<Button onClick={handleClose} size="small" onClick={ ()=>{ setUpdateState(true) } } color="primary"> Update </Button>) :
+            (<Button   size="small" onClick={ ()=>{ setUpdateState(true) } } color="primary"> Update </Button>) :
             ( <>
-                <Button onClick={handleClose} size="small" onClick={ ()=>{ setUpdateState(false) } } color="primary" autoFocus> Close </Button>
-                <Button onClick={handleClose} size="small" onClick={ ()=>{ dispatch(updateModule(moduleUpdateData)) } } color="primary" autoFocus>  Update </Button>
+                <Button   size="small" onClick={ ()=>{ setUpdateState(false) } } color="primary" autoFocus> Close </Button>
+                <Button  size="small" onClick={ ()=>{ handleClose() ; dispatch(updateModule(moduleUpdateData)) } } color="primary" autoFocus>  Update </Button>
               </>
               
             )
            }
 
           {  updateState == false ? 
-            (<Button onClick={handleClose} size="small" color="primary" autoFocus> Close </Button>) :
+            (<Button onClick={handleClose}  size="small" color="primary" autoFocus> Close </Button>) :
             null
           }
           
           { updateState == false ?
-            (<Button onClick={handleClose} size="small" onClick={ ()=>{ 
+            (<Button  size="small" onClick={ ()=>{ 
               dispatch(deleteModule(module.moduleId , module.companyId ))
               handleClose()
              } } color="secondary" autoFocus>  Delete </Button>) :
