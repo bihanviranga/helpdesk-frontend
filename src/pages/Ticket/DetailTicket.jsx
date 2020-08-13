@@ -63,12 +63,12 @@ function DetailTicket() {
     }
 
     const getAttachment = () => {
-        dispatch(getTicketAttachment(selectedTicket.ticketId));
+        dispatch(getTicketAttachment(selectedTicket.ticketId, selectedTicket.tktAttachment));
     }
 
     function StatusDropdownComponent() {
         if (selectedTicket != null) {
-            if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserType == "HelpDesk"){
+            if (JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserType == "HelpDesk") {
                 return (
                     <FormControl fullWidth variant="outlined" className={ classes.formControl }>
                         <Select native onChange={ (e) => { updateTkt(e, selectedTicket) } } >
@@ -78,8 +78,8 @@ function DetailTicket() {
                         </Select>
                     </FormControl>
                 )
-            }else{
-                return(
+            } else {
+                return (
                     <>
                         { selectedTicket != null ? selectedTicket.tktStatus : 'Loading ... !' }
                     </>
