@@ -50,8 +50,7 @@ export const fetchAllUsers = () => {
                 Axios.get(`${API_PATH}/User/`, {
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
                 })
-                    .then(response => {
-                        console.log(response)
+                    .then(response => { 
                         resolve(response.data)
 
                     })
