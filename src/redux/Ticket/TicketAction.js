@@ -14,8 +14,8 @@ export const createTicket = (ticket) => {
         });
 
         dispatch({
-            type : "CREATE_TICKET",
-            payload : new Promise((resolve , reject)=>{
+            type: "CREATE_TICKET",
+            payload: new Promise((resolve, reject) => {
                 Axios.post(`${API_PATH}/Ticket/`, formData, {
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("Token"),
@@ -26,8 +26,8 @@ export const createTicket = (ticket) => {
                 })
             })
         })
-        
-        
+
+
     }
 }
 
@@ -113,22 +113,30 @@ export const updateTicket = (tkt) => {
     }
 }
 
-export const getTicketAttachment = (ticketId) => {
+export const getTicketAttachment = (ticketId, ticketAttachmentName) => {
     return dispatch => {
-       
+
         dispatch({
             type: "GET_TICKET_ATTACHMENT",
             payload: new Promise((resolve, reject) => {
-                Axios.get(`${API_PATH}/Ticket/${ticketId}/attachment`, {
-                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                Axios({
+                    url: `${API_PATH}/Ticket/${ticketId}/attachment`,
+                    method: 'GET',
+                    responseType: 'blob',
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem("Token"),
+                    },
                 }).then(response => {
                     const attachment = response.data
+                    // Below code is from StackOverflow. Don't trust it. --bv
                     var fileURL = window.URL.createObjectURL(new Blob([attachment]));
                     var fileLink = document.createElement('a');
                     fileLink.href = fileURL;
-                    fileLink.setAttribute('download', `${ticketId}.txt`);
+                    fileLink.setAttribute('download', `${ticketAttachmentName}`);
+                    fileLink.target = '_blank';
                     document.body.appendChild(fileLink);
                     fileLink.click();
+                    // window.URL.revokeObjectURL(fileURL);
                 })
                     .catch(err => {
                         const errorMsg = err.message
