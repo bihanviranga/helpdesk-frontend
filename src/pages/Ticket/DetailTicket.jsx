@@ -22,6 +22,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Link from '@material-ui/core/Link';
 
 import TicketOwnerDetails from '../../components/Ticket/TicketOwnerDetails'
+import ConversationIndex from '../../components/Conversation/ConversationIndex'
 
 function DetailTicket() {
     const { ticketId } = useParams();
@@ -47,6 +48,7 @@ function DetailTicket() {
 
     const _userReducer = useSelector(state => state.user)
     const ticketOwnerDetailsRef = useRef();
+    const conversationIndexRef = useRef();
 
     useEffect(() => {
         dispatch(fetchTicketById(ticketId));
@@ -131,7 +133,9 @@ function DetailTicket() {
                                 <Grid item xs={ 7 }>
                                     <Box display="inline" mx={ 2 } >   { false ? <>Reassignment</> : null }  </Box >
                                     <Box display="inline" mx={ 2 } >   { false ? <>Transferring</> : null }  </Box >
-                                    <Box display="inline" mx={ 2 } >   { false ? <>Conversation</> : null }  </Box >
+                                    <Box display="inline" mx={ 2 } >
+                                         <Link onClick={ () => { conversationIndexRef.current.handleClickOpen(selectedTicket.ticketId) } } >Conversation</Link>
+                                    </Box >
 
                                     <Box display="inline" mx={ 2 } >
                                         <Link onClick={ () => { ticketOwnerDetailsRef.current.handleClickOpen(selectedTicket.tktCreatedBy) } } >Ticket Owner Details</Link>
@@ -235,6 +239,7 @@ function DetailTicket() {
             </Grid>
             <>
                 <TicketOwnerDetails ref={ ticketOwnerDetailsRef } />
+                <ConversationIndex ref = { conversationIndexRef } />
             </>
         </div >
     );
