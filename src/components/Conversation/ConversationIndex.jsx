@@ -53,6 +53,7 @@ const ConversationIndex = forwardRef( (props , ref) => {
       submit: {
         margin: theme.spacing(3, 0, 2),
       },
+       
     },
   }));
 
@@ -69,7 +70,7 @@ const ConversationIndex = forwardRef( (props , ref) => {
     TicketId : null,
     CvSender : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName,
     CvSenderType : JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserType,
-    CvSendDate : new Date(),
+    CvSendDate : null,
     CvContent : ''
   });
   
@@ -79,8 +80,41 @@ const ConversationIndex = forwardRef( (props , ref) => {
     }
   }, [conversation.TicketId ]);
 
-  const cretaeConversation = () => {
+  const cretaeConversation =  () => {
+     
+    // setConversation({ ...conversation , CvSendDate : new Date()  })
+    
     dispatch(createConversation(conversation))
+  }
+
+  const fetchConversationComponent = () => {
+     
+      return(
+        _conversationReducer.conversations.map((element , index )=> (
+          <Grid item xs={12} >
+              <Box  borderColor="primary.main" p={1} border={1}  borderRadius="borderRadius"  >
+               
+              <Grid container spacing={3}>
+                 <Grid item xs={12} sm={6}>
+                  <b>Publisher :</ b>  {element.cvSender}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <b> On :</ b>  {element.cvSendDate}
+                </Grid>
+                 
+              </Grid>
+               <hr />  
+              <Grid item xs={12} >
+                 { element.cvContent }
+              </Grid>
+                
+              </ Box>  
+          </ Grid >
+        ))
+      )
+    
+      
+    
   }
 
 
@@ -90,12 +124,18 @@ const ConversationIndex = forwardRef( (props , ref) => {
         <DialogTitle id="alert-dialog-title">{"Conversation"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-          <form className={classes.form} noValidate>
-              <Grid container spacing={2}>
-                {JSON.stringify(_conversationReducer.conversations)}
+          
+              <Grid container spacing={2}   > 
+                 { fetchConversationComponent() }
+              </Grid>
+               
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+        <Grid container spacing={2}> 
                   <Grid item xs={12}>
                     <TextField variant="outlined" required fullWidth name="Content" label="Message"
-                        onChange={e=>  setConversation({ ...conversation , CvContent : e.target.value })}
+                        onChange={e=>  setConversation({ ...conversation , CvContent : e.target.value  })}
                     />
                   </Grid>
                   
@@ -103,17 +143,11 @@ const ConversationIndex = forwardRef( (props , ref) => {
               <Box my={3}>
                 <Button
                   type="submit" fullWidth  variant="contained" color="primary"
-                  className={classes.submit} onClick={(e)=>{
+                  className={classes.submit} onClick={  (e)=>{
                       cretaeConversation()
                       e.preventDefault();
-                  }} > Create </Button>
-              </Box>
-              
-              </form>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary"> Cancel  </Button> 
+                  }} > Send </Button>
+              </Box> 
         </DialogActions>
       </Dialog>
     </div>

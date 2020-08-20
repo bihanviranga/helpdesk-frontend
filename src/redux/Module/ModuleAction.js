@@ -73,7 +73,9 @@ export const deleteModule = (moduleId , companyId) => {
                     resolve(res.data)
                 }).
                 catch(err => {
-                    resolve([])
+                    if(err.response.status == 400){
+                        alert("Can not delete modules that are refernced by tickets ?")
+                    }
                 })
             })
         })

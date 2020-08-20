@@ -98,7 +98,10 @@ const BrandView = forwardRef( (props , ref) => {
             (<Button onClick={handleClose} size="small" onClick={ ()=>{ setUpdateState(true) } } color="primary"> Update </Button>) :
             ( <>
                 <Button onClick={handleClose} size="small" onClick={ ()=>{ setUpdateState(false) } } color="primary" autoFocus> Close </Button>
-                <Button onClick={handleClose} size="small" onClick={ ()=>{ dispatch(updateBrand(brandUpdateData)) } } color="primary" autoFocus>  Update </Button>
+                <Button onClick={handleClose} size="small" onClick={ ()=>{ 
+                  setBrand({...brand , brandName : brandUpdateData.brandName })
+                  setUpdateState(false);
+                  dispatch(updateBrand(brandUpdateData)) } } color="primary" autoFocus>  Update </Button>
               </>
               
             )

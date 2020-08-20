@@ -73,7 +73,9 @@ export const deleteBrand = (brandId , companyId) => {
                     resolve(res.data)
                 }).
                 catch(err => {
-                    resolve([])
+                    if(err.response.status == 400){
+                        alert("Can not delete brands that are refernced by tickets ?")
+                    }
                 })
             })
         })

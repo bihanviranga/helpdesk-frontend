@@ -98,7 +98,10 @@ const ModuleView = forwardRef( (props , ref) => {
             (<Button   size="small" onClick={ ()=>{ setUpdateState(true) } } color="primary"> Update </Button>) :
             ( <>
                 <Button   size="small" onClick={ ()=>{ setUpdateState(false) } } color="primary" autoFocus> Close </Button>
-                <Button  size="small" onClick={ ()=>{ handleClose() ; dispatch(updateModule(moduleUpdateData)) } } color="primary" autoFocus>  Update </Button>
+                <Button  size="small" onClick={ ()=>{ 
+                  setModule({...module , moduleName : moduleUpdateData.moduleName })
+                  setUpdateState(false); 
+                  dispatch(updateModule(moduleUpdateData)) } } color="primary" autoFocus>  Update </Button>
               </>
               
             )

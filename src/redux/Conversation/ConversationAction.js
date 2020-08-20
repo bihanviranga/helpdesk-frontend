@@ -23,6 +23,7 @@ export const fetchConvesations = (ticketId) => {
 
 
 export const createConversation = (conversation) => {
+    conversation.CvSendDate = new Date() ;
     return dispatch => {
         dispatch({
             type: "CREATE_CONVERSATION",

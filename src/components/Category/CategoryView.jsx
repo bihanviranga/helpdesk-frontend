@@ -98,7 +98,10 @@ const CategoryView = forwardRef( (props , ref) => {
             (<Button  size="small" onClick={ ()=>{ setUpdateState(true) } } color="primary"> Update </Button>) :
             ( <>
                 <Button  size="small" onClick={ ()=>{ setUpdateState(false) } } color="primary" autoFocus> Close </Button>
-                <Button  size="small" onClick={ ()=>{ handleClose() ; dispatch(updateCategory(categoryUpdateData)) } } color="primary" autoFocus>  Update </Button>
+                <Button  size="small" onClick={ ()=>{ 
+                  setCategory({...category , categoryName : categoryUpdateData.categoryName })
+                  setUpdateState(false);
+                  dispatch(updateCategory(categoryUpdateData)) } } color="primary" autoFocus>  Update </Button>
               </>
               
             )
