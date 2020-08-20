@@ -6,6 +6,7 @@ import categoryReducer from './Category/CategoryReducer'
 import brandReducer from './Brand/BrandReducer'
 import moduleReducer from './Module/ModuleReducer'
 import ticketReducer from './Ticket/TicketReducer'
+import conversationReducer from './Conversation/ConversationReducer'
 
 const rootReducer = combineReducers({
     user: userReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     category: categoryReducer,
     module: moduleReducer,
     brand: brandReducer,
-    ticket: ticketReducer
+    ticket: ticketReducer,
+    conversation : conversationReducer
 })
 
 export default rootReducer
