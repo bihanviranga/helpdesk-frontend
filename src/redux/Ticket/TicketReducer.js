@@ -8,7 +8,7 @@ const ticketReducer = (state = initialState, action) => {
                 if( action.type == "CREATE_TICKET_FULFILLED" ) {
                         return{
                                 ...state ,
-                                tickets : [...state.tickets , action.payload  ]
+                                tickets : [ action.payload , ...state.tickets   ]
                         }
                 }else if( action.type == "FETCH_TICKETS_FULFILLED" ) {
                         return {

@@ -73,7 +73,9 @@ export const deleteProduct = (productId , companyId) => {
                     resolve(res.data)
                 }).
                 catch(err => {
-                    resolve([])
+                    if(err.response.status == 400){
+                        alert("Can not delete products that are refernced by tickets ?")
+                    }
                 })
             })
         })

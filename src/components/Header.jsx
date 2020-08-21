@@ -241,7 +241,6 @@ export default function Header() {
               handleDrawerClose()
             } } />
           </ListItem></>) : null  }
-          
           { (permission("Brand") ) ? (<><ListItem button >
             {/* for Icon */ }
               <ListItemText primary={ "Brand" } onClick={ () => {

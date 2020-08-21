@@ -98,7 +98,11 @@ const ProductView = forwardRef( (props , ref) => {
             (<Button onClick={handleClose} size="small" onClick={ ()=>{ setUpdateState(true) } } color="primary"> Update </Button>) :
             ( <>
                 <Button onClick={handleClose} size="small" onClick={ ()=>{ setUpdateState(false) } } color="primary" autoFocus> Close </Button>
-                <Button onClick={handleClose} size="small" onClick={ ()=>{ dispatch(updateProduct(productUpdateData)) } } color="primary" autoFocus>  Update </Button>
+                <Button onClick={handleClose} size="small" onClick={ ()=>{ 
+                    setProduct({...product , productName : productUpdateData.productName })
+                    setUpdateState(false); 
+                    dispatch(updateProduct(productUpdateData)) 
+                  } } color="primary" autoFocus>  Update </Button>
               </>
               
             )

@@ -73,7 +73,9 @@ export const deleteCategory = (categoryId , companyId) => {
                     resolve(res.data)
                 }).
                 catch(err => {
-                    resolve([])
+                    if(err.response.status == 400){
+                        alert("Can not delete categories that are refernced by tickets ?")
+                    }
                 })
             })
         })
