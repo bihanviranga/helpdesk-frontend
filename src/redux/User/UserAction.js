@@ -76,7 +76,9 @@ export const loginUser = (loginDetails) => {
                         // history.push({ pathname:  "/" })
                     })
                     .catch(err => {
-                        const errMzg = err.message
+                        if(err.response.status == 404){
+                            alert("Invalid username / Email or Password ? ")
+                        }
                     })
             })
         })

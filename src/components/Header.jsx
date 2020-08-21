@@ -102,6 +102,17 @@ export default function Header() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
 
+  // check token expire or not
+  
+
+  useEffect(() => {
+    if(localStorage.getItem('Token') != null){
+      if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).exp < new Date().getTime()/1000){
+        dispatch(logOutUser())
+      }
+    }
+  }, [ ]);
+
 
   function LoginCheck() {
      
