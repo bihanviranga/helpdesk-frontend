@@ -18,7 +18,8 @@ export {
     deleteTicket,
     fetchTicketById,
     updateTicket,
-    getTicketAttachment
+    getTicketAttachment,
+    AssigningUser
 } from './Ticket/TicketAction'
 
 export {

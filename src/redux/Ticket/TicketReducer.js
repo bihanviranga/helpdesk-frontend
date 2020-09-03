@@ -25,6 +25,16 @@ const ticketReducer = (state = initialState, action) => {
                                 ...state,
                                 tickets : [ ...state.tickets.filter(function(value){ return value.ticketId != action.payload;}) ]
                         }
+                }else if(action.type == "ASSIGNING_USER_FULFILLED"){
+                        
+                        return{
+                                ...state,
+                                tickets : [ ...state.tickets.map(function(value){
+                                        if(value.ticketId == action.payload.ticketId){
+                                                return action.payload
+                                        }else { return value } })
+                                ]
+                        }
                 }else{
                         return state
                 }

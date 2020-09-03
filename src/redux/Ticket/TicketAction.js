@@ -145,3 +145,26 @@ export const getTicketAttachment = (ticketId, ticketAttachmentName) => {
         })
     }
 }
+
+export const AssigningUser = (assigningData) =>{
+    console.log(assigningData)
+    return dispatch =>{
+        dispatch({
+            type : "ASSIGNING_USER",
+            payload : new Promise((resolve , reject) => {
+                Axios.post(`${API_PATH}/Ticket/Assigning`, assigningData, {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                }).then(response => {
+                    resolve(response.data)
+                })
+                .catch(err => {
+                    if(err.response.status == 401){
+                        alert(err.response.data)
+                    }else if(err.response.status == 404){
+                        alert(err.response.data)
+                    }
+                })
+            })
+        })
+    }
+}
