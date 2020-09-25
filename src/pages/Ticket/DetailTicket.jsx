@@ -23,7 +23,7 @@ import Link from '@material-ui/core/Link';
 
 import TicketOwnerDetails from '../../components/Ticket/TicketOwnerDetails'
 import ConversationIndex from '../../components/Conversation/ConversationIndex'
-import TicketAssign from '../../components/Ticket/TicketAssigning'
+
 import TicketAssigning from '../../components/Ticket/TicketAssigning';
 
 function DetailTicket() {

@@ -22,6 +22,7 @@ import Category from './pages/Category/CategoryIndex'
 import Brand from './pages/Brand/BrandIndex'
 import ListTickets from './pages/Ticket/ListTickets';
 import DetailTicket from './pages/Ticket/DetailTicket';
+import Dashboard from './pages/Dashboard/DashboardIndex'
 
 import {
   BrowserRouter as Router,
@@ -65,6 +66,7 @@ function App() {
                 
                 <Route path="/Tickets/:ticketId" component={ () => isLogin() ? <DetailTicket /> :<UserLogin /> } />
                 <Route path="/Tickets" component={ () => isLogin() ? <ListTickets /> :<UserLogin /> } /> 
+                <Route path="/Dashboard" component={ () => isLogin() ? <Dashboard /> :<UserLogin /> } /> 
                  
               </Switch>
             </Container>
