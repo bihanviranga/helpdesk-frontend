@@ -2,6 +2,8 @@ import React , {useState , useEffect ,forwardRef, useImperativeHandle}from 'reac
 import { makeStyles } from '@material-ui/core/styles';
 import {useSelector , useDispatch} from 'react-redux'
 import { fetchDashboard } from '../../redux';
+import DashboardMainInformation from '../../components/Dashboard/DashboardMainInformation'
+import DashboardCompanyDetails from '../../components/Dashboard/DashboardCompanyDetails'
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -31,45 +33,8 @@ function DashboardIndex() {
 
     return (
         <div className={classes.root}>
-            <Box m={5}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                            <h1>Master Dashboard</h1>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Paper className={classes.paper}>
-                            <Box m={5}>
-                                <h3>Total Tickets</h3>
-                                <h2> {_dashboardReducer.totalTickets}</h2>
-                            </Box> 
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Paper className={classes.paper}>
-                            <Box m={5}>
-                                <h3>Open Tickets</h3>
-                                <h2> {_dashboardReducer.openTickets}</h2>
-                            </Box> 
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Paper className={classes.paper}>
-                            <Box m={5}>
-                                <h3>Closed Tickets</h3>
-                                <h2> {_dashboardReducer.closedTickets}</h2>
-                            </Box>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Paper className={classes.paper}>
-                            <Box m={5}>
-                                <h3>Inprogress Tickets</h3>
-                                <h2> {_dashboardReducer.inprogressTickets}</h2>
-                            </Box>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </Box>
+            <DashboardMainInformation />
+            <DashboardCompanyDetails />
         </div>
     )
 }
