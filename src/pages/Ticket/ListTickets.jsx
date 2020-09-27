@@ -99,6 +99,9 @@ function ListTickets() {
             tkts = _ticketStore.tickets
             tkts = tkts.filter(function(value){ return value.tktCreatedBy == JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName;})
     
+        }else if(init.MyTktOrAllTkt == 'AssignedToMe'){
+            tkts = _ticketStore.tickets
+            tkts = tkts.filter(function(value){ return value.tktAssignedTo == JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName;})
         }
         var i = 0 ;
 
@@ -261,7 +264,13 @@ function ListTickets() {
                     <RadioGroup row  defaultValue="AllTkt"  onChange={ (e)=>{ setInit({ ...init , MyTktOrAllTkt : e.target.value }) } }>
                         
                         <FormControlLabel value="AllTkt" control={<Radio color="primary" />} label="All Tickets"   />
+                        
+                        {  JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserType == "HelpDesk" ?
+                             <FormControlLabel value="AssignedToMe" control={<Radio color="primary" />} label="Assigned Tickets"   />  : null
+                        }
+                        
                         <FormControlLabel value="MyTkt" control={<Radio color="primary" />} label="My Tickets"   />
+                        
                         
                     </RadioGroup>
                 </FormControl>

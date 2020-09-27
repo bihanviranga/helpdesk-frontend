@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from "react-router";
-import { fetchTicketById, deleteTicket, updateTicket, getUserByUserName, getTicketAttachment } from '../../redux/'
+import { fetchTicketById, deleteTicket, updateTicket, getUserByUserName, getTicketAttachment , AssigningUser} from '../../redux/'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -23,6 +23,8 @@ import Link from '@material-ui/core/Link';
 
 import TicketOwnerDetails from '../../components/Ticket/TicketOwnerDetails'
 import ConversationIndex from '../../components/Conversation/ConversationIndex'
+
+import TicketAssigning from '../../components/Ticket/TicketAssigning';
 
 function DetailTicket() {
     const { ticketId } = useParams();
@@ -49,6 +51,7 @@ function DetailTicket() {
     const _userReducer = useSelector(state => state.user)
     const ticketOwnerDetailsRef = useRef();
     const conversationIndexRef = useRef();
+    const ticketAssignRef = useRef();
 
     useEffect(() => {
         dispatch(fetchTicketById(ticketId));
@@ -116,6 +119,23 @@ function DetailTicket() {
             else return false;
     }
 
+    const userAssigmentComponent = () =>{
+        if (_userReducer.user == null   && localStorage.getItem("Token") != null) return null;
+        else if( selectedTicket == null ) return null;
+        else if(_userReducer.user.userType == "HelpDesk" && _userReducer.user.userRole == "User" && selectedTicket.tktAssignedTo == null ){
+            return(
+                <Link onClick={ () => { dispatch(AssigningUser( { userName : _userReducer.user.userName , ticketId : selectedTicket.ticketId } )) } } > Assign By Me </Link>
+            );
+        }else if(_userReducer.user.userType == "HelpDesk" && _userReducer.user.userRole == "Manager" ){
+            if(selectedTicket.tktAssignedTo != null){
+                return ( <Link onClick={ () => { ticketAssignRef.current.handleClickOpen(selectedTicket.ticketId , _userReducer.user.userName) } } > Re-Assign To </Link> );
+            }
+            return(
+                <Link onClick={ () => { ticketAssignRef.current.handleClickOpen(selectedTicket.ticketId  ) } } > Assign To </Link>  
+            );
+        }
+        else return null;
+    }
 
     return (
         <div>
@@ -132,7 +152,8 @@ function DetailTicket() {
                                 </Grid>
                                 <Grid item xs={ 7 }>
                                     <Box display="inline" mx={ 2 } >   { false ? <>Reassignment</> : null }  </Box >
-                                    <Box display="inline" mx={ 2 } >   { false ? <>Transferring</> : null }  </Box >
+                                    <Box display="inline" mx={ 2 } > { userAssigmentComponent() }</Box >
+                                    {/* {JSON.stringify(selectedTicket)} */}
                                     <Box display="inline" mx={ 2 } >
                                          <Link onClick={ () => { conversationIndexRef.current.handleClickOpen(selectedTicket.ticketId) } } >Conversation</Link>
                                     </Box >
@@ -240,6 +261,7 @@ function DetailTicket() {
             <>
                 <TicketOwnerDetails ref={ ticketOwnerDetailsRef } />
                 <ConversationIndex ref = { conversationIndexRef } />
+                < TicketAssigning ref={ticketAssignRef} />
             </>
         </div >
     );

@@ -161,7 +161,10 @@ export default function Header() {
   const permission = (nav) =>{
     if (localStorage.getItem("Token") == null)  return false;
     else
-      if(nav != "Tickets") 
+      if(nav == "Dashboard" )
+        if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserType == "HelpDesk" && JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "Manager" ) return true;
+        else return false;
+      else if(nav != "Tickets") 
         if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "User") return !true;
         else return true;
       else return true ;
@@ -221,6 +224,14 @@ export default function Header() {
               handleDrawerClose()
             } } />
           </ListItem>
+
+          { permission("Dashboard") ? (<><ListItem button >
+            {/* for Icon */ }
+            <ListItemText primary={ "Dashboard" } onClick={ () => {
+              history.push({ pathname: "/Dashboard" })
+              handleDrawerClose()
+            } } />
+          </ListItem></>) : null  }
 
           { permission("User") ? (<><ListItem button >
             {/* for Icon */ }

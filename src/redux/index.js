@@ -18,7 +18,8 @@ export {
     deleteTicket,
     fetchTicketById,
     updateTicket,
-    getTicketAttachment
+    getTicketAttachment,
+    AssigningUser
 } from './Ticket/TicketAction'
 
 export {
@@ -63,3 +64,7 @@ export {
     createConversation,
     fetchConvesations
 }from './Conversation/ConversationAction'
+
+export {
+    fetchDashboard
+}from './Dashboard/DashboardAction'

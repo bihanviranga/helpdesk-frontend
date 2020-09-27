@@ -7,6 +7,7 @@ import brandReducer from './Brand/BrandReducer'
 import moduleReducer from './Module/ModuleReducer'
 import ticketReducer from './Ticket/TicketReducer'
 import conversationReducer from './Conversation/ConversationReducer'
+import dashboardReducer from './Dashboard/DashbaordReducer'
 
 const rootReducer = combineReducers({
     user: userReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     module: moduleReducer,
     brand: brandReducer,
     ticket: ticketReducer,
-    conversation : conversationReducer
+    conversation : conversationReducer,
+    dashboard: dashboardReducer
 })
 
 export default rootReducer
