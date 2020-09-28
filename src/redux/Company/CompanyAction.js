@@ -11,6 +11,7 @@ export const fetchAllCompanies = () => {
                 })
                     .then(response => {
                         const companies = response.data
+                        console.log(response.data)
                         resolve(companies)
                     })
                     .catch(err => {
