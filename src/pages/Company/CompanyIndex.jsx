@@ -39,16 +39,19 @@ function CompanyIndex() {
     const [company , setCompany] = useState(initCreateCompany);
     const [selectedCompany , setSelectedCompany] = useState(initSelectedCompany);
 
+    useEffect(() => {
+        dispatch(fetchAllCompanies())
+    }, [ ]);
 
     //components
 
     function ComapanyListComponent(){
-        dispatch(fetchAllCompanies())
+        
         if(_companyReducer.companies.length == 0){
-            
             return (<p> Loading Companies ... ! </p>)
         }
         else{
+            
             return ( _companyReducer.companies.map((row)=>(
                 <TableRow key={row.companyId} >
                     <TableCell component="th" scope="row"> 
@@ -61,9 +64,11 @@ function CompanyIndex() {
                         </Button>
                     </TableCell>
                     <TableCell align="right">{row.companyName} </TableCell>
-                    <TableCell align="right">#</TableCell>
-                    <TableCell align="right">#</TableCell>
-                    <TableCell align="right">#</TableCell>
+                    <TableCell align="right">{row.numOfTickets}</TableCell>
+                    <TableCell align="right">{row.numOfProducts}</TableCell>
+                    <TableCell align="right">{row.numOfCategories}</TableCell>
+                    <TableCell align="right">{row.numOfModules}</TableCell>
+                    <TableCell align="right">{row.numOfBrands}</TableCell>
                 </TableRow>
                 )
             ) )
@@ -85,14 +90,16 @@ function CompanyIndex() {
                             <TableRow>
                                 <TableCell><b>Company ID</b></TableCell>
                                 <TableCell align="right"><b>Company Name</b></TableCell>
-                                <TableCell align="right"><b>Num of Pro</b></TableCell>
-                                <TableCell align="right"><b>Num of Tkt</b></TableCell>
-                                <TableCell align="right"><b>Num of Brand</b></TableCell>
+                                <TableCell align="right"><b>Num of Tickets</b></TableCell>
+                                <TableCell align="right"><b>Num of Products</b></TableCell>
+                                <TableCell align="right"><b>Num of Categories</b></TableCell>
+                                <TableCell align="right"><b>Num of Modules</b></TableCell>
+                                <TableCell align="right"><b>Num of Brands</b></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
 
-                            <ComapanyListComponent />
+                            {ComapanyListComponent()}
                             
                         </TableBody>
                     </Table>
