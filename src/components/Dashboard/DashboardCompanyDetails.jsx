@@ -108,11 +108,11 @@ function DashboardCompanyDetails() {
                 </Box>
             </Paper>
           </Grid>
-          <Grid item xs={4}>
+          {/* <Grid item xs={4}>
             <Paper className={classes.paper}>
                 Avarage time and other parts inclute here.... ( not dev yet)
             </Paper>
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
     )
