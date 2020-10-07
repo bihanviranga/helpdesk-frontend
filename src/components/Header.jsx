@@ -16,12 +16,19 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-
+import Box from '@material-ui/core/Box'; 
 
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+
+
+// icons
+import { 
+  AccountBalance , Dashboard , People , AllInbox , Category , CardMembership , Redeem , Album,
+  AccountCircle , ExitToApp , LocationCity , NoteAdd
+} from '@material-ui/icons';
 
 
 
@@ -32,6 +39,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    color: theme.palette.text.primary,
   },
   title: {
     flexGrow: 1,
@@ -89,7 +97,9 @@ const useStyles = makeStyles((theme) => ({
   },
   contanerStyle: {
     width: "970px"
-  }
+  },
+
+  
 }));
 
 
@@ -122,7 +132,7 @@ export default function Header() {
       return (<Button color="inherit" onClick={ () => {
         history.push({ pathname: "/UserLogin" })
         dispatch(logOutUser())
-      } } >Log Out</Button>)
+      } } >   Log Out <Box ml={2} mt={1}><ExitToApp /></Box></Button>)
     }
   }
 
@@ -139,13 +149,13 @@ export default function Header() {
   function CreateTicketComponent() {
     if (localStorage.getItem("Token") == null) {
       return null
-    } else { return (<Button ml={ 5 } color="inherit" component={ Link } to='/CreateTicket'>Create Ticket</Button>) }
+    } else { return (<Button ml={ 5 } color="inherit" component={ Link } to='/CreateTicket'><Box ml={5} >Create Ticket</Box> <Box ml={2} mt={1}><NoteAdd /></Box> </Button>) }
   }
 
 
   function MyProfileComponent() {
     if (localStorage.getItem("Token") == null) { return null }
-    else { return (<Button ml={ 5 } color="inherit" component={ Link } to='/MyProfile'>My Profile</Button>) }
+    else { return (<Button ml={ 5 } color="inherit" component={ Link } to='/MyProfile'>   My Profile <Box ml={2} mt={1}><AccountCircle /></Box></Button>) }
   }
 
   function CompanyComponent() {
@@ -153,7 +163,7 @@ export default function Header() {
     else { 
       if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "User")  
         return null
-      else return (<Button ml={ 5 } color="inherit" component={ Link } to='/Company'>Company</Button>) ;
+      else return (<Button ml={ 5 } color="inherit" component={ Link } to='/Company'>Company <Box ml={2} mt={1}><LocationCity /></Box> </Button>) ;
      
     }
   }
@@ -188,7 +198,7 @@ export default function Header() {
           <Typography variant="h6" className={ classes.title }>
             <span onClick={ () => { history.push({ pathname: "/" }) } }>Help DESK</span>
 
-
+            
             <CreateTicketComponent />
             <CompanyComponent />
 
@@ -211,14 +221,14 @@ export default function Header() {
       >
         <div className={ classes.drawerHeader }>
           <IconButton onClick={ handleDrawerClose }>
-            Main Manue
+            Main Menu
             { theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
           </IconButton>
         </div>
         <Divider />
         <List>
           <ListItem button >
-            {/* for Icon */ }
+              <Box mr={2}><AccountBalance /></Box>
             <ListItemText primary={ "Knowledge Base" } onClick={ () => {
               history.push({ pathname: "/KnowledgeBase_index" })
               handleDrawerClose()
@@ -226,7 +236,7 @@ export default function Header() {
           </ListItem>
 
           { permission("Dashboard") ? (<><ListItem button >
-            {/* for Icon */ }
+            {/* for Icon */ }  <Box mr={2}><Dashboard /></Box>
             <ListItemText primary={ "Dashboard" } onClick={ () => {
               history.push({ pathname: "/Dashboard" })
               handleDrawerClose()
@@ -234,7 +244,7 @@ export default function Header() {
           </ListItem></>) : null  }
 
           { permission("User") ? (<><ListItem button >
-            {/* for Icon */ }
+            {/* for Icon */ }  <Box mr={2}><People /></Box>
             <ListItemText primary={ "User" } onClick={ () => {
               history.push({ pathname: "/User" })
               handleDrawerClose()
@@ -243,28 +253,28 @@ export default function Header() {
 
           
           { permission("Product") ? (<><ListItem button >
-            {/* for Icon */ }
+            {/* for Icon */ } <Box mr={2}><Redeem /></Box>
               <ListItemText primary={ "Product" } onClick={ () => {
               history.push({ pathname: "/Product" })
               handleDrawerClose()
             } } />
           </ListItem></>) : null  }
           { permission("Module") ? (<><ListItem button >
-            {/* for Icon */ }
+            {/* for Icon */ }  <Box mr={2}><CardMembership /></Box> 
               <ListItemText primary={ "Module" } onClick={ () => {
               history.push({ pathname: "/Module" })
               handleDrawerClose()
             } } />
           </ListItem></>) : null  }
           { (permission("Category") ) ? (<><ListItem button >
-            {/* for Icon */ }
+            {/* for Icon */ }  <Box mr={2}><Category /></Box> 
               <ListItemText primary={ "Category" } onClick={ () => {
               history.push({ pathname: "/Category" })
               handleDrawerClose()
             } } />
           </ListItem></>) : null  }
           { (permission("Brand") ) ? (<><ListItem button >
-            {/* for Icon */ }
+            {/* for Icon */ } <Box mr={2}><Album /></Box> 
               <ListItemText primary={ "Brand" } onClick={ () => {
               history.push({ pathname: "/Brand" })
               handleDrawerClose()
@@ -272,7 +282,7 @@ export default function Header() {
           </ListItem></>) : null  }
 
           { (permission("Tickets") ) ? (<><ListItem button >
-            {/* for Icon */ }
+            {/* for Icon */ }  <Box mr={2}><AllInbox /></Box> 
             <ListItemText primary={ "Tickets" } onClick={ () => {
               history.push({ pathname: "/Tickets" })
               handleDrawerClose()
