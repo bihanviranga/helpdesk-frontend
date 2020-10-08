@@ -7,7 +7,7 @@ import Header from './components/Header'
 
 import Home from './pages/Home'
 import KnowledgeBase_index from './pages/KnowledgeBase/knowledgeBase_index'
-import CreateArticle from './pages/KnowledgeBase/CreateArticle'
+import CreateArticle from './components/KnowledgeBase/CreateArticle'
 import UserIndex from './pages/User/UserIndex';
 import UserRegistration from './pages/User/UserRegistration'
 import UserLogin from './pages/User/UserLogin'
@@ -22,7 +22,8 @@ import Category from './pages/Category/CategoryIndex'
 import Brand from './pages/Brand/BrandIndex'
 import ListTickets from './pages/Ticket/ListTickets';
 import DetailTicket from './pages/Ticket/DetailTicket';
-import Dashboard from './pages/Dashboard/DashboardIndex'
+import Dashboard from './pages/Dashboard/DashboardIndex';
+import Article from './pages/KnowledgeBase/KnowledgeArticle';
 
 import {
   BrowserRouter as Router,
@@ -52,6 +53,9 @@ function App() {
                 <Route exact path="/" component={ Home } />
                 <Route path="/KnowledgeBase_index" component={ KnowledgeBase_index } />
                 <Route path="/CreateArticle"  component={ () => isLogin() ? <CreateArticle /> :<UserLogin /> } />
+                <Route path="/article/:articleId"  component={   Article   } />
+
+
                 <Route path="/User" component={ () => isLogin() ? <UserIndex /> :<UserLogin /> } />
                 <Route path="/UserRegistration" component={ () => isLogin() ? <UserRegistration /> :<UserLogin /> } />
                 <Route path="/UserLogin" component={ () => isLogin() ? <UserLogin /> :<UserLogin /> } />

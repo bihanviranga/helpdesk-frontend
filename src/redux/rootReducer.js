@@ -8,6 +8,8 @@ import moduleReducer from './Module/ModuleReducer'
 import ticketReducer from './Ticket/TicketReducer'
 import conversationReducer from './Conversation/ConversationReducer'
 import dashboardReducer from './Dashboard/DashbaordReducer'
+import articleReducer from './KnowledgeBase/KnowledgeBaseReducer'
+import knowledgebaseReducer from './KnowledgeBase/KnowledgeBaseReducer'
 
 const rootReducer = combineReducers({
     user: userReducer,
@@ -18,7 +20,8 @@ const rootReducer = combineReducers({
     brand: brandReducer,
     ticket: ticketReducer,
     conversation : conversationReducer,
-    dashboard: dashboardReducer
+    dashboard: dashboardReducer,
+    knowledgebase : knowledgebaseReducer
 })
 
 export default rootReducer
