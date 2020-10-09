@@ -90,8 +90,7 @@ function CreateArticle() {
     
          axios.post("https://api.cloudinary.com/v1_1/dj8a0phpt/image/upload" , formData)
             .then(async (res) => { // use async await for asing data of return
-               
-                alert(res.data.secure_url)  
+                
                 // after uploading file create the fill article 
 
                 //useState set method not reflecting change immediately

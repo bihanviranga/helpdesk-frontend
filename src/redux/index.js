@@ -1,7 +1,8 @@
 export {
     createArticle,
     fetchArticles,
-    fetchArticleById
+    fetchArticleById,
+    deleteArticle
 } from './KnowledgeBase/KnowledgeBaseAction'
 
 export {

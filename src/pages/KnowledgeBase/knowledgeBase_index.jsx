@@ -73,6 +73,8 @@ export default function KnowledgebaseIndex() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [search , setSearch] = useState(null);
+
 
   
   const _knowledgebaseReducer = useSelector(state=>state.knowledgebase)
@@ -115,14 +117,15 @@ export default function KnowledgebaseIndex() {
                 {CreateNewArticle()}
             </Grid>
             <Grid item xs={8}> 
-            
                 <Paper component="form" className={classesSearch.root}>
                     <IconButton className={classesSearch.iconButton} aria-label="menu">
                         <MenuIcon />
                     </IconButton>
+                    
                     <InputBase
                         className={classesSearch.input}
                         placeholder="Search Here !" 
+                        onChange={(e)=>setSearch(e.target.value)}
                     />
                     <Divider className={classesSearch.divider} orientation="vertical" />
                     <IconButton type="submit" className={classesSearch.iconButton} aria-label="search">
@@ -140,7 +143,7 @@ export default function KnowledgebaseIndex() {
                 <Paper className={classes.paper}>3</Paper>
             </Grid>
             <Grid item xs={9}>
-                <Paper className={classes.paper}><ArticleList  />  </Paper>
+                <Paper className={classes.paper}><ArticleList search={search}  />  </Paper>
             </Grid>
         </Grid>
       </Box>
