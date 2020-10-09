@@ -1,23 +1,64 @@
 import Axios from "axios"
 import API_PATH from '../api'
 
-export const createArticle = (article) => {
-  // those things should be from automatically in future
-  article.ArticleId = "99988"
-  article.CreatedBy = "hu"
-  article.AcceptedBy = "67892s"
-  article.CreatedDate = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
-  article.AcceptedDate = "2016-09-09"
-  article.LastEditedDate = "2016-09-09"
-  article.LastEditedBy = "heycq567"
-  article.ProductID = "yuhcsa778878" 
-  return () => {
-    Axios.post(`${API_PATH}/Article/`, article)
-      .then(response => {
-        const posts = response.data 
+export const createArticle = (article ) => {
+  // article.ArticleAttachment = articleAttachment
+  console.log(article)
+  return dispatch => {
+
+      dispatch({
+          type: "CREATE_ARTICLE",
+          payload: new Promise((resolve, reject) => {
+            Axios.post(`${API_PATH}/Article/`, article , {
+              headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("Token") , 
+            }
+            })
+            .then(response => { 
+              resolve(response.data )
+            })
+            .catch(err => {
+              const errMzg = err.message
+            })
+          })
       })
-      .catch(err => {
-        const errMzg = err.message
+  }
+}
+
+
+
+export const fetchArticles = () => {
+  return dispatch => {
+      dispatch({
+          type: "FETCH_ARTICLES",
+          payload: new Promise((resolve, reject) => {
+            Axios.get(`${API_PATH}/Article/` )
+              .then(response => {
+                  resolve( response.data ) 
+                  
+              })
+              .catch(err => {
+                  const errMzg = err.message
+              })
+        })
       })
+  }
+}
+
+export const fetchArticleById = (articleId) => {
+  return dispatch => {
+    dispatch({
+      type : "FETCH_ARTICLE_BY_ID",
+      payload : new Promise((resolve , reject) => {
+        Axios.get(`${API_PATH}/Article/${articleId}`)
+        .then( response => {
+          console.log(response.data)
+          resolve(response.data)
+        })
+        .catch(err =>{
+          const errMzg = err.message
+        })
+      })
+    })
   }
 }
