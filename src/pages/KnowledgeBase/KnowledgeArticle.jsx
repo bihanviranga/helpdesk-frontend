@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
 import ArticleImage from '../../components/KnowledgeBase/ArticleImage'
+import ArticleMoreOperations from '../../components/KnowledgeBase/ArticleMoreOperations'
 
 import { 
     More
@@ -39,13 +40,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function KnowledgeArticle() {
     const { articleId } = useParams();
-    const articleImageRef = useRef()
+    const articleImageRef = useRef() 
+    const articleMoreOperationsRef = useRef()
+
 
     const classes = useStyles();
     const dispatch = useDispatch();
 
     const _knowledgebaseReducer = useSelector(state=>state.knowledgebase)
     const [article, setArticle] = React.useState(null);
+ 
  
     useEffect(() => {
         dispatch(fetchArticleById(articleId))
@@ -54,6 +58,29 @@ export default function KnowledgeArticle() {
     useEffect(() => {
        setArticle(_knowledgebaseReducer.article)
     }, [_knowledgebaseReducer]);
+
+
+    //components
+
+    const MoreInformations = () => {
+      if(localStorage.getItem("Token") != null ){
+        if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserType == "HelpDesk" && JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "Manager"){
+          return(
+            <>
+              {article != null ? (
+                <>
+                  <Button variant="contained" size="small" color="primary" className={classes.margin}
+                    onClick={()=>  articleMoreOperationsRef.current.handleClickOpen(article) }
+                  >
+                      More Informations <Box mt={1} ml={2}> <More /> </Box> 
+                  </Button> 
+                </>
+              ): null}
+            </>
+          )
+        }else return null
+      }else return null
+    }
 
   return (
     <div className={classes.root}>
@@ -68,7 +95,9 @@ export default function KnowledgeArticle() {
 
             </Grid>
             <Grid item xs={3}> 
-                    <Box mt={2}> <Button variant="contained" size="small" color="primary" className={classes.margin}>  More Informations <Box mt={1} ml={2}> <More /> </Box> </Button> </Box>
+                  <Box mt={2}> 
+                    {MoreInformations()}
+                  </Box>
             </Grid>
             <Grid item xs={12}> 
                 <Divider />
@@ -94,7 +123,8 @@ export default function KnowledgeArticle() {
                 </Paper>
             </Grid>
             <Grid>
-                <ArticleImage ref={articleImageRef} />
+                <ArticleImage ref={articleImageRef} /> 
+                <ArticleMoreOperations ref={articleMoreOperationsRef} /> 
             </Grid> 
         </Grid>
       </Box>

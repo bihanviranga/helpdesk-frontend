@@ -28,6 +28,11 @@ const knowledgebaseReducer = (state = initialState, action) => {
             article : action.payload,
             imageUrl : url
         }
+    }else if(action.type == "DELETE_ARTICLE_FULFILLED"){
+        return{
+            ...state,
+            articles : [ ...state.articles.filter(function(value){ return value.articleId != action.payload ;}) ]
+        }
     }else{
         return state
     }

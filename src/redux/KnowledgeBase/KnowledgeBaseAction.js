@@ -2,8 +2,6 @@ import Axios from "axios"
 import API_PATH from '../api'
 
 export const createArticle = (article ) => {
-  // article.ArticleAttachment = articleAttachment
-  console.log(article)
   return dispatch => {
 
       dispatch({
@@ -60,5 +58,27 @@ export const fetchArticleById = (articleId) => {
         })
       })
     })
+  }
+}
+
+export const deleteArticle = (articleId) => {
+ 
+  return dispatch => {
+      dispatch({
+          type: "DELETE_ARTICLE",
+          payload: new Promise((resolve, reject) => {
+            Axios.delete(`${API_PATH}/Article/${articleId}`, {
+              headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("Token") , 
+            }
+            })
+            .then(response => { 
+              resolve(response.data )
+            })
+            .catch(err => {
+              const errMzg = err.message
+            })
+          })
+      })
   }
 }
