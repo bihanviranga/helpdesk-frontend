@@ -1,7 +1,8 @@
 import React, { useEffect, useRef  } from 'react';
 import { useParams } from 'react-router-dom';
-import {fetchArticleById} from '../../redux'
+import {fetchArticleById , deleteArticle} from '../../redux'
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from "react-router";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -11,11 +12,12 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
 import ArticleImage from '../../components/KnowledgeBase/ArticleImage'
-import ArticleMoreOperations from '../../components/KnowledgeBase/ArticleMoreOperations'
 
+  // icons
 import { 
-    More
-  } from '@material-ui/icons';
+  More , Delete , CloudUpload  , Redeem , Album,
+  LocationCity , NoteAdd , CardMembership
+} from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,11 +43,11 @@ const useStyles = makeStyles((theme) => ({
 export default function KnowledgeArticle() {
     const { articleId } = useParams();
     const articleImageRef = useRef() 
-    const articleMoreOperationsRef = useRef()
 
 
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const _knowledgebaseReducer = useSelector(state=>state.knowledgebase)
     const [article, setArticle] = React.useState(null);
@@ -69,11 +71,18 @@ export default function KnowledgeArticle() {
             <>
               {article != null ? (
                 <>
-                  <Button variant="contained" size="small" color="primary" className={classes.margin}
-                    onClick={()=>  articleMoreOperationsRef.current.handleClickOpen(article) }
-                  >
-                      More Informations <Box mt={1} ml={2}> <More /> </Box> 
-                  </Button> 
+
+                  <pre><Button startIcon={<Delete />} variant="contained" size="small"  color="secondary" className={classes.margin}
+                        onClick={ ()=>{ 
+                          if(article != null) dispatch(deleteArticle(article.articleId))
+                          history.push({ pathname: "/KnowledgeBase_index" })
+                        } }
+                      >
+                        Delete
+                      </Button > &nbsp;          
+                        <Button variant="contained" size="small"
+                                color="default" 
+                                startIcon={<CloudUpload />} className={classes.margin}>Update</Button > </pre>
                 </>
               ): null}
             </>
@@ -92,6 +101,14 @@ export default function KnowledgeArticle() {
             <Grid item xs={9}>
 
                  <h2> { article != null ? (<>{article.articleTitle}</>) : null } </h2>
+                 <br/>
+                <> { article != null ? 
+                  (<> { article.companyName != null ? (<> <Button disabled size="small"  startIcon={<LocationCity />} > {article.companyName} </Button> | </>) : null } 
+                      { article.productName != null ? (<> <Button disabled size="small"  startIcon={<Redeem />} > {article.productName} </Button> | </>) : null }
+                      { article.moduleName != null ? (<> <Button disabled size="small"  startIcon={<CardMembership />} > {article.moduleName} </Button> | </>) : null }
+                      { article.brandName != null ? (<> <Button disabled size="small"  startIcon={<Album />} > {article.brandName} </Button> | </>) : null }
+                   </>)
+                : null } </>
 
             </Grid>
             <Grid item xs={3}> 
@@ -124,7 +141,6 @@ export default function KnowledgeArticle() {
             </Grid>
             <Grid>
                 <ArticleImage ref={articleImageRef} /> 
-                <ArticleMoreOperations ref={articleMoreOperationsRef} /> 
             </Grid> 
         </Grid>
       </Box>
