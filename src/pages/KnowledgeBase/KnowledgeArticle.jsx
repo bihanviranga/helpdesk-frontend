@@ -16,7 +16,7 @@ import ArticleImage from '../../components/KnowledgeBase/ArticleImage'
   // icons
 import { 
   More , Delete , CloudUpload  , Redeem , Album,
-  LocationCity , NoteAdd , CardMembership
+  LocationCity , NoteAdd , CardMembership , Category
 } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -104,6 +104,7 @@ export default function KnowledgeArticle() {
                  <br/>
                 <> { article != null ? 
                   (<> { article.companyName != null ? (<> <Button disabled size="small"  startIcon={<LocationCity />} > {article.companyName} </Button> | </>) : null } 
+                      { article.categoryName != null ? (<> <Button disabled size="small"  startIcon={<Category />} > {article.categoryName} </Button> | </>) : null }
                       { article.productName != null ? (<> <Button disabled size="small"  startIcon={<Redeem />} > {article.productName} </Button> | </>) : null }
                       { article.moduleName != null ? (<> <Button disabled size="small"  startIcon={<CardMembership />} > {article.moduleName} </Button> | </>) : null }
                       { article.brandName != null ? (<> <Button disabled size="small"  startIcon={<Album />} > {article.brandName} </Button> | </>) : null }
