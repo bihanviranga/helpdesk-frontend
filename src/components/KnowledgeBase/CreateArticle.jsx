@@ -1,6 +1,9 @@
 import React , {useState , useEffect} from 'react'
 import {useSelector , useDispatch} from 'react-redux'
-import { createArticle } from '../../redux'
+import { createArticle , fetchAllCompanies,
+    fetchProductsByComapnyId, fetchCategoriesByComapnyId,
+    fetchModulesByComapnyId, fetchBrandsByComapnyId
+ } from '../../redux'
 import axios from 'axios';
 
 
@@ -16,6 +19,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Container from '@material-ui/core/Container';
+import Select from '@material-ui/core/Select'; 
+import InputLabel from '@material-ui/core/InputLabel';
 
 
 import { 
@@ -50,16 +57,29 @@ function CreateArticle() {
     const classes = useStyles();
     const history = useHistory();
 
+    const _companyReducer = useSelector(state => state.company)
+    const _productReducer = useSelector(state => state.product)
+    const _categoryReducer = useSelector(state => state.category)
+    const _moduleReducer = useSelector(state => state.module)
+    const _brandReducer = useSelector(state => state.brand)
+
     const initArticle = {
         ArticleTitle : null,
         ArticleContent:null, 
-        ArticleAttachment:null
+        ArticleAttachment:null,
+        CompanyId: "",
+        ProductId: "",
+        ModuleId: "",
+        BrandId: "",
+        CategoryId: "",
+
     }
 
     const [article , setArticle] = useState(initArticle);
     const [image , setImage] = useState( null );
     const [imageFile , setImageFile] = useState( null );
     const [imageInclued , setImageInclued] = useState( false );
+    const [moreSpecific , setMoreSpecific] = useState( false );
 
 
     var imageHandler = (e) => {
@@ -75,6 +95,25 @@ function CreateArticle() {
 
     var imageIncluedHandle = () =>{
         setImageInclued(!imageInclued)
+    }
+
+    const MoreSpecificArticle = async () => {
+        if(_companyReducer.companies.length == 0){
+           await dispatch(fetchAllCompanies()) 
+        }
+            
+        setMoreSpecific( !moreSpecific )
+    }
+
+    const SelectCompany = (e) => {
+        if (e.target.value.length > 0) {
+            dispatch(fetchProductsByComapnyId(e.target.value))
+            dispatch(fetchCategoriesByComapnyId(e.target.value))
+            dispatch(fetchModulesByComapnyId(e.target.value))
+            dispatch(fetchBrandsByComapnyId(e.target.value))
+        }
+
+        setArticle({ ...article, CompanyId: e.target.value })
     }
 
 
@@ -119,6 +158,7 @@ function CreateArticle() {
 
             <div className={classes.root}>
                 <Box mx={12} >
+                    {/* {JSON.stringify(_companyReducer.companies)} */}
 
                     <Grid container spacing={3}>
                         <Grid item xs={8}> <h2> Create Article </h2> </Grid>
@@ -132,7 +172,95 @@ function CreateArticle() {
                                 } }
                             />
                             
-                        </Grid>        
+                        </Grid>
+                        <Grid item sm={ 4 }>
+
+                        <FormControlLabel
+                                label="Want More Specific  "
+                                control={
+                                    <Checkbox
+                                    onChange={()=> MoreSpecificArticle() }
+                                    color="primary"
+                                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                />
+                                }
+                            />
+                            
+                        </Grid> 
+
+                        {/*  more specifize  */}
+
+                        {moreSpecific ? (
+                        <>
+                            <Grid item sm={ 3 }>
+                            <FormControl fullWidth variant="outlined" className={ classes.formControl }>
+                                <InputLabel  >Company</InputLabel>
+                                <Select native label="CompanyName" name="CompanyName" onChange={ (e) => { SelectCompany(e) } } >
+                                    <option value=""></option>
+                                    { _companyReducer.companies.map((company) => (
+                                        <option key={ company.companyId } value={ company.companyId }>{ company.companyName }</option>
+                                    )) }
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        
+                        { article.CompanyId ? (<>
+                        
+                            <Grid item sm={ 2 }>
+                                <FormControl fullWidth variant="outlined" className={ classes.formControl }>
+                                    <InputLabel  >Product Name</InputLabel>
+                                    {/* In the setArticle call, be sure to put a capital letter. CategoryId, not categoryId */ }
+                                    <Select native label="product Name Name" name="productName" onChange={ (e) => { setArticle({ ...article, ProductId: e.target.value }) } } >
+                                        <option value=""></option>
+                                        { _productReducer.productsOfSelectedCompany.map((product) => (
+                                            <option key={ product.productId } value={ product.productId }>{ product.productName }</option>
+                                        )) }
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item  sm={ 2 }>
+                                <FormControl fullWidth variant="outlined" className={ classes.formControl }>
+                                    <InputLabel  >categoryName</InputLabel>
+                                    <Select native label="category Name" name="categoryName" onChange={ (e) => { setArticle({ ...article, CategoryId: e.target.value }) } }  >
+                                        <option value=""></option>
+                                        { _categoryReducer.categoriesOfSelectedCompany.map((category) => (
+                                            <option key={ category.categoryId } value={ category.categoryId }>{ category.categoryName }</option>
+                                        )) }
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item  sm={ 2 }>
+                                <FormControl fullWidth variant="outlined" className={ classes.formControl }>
+                                    <InputLabel  >Module Name</InputLabel>
+                                    <Select native label="module Name" name="moduleName" onChange={ (e) => { setArticle({ ...article, ModuleId: e.target.value }) } }  >
+                                        <option value=""></option>
+                                        { _moduleReducer.modulesOfSelectedCompany.map((module) => (
+                                            <option key={ module.moduleId } value={ module.moduleId }>{ module.moduleName }</option>
+                                        )) }
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+
+
+                           
+                            <Grid item xs={ 12 } sm={ 2 }>
+                                <FormControl fullWidth variant="outlined" className={ classes.formControl }>
+                                    <InputLabel  >Brand Name</InputLabel>
+                                    <Select native label="brand Name" name="brandName" onChange={ (e) => { setArticle({ ...article, BrandId: e.target.value }) } }  >
+                                        <option value=""></option>
+                                        { _brandReducer.brandsOfSelectedCompany.map((brand, index) => (
+                                            <option key={ index } value={ brand.brandId }>{ brand.brandName }</option>
+                                        )) }
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                        
+                        </>) : (<> <Grid item xs={ 12 } sm={ 7 }></Grid> </>) }
+                            
+                        </>) : null  }
+
+                        {/*  */}
+
                         <Grid item xs={7}>
                             <TextField
                                 label="Content"
