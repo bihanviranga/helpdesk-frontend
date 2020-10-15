@@ -49,8 +49,7 @@ export const fetchArticleById = (articleId) => {
       type : "FETCH_ARTICLE_BY_ID",
       payload : new Promise((resolve , reject) => {
         Axios.get(`${API_PATH}/Article/${articleId}`)
-        .then( response => {
-          console.log(response.data)
+        .then( response => { 
           resolve(response.data)
         })
         .catch(err =>{

@@ -146,8 +146,7 @@ export const getTicketAttachment = (ticketId, ticketAttachmentName) => {
     }
 }
 
-export const AssigningUser = (assigningData) =>{
-    console.log(assigningData)
+export const AssigningUser = (assigningData) =>{ 
     return dispatch =>{
         dispatch({
             type : "ASSIGNING_USER",

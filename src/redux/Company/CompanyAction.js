@@ -10,8 +10,7 @@ export const fetchAllCompanies = () => {
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
                 })
                     .then(response => {
-                        const companies = response.data
-                        console.log(response.data)
+                        const companies = response.data 
                         resolve(companies)
                     })
                     .catch(err => {
