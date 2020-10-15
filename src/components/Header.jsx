@@ -31,6 +31,10 @@ import {
 } from '@material-ui/icons';
 
 
+//import component
+
+import NotificationIndex from './notification/NotificationIndex'
+
 
 import { Link } from 'react-router-dom'
 
@@ -205,6 +209,7 @@ export default function Header() {
 
           </Typography>
 
+          <NotificationIndex />
           <MyProfileComponent />
           <LoginCheck />
 

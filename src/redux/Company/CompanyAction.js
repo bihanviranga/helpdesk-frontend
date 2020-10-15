@@ -23,12 +23,14 @@ export const fetchAllCompanies = () => {
 }
 
 
-export const createCompany = (company) => {
-    return dispatch => {
+export const createCompany = (CompanyName) => {
+    return dispatch => { 
         dispatch({
             type: "CREATE_COMPANY",
             payload: new Promise((resolve, reject) => {
-                Axios.post(`${API_PATH}/Company/`, company)
+                Axios.post(`${API_PATH}/Company/`, { CompanyName : CompanyName}, {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                })
                     .then(response => {
                         const CreatedCompany = response.data
                         resolve(CreatedCompany)
@@ -41,19 +43,21 @@ export const createCompany = (company) => {
     }
 }
 
-export const deleteCompany = (id) => {
-    alert(id)
+export const deleteCompany = (id) => { 
     return dispatch => {
         dispatch({
             type: "DELETE_COMPANY",
             payload: new Promise((resolve, reject) => {
-                Axios.delete(`${API_PATH}/Company/${id}`)
+                Axios.delete(`${API_PATH}/Company/${id}` , {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                })
                     .then(response => {
                         const deletedCompany = response.data
+                        alert( response.data.companyName + " has been deleted !" )
                         resolve(deletedCompany)
                     })
-                    .catch(err => {
-                        const errMzg = err.message
+                    .catch(error => {
+                        alert( error.response.data )
                     })
             })
         })

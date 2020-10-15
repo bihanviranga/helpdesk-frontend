@@ -19,12 +19,56 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+
+import Avatar from '@material-ui/core/Avatar'; 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField'; 
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+
 import {Link} from 'react-router-dom'
+
+
+//custom style
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    root: {
+        width: '100%',
+        '& > * + *': {
+          marginTop: theme.spacing(2),
+        },
+      },
+     
+  }));
 
 function UserIndex() {
     const dispatch = useDispatch()
     const _userReducer = useSelector(state=>state.user)
     const history =  useHistory()
+    const classes = useStyles();
     
    
     const [open, setOpen] = useState(false);
@@ -51,6 +95,59 @@ function UserIndex() {
             return null
          }
 
+    }
+
+     // component 
+     function ProfileDataComponent (){
+        if(selectedUser == null ){ 
+            return ( <p> Loading ... ! </p> )
+        }else{
+            return ( 
+            <>  
+                <Container component="main" maxWidth="md">
+                <CssBaseline />
+                    <div className={classes.paper}>
+                        <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                        </Avatar> 
+                        <Typography component="h1" variant="h5">    { selectedUser.userName } !! </Typography>
+                        <form className={classes.form} noValidate>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} >
+                                Full name : { selectedUser.fullName }
+                            </Grid>
+                        
+                            <Grid item xs={12} sm={6}>
+                                User Type : { selectedUser.userType }
+                            </Grid>
+                           
+                            <Grid  item xs={12} sm={6}>
+                                User Role : { selectedUser.userRole }
+                            </Grid>
+                            <Grid item xs={12} sm={6}> 
+                                    User Name : { selectedUser.userName }
+                                
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                               
+                                    Phone : { selectedUser.phone }
+                              
+                            </Grid>
+                            <Grid item xs={12} >
+                                
+                                    EMail : { selectedUser.email }
+                                
+                            </Grid>
+                            <Grid item xs={12}>
+                                Company : { selectedUser.companyName }
+                            </Grid>
+                        </Grid>
+                        </form>
+                    </div>
+                   
+                </Container>
+            </> )
+        }
     }
     
 
@@ -135,7 +232,7 @@ function UserIndex() {
                     <DialogTitle id="alert-dialog-title">{"User Information"}</DialogTitle>
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        { JSON.stringify(selectedUser) }
+                        { ProfileDataComponent() }
                     </DialogContentText>
                     </DialogContent>
                     <DialogActions>
