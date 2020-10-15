@@ -80,6 +80,7 @@ function CreateArticle() {
     const [imageFile , setImageFile] = useState( null );
     const [imageInclued , setImageInclued] = useState( false );
     const [moreSpecific , setMoreSpecific] = useState( false );
+    const [uploadingProcessing , setUploadingProcessing] = useState( false );
 
 
     var imageHandler = (e) => {
@@ -119,6 +120,7 @@ function CreateArticle() {
 
     
     var uploadArticle =  () =>{
+        setUploadingProcessing(true)
 
         if(imageInclued != false ){
             const file = imageFile
@@ -294,10 +296,18 @@ function CreateArticle() {
                             </Box>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button variant="contained" size="small" color="primary" className={classes.margin} 
-                            onClick={
-                                uploadArticle
-                            }>  publish <Box ml={1}> <PostAdd /> </Box> </Button>  
+
+                            {uploadingProcessing == true ? (<>
+                                <Button variant="contained" size="small" className={classes.margin} disabled
+                                >  Uploading ... <Box ml={1}> <PostAdd /> </Box> </Button> 
+                            </>) : (<>
+                                <Button variant="contained" size="small" color="primary" className={classes.margin} 
+                                onClick={
+                                    
+                                    uploadArticle
+                                }>  publish <Box ml={1}> <PostAdd /> </Box> </Button> 
+                            </>)}
+                             
                         </Grid>
                         
                     </Grid>

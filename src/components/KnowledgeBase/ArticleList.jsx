@@ -25,31 +25,8 @@ function ArticleList( props ) {
  
     const _knowledgebaseReducer = useSelector(state=>state.knowledgebase)
     const[articles , setArticles] = useState([])
-    const[searchedArticles , setSearchedArticles] = useState([])
 
-    useEffect(()=>{
-
-        if(props.search != null){
-            if(props.search.length == 0){
-                 
-                    setArticles(_knowledgebaseReducer.articles)
-                
-            }else if(props.search.length != 0){
-                if(searchedArticles.length != 0){
-                    setArticles(searchedArticles)
-                }else{
-                    setArticles(searchedArticles)
-                }   
-            }
-        }else{
-            if(_knowledgebaseReducer.articles != null){ 
-                setArticles(_knowledgebaseReducer.articles)
-            }   
-        }
-         
-    //    if(_knowledgebaseReducer.articles != null)
-    //      setArticles(_knowledgebaseReducer.articles)
-    },[_knowledgebaseReducer.articles , props.search ])
+   
 
     // searching algorithm 
 
@@ -57,30 +34,29 @@ function ArticleList( props ) {
         if(props.search != null ){
 
             if(props.search.length != 0){
-                setSearchedArticles([]) 
-                articles.forEach( element  => {
-                    var title = element.articleTitle
-                    var content = element.articleContent
+                    setArticles([])
 
-                    // check item 
-                    if( title.indexOf(props.search) != -1 || content.indexOf(props.search) != -1 ){
-                        
-                            setSearchedArticles(oldArray=>[ ...oldArray ,  element ])                      
-                    }
-                });  
+                    const filteredEmployees = articles.filter(el => {
+                        return (
+                            el.articleTitle.toLowerCase().includes(props.search) ||
+                            el.articleContent.toLowerCase().includes(props.search) ||
+                            el.createdBy.toLowerCase().includes(props.search)
+                            );
+                      });
+
+                      setArticles(filteredEmployees);
+               
             }else if(props.search.length == 0){
-                setSearchedArticles([])
+                setArticles(_knowledgebaseReducer.articles)
             }
             
-        } else { setSearchedArticles([]) }
-    } , [props.search])
+        } else { setArticles(_knowledgebaseReducer.articles) }
+    } , [_knowledgebaseReducer.articles , props.search])
     
    
 
     return (
         <div>
-           
-{/* {JSON.stringify(searchedArticles.length)} */}
            {articles.map((article ,index)=>(
                <>
                

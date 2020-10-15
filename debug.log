@@ -68,3 +68,7 @@
 [1003/004518.642:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [1003/004519.263:ERROR:exception_snapshot_win.cc(99)] thread ID 21428 not found in process
 [1008/094130.350:ERROR:settings.cc(320)] Settings magic is not 1129342067
+[1012/134003.214:ERROR:scoped_process_suspend.cc(31)] NtSuspendProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1012/134003.323:ERROR:process_info.cc(118)] ReadProcessMemory bool __cdecl crashpad::(anonymous namespace)::ReadStruct(HANDLE, crashpad::WinVMAddress, T *) [T = crashpad::process_types::PEB<crashpad::process_types::internal::Traits64>]: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
+[1012/134003.334:ERROR:process_info.cc(551)] ReadProcessData failed
+[1015/105316.851:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

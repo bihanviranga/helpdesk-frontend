@@ -3,8 +3,10 @@ import {useSelector , useDispatch} from 'react-redux'
 import { createCompany , fetchAllCompanies , deleteCompany } from '../../redux'
 
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 // table component
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,6 +14,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
 
 // dialogBox component
 import Dialog from '@material-ui/core/Dialog';
@@ -20,15 +23,44 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+// icons
+import { 
+    Delete , CloudUpload
+  } from '@material-ui/icons';
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+  
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+  
+  
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 700,
+    },
+  });
+
 
 function CompanyIndex() {
 
     const dispatch = useDispatch();
+    const classes = useStyles();
     const _companyReducer = useSelector(state=>state.company)
 
-    const initCreateCompany = {
-        companyName : ''
-    }
+   
     const initSelectedCompany = {
         companyId : '',
         companyName : ''
@@ -36,7 +68,7 @@ function CompanyIndex() {
     const [createDialogBoxOpen, setCreateDialogBoxOpen] = useState(false);
     const [viewCompanyDialogBoxOpen, setViewCompanyDialogBoxOpen] = useState(false);
 
-    const [company , setCompany] = useState(initCreateCompany);
+    const [newCompany , setNewCompany] = useState('');
     const [selectedCompany , setSelectedCompany] = useState(initSelectedCompany);
 
     useEffect(() => {
@@ -54,21 +86,20 @@ function CompanyIndex() {
             
             return ( _companyReducer.companies.map((row)=>(
                 <TableRow key={row.companyId} >
-                    <TableCell component="th" scope="row"> 
-                        <Button variant="outlined" color="primary" onClick={()=>{
+                    <StyledTableCell align="left" component="th" scope="row"> 
+                        <Link variant="outlined" color="primary" onClick={()=>{
                             // setSelectedUser(row)
                             setSelectedCompany(row)
                             setViewCompanyDialogBoxOpen(true)
                         }}>
-                            {row.companyId}
-                        </Button>
-                    </TableCell>
-                    <TableCell align="right">{row.companyName} </TableCell>
-                    <TableCell align="right">{row.numOfTickets}</TableCell>
-                    <TableCell align="right">{row.numOfProducts}</TableCell>
-                    <TableCell align="right">{row.numOfCategories}</TableCell>
-                    <TableCell align="right">{row.numOfModules}</TableCell>
-                    <TableCell align="right">{row.numOfBrands}</TableCell>
+                            {row.companyName}
+                        </Link>
+                    </StyledTableCell> 
+                    <StyledTableCell align="right">{row.numOfTickets}</StyledTableCell>
+                    <StyledTableCell align="right">{row.numOfProducts}</StyledTableCell>
+                    <StyledTableCell align="right">{row.numOfCategories}</StyledTableCell>
+                    <StyledTableCell align="right">{row.numOfModules}</StyledTableCell>
+                    <StyledTableCell align="right">{row.numOfBrands}</StyledTableCell>
                 </TableRow>
                 )
             ) )
@@ -81,20 +112,19 @@ function CompanyIndex() {
             <h3>Company List</h3>
 
             <div>
-                <Button variant="outlined" color="primary" onClick={()=>{ setCreateDialogBoxOpen(true)}}>New Company</Button>
+               <Box mb={3}>  <Link variant="outlined" color="primary" onClick={()=>{ setCreateDialogBoxOpen(true)}}>New Company</Link> </Box> 
             </div>
             <div>
                 <TableContainer component={Paper} >
                     <Table aria-label="simple table">
                         <TableHead>
-                            <TableRow>
-                                <TableCell><b>Company ID</b></TableCell>
-                                <TableCell align="right"><b>Company Name</b></TableCell>
-                                <TableCell align="right"><b>Num of Tickets</b></TableCell>
-                                <TableCell align="right"><b>Num of Products</b></TableCell>
-                                <TableCell align="right"><b>Num of Categories</b></TableCell>
-                                <TableCell align="right"><b>Num of Modules</b></TableCell>
-                                <TableCell align="right"><b>Num of Brands</b></TableCell>
+                            <TableRow> 
+                                <StyledTableCell align="left"><b>Company Name</b></StyledTableCell>
+                                <StyledTableCell align="right"><b>Num of Tickets</b></StyledTableCell>
+                                <StyledTableCell align="right"><b>Num of Products</b></StyledTableCell>
+                                <StyledTableCell align="right"><b>Num of Categories</b></StyledTableCell>
+                                <StyledTableCell align="right"><b>Num of Modules</b></StyledTableCell>
+                                <StyledTableCell align="right"><b>Num of Brands</b></StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -119,12 +149,12 @@ function CompanyIndex() {
                     <DialogTitle id="alert-dialog-title">{"Creat new Company"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            <input type="text" name="CompanyName" placeholder="Enter Company Name" onChange={e=>  setCompany({ ...company , CompanyName : e.target.value })} />
+                            <input type="text" name="CompanyName" placeholder="Enter Company Name" onChange={e=>  setNewCompany( e.target.value )} />
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={()=>{ 
-                            if(company.companyName.length > 0){dispatch(createCompany(company))}
+                            if(newCompany.length > 0){dispatch(createCompany(newCompany))}
                             setCreateDialogBoxOpen(false)
                         }} color="primary">
                             Create
@@ -144,22 +174,24 @@ function CompanyIndex() {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"View Company"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{`View Company - ${ selectedCompany.companyName}`}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            {JSON.stringify(selectedCompany)}
+
+                        <Button mr={5} aria-label="delete" className={classes.margin} color="secondary" onClick={ async (e) => {
+                               
+                                await dispatch(deleteCompany(selectedCompany.companyId))
+                                setViewCompanyDialogBoxOpen(false)
+                            } }> 
+                                <Delete /> Delete 
+                        </Button> 
+                        <Button aria-label="delete" className={classes.margin}>
+                                <CloudUpload  /> Update
+                        </Button> 
+                           
                         </DialogContentText>
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={()=>{ 
-                            dispatch(deleteCompany(selectedCompany.companyId))
-                            setViewCompanyDialogBoxOpen(false)
-                        }} color="primary">
-                            Delete
-                        </Button>
-                        <Button onClick={()=>{setViewCompanyDialogBoxOpen(false)}} color="primary" autoFocus>  Edit </Button>
-                        <Button onClick={()=>{setViewCompanyDialogBoxOpen(false)}} color="primary" autoFocus>  Close </Button>
-                    </DialogActions>
+                    
                 </Dialog>
             </div>
         </div>
