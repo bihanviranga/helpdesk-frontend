@@ -73,5 +73,6 @@ export {
 }from './Dashboard/DashboardAction'
 
 export {
+    markNotification,
     fetchNotifications
 } from './Notification/NotificationAction'

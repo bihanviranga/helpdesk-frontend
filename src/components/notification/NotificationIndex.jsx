@@ -13,7 +13,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box'; 
 
-import { fetchNotifications } from '../../redux/index'
+import { fetchNotifications , markNotification} from '../../redux/index'
 
 // icons
 import { 
@@ -39,8 +39,6 @@ export default function NotificationIndex() {
   
   const _notificationsReducer = useSelector(state => state.notifications)
 
-  const [notifications , setNotifications] = React.useState(null)
-
 
   const NotificationList = () =>{
     if(localStorage.getItem('Token') != null){
@@ -50,7 +48,12 @@ export default function NotificationIndex() {
       else{
       return(<> {_notificationsReducer.notifications.map((notification)=>( 
         <> 
-          <MenuItem onClick={() => history.push({ pathname: `/tickets/${notification.ticketId}` })}>
+          <MenuItem onClick={async() => {
+                handleToggle()
+                await dispatch(markNotification(notification.notifId))
+                history.push({ pathname: `/tickets/${notification.ticketId}` })
+              }
+            }>
             {notification.notifRead ? (<>{ notification.notifContent }</>) : ( <><b> { notification.notifContent } </b></> ) }
           </MenuItem>
         </>

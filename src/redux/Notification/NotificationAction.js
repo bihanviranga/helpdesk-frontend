@@ -23,3 +23,26 @@ export const fetchNotifications = (userId) => {
         })
     }
 }
+
+export const markNotification = (id) => {
+ alert(id)
+    return dispatch => {
+        dispatch({
+            type: "MARK_NOTIFICATION",
+            payload: new Promise((resolve, reject) => {
+                Axios.put(`${API_PATH}/notification/${id}`, {"NotifRead": true} ,{
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token") }
+                })
+                    .then(res => {
+                       
+
+                    })
+                    .catch(err => {
+                        if (err.response.data == "Not Found") {
+                            alert(err.response.data)
+                        }
+                    })
+            })
+        })
+    }
+}
