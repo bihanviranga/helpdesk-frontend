@@ -10,6 +10,7 @@ import conversationReducer from './Conversation/ConversationReducer'
 import dashboardReducer from './Dashboard/DashbaordReducer'
 import articleReducer from './KnowledgeBase/KnowledgeBaseReducer'
 import knowledgebaseReducer from './KnowledgeBase/KnowledgeBaseReducer'
+import notificationReducer from './Notification/NotificationReducer'
 
 const rootReducer = combineReducers({
     user: userReducer,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     ticket: ticketReducer,
     conversation : conversationReducer,
     dashboard: dashboardReducer,
-    knowledgebase : knowledgebaseReducer
+    knowledgebase : knowledgebaseReducer,
+    notifications : notificationReducer
 })
 
 export default rootReducer

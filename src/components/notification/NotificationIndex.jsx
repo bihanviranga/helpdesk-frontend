@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+
+
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -8,6 +12,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box'; 
+
+import { fetchNotifications } from '../../redux/index'
 
 // icons
 import { 
@@ -25,8 +31,37 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NotificationIndex() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  
+  const _notificationsReducer = useSelector(state => state.notifications)
+
+  const [notifications , setNotifications] = React.useState(null)
+
+
+  const NotificationList = () =>{
+    if(localStorage.getItem('Token') != null){
+      dispatch(fetchNotifications(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserName))
+
+      if( _notificationsReducer.notifications.length == 0 ) return(<>You Dont Have Any Notifications !</>)
+      else{
+      return(<> {_notificationsReducer.notifications.map((notification)=>( 
+        <> 
+          <MenuItem onClick={() => history.push({ pathname: `/tickets/${notification.ticketId}` })}>
+            {notification.notifRead ? (<>{ notification.notifContent }</>) : ( <><b> { notification.notifContent } </b></> ) }
+          </MenuItem>
+        </>
+      ))}
+      
+       </>)
+      }
+    }
+  }
+
+
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -77,9 +112,8 @@ export default function NotificationIndex() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={handleClose}>ProfileProfileProfileProfile ProfileProfile ProfileProfile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    
+                    {NotificationList()}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

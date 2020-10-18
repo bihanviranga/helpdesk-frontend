@@ -71,3 +71,7 @@ export {
 export {
     fetchDashboard
 }from './Dashboard/DashboardAction'
+
+export {
+    fetchNotifications
+} from './Notification/NotificationAction'
