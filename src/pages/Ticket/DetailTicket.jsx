@@ -1,8 +1,8 @@
-import React, { useEffect, useRef  } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from "react-router";
-import { fetchTicketById, deleteTicket, updateTicket, getUserByUserName, getTicketAttachment , AssigningUser} from '../../redux/'
+import { fetchTicketById, deleteTicket, updateTicket, getUserByUserName, getTicketAttachment, AssigningUser } from '../../redux/'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -23,6 +23,7 @@ import Link from '@material-ui/core/Link';
 
 import TicketOwnerDetails from '../../components/Ticket/TicketOwnerDetails'
 import ConversationIndex from '../../components/Conversation/ConversationIndex'
+import TicketTimeline from '../../components/Ticket/TicketTimeline';
 
 import TicketAssigning from '../../components/Ticket/TicketAssigning';
 
@@ -52,6 +53,7 @@ function DetailTicket() {
     const ticketOwnerDetailsRef = useRef();
     const conversationIndexRef = useRef();
     const ticketAssignRef = useRef();
+    const ticketTimelineRef = useRef();
 
     useEffect(() => {
         dispatch(fetchTicketById(ticketId));
@@ -119,19 +121,19 @@ function DetailTicket() {
             else return false;
     }
 
-    const userAssigmentComponent = () =>{
-        if (_userReducer.user == null   && localStorage.getItem("Token") != null) return null;
-        else if( selectedTicket == null ) return null;
-        else if(_userReducer.user.userType == "HelpDesk" && _userReducer.user.userRole == "User" && selectedTicket.tktAssignedTo == null ){
-            return(
-                <Link onClick={ () => { dispatch(AssigningUser( { userName : _userReducer.user.userName , ticketId : selectedTicket.ticketId } )) } } > Assign By Me </Link>
+    const userAssigmentComponent = () => {
+        if (_userReducer.user == null && localStorage.getItem("Token") != null) return null;
+        else if (selectedTicket == null) return null;
+        else if (_userReducer.user.userType == "HelpDesk" && _userReducer.user.userRole == "User" && selectedTicket.tktAssignedTo == null) {
+            return (
+                <Link onClick={ () => { dispatch(AssigningUser({ userName: _userReducer.user.userName, ticketId: selectedTicket.ticketId })) } } > Assign By Me </Link>
             );
-        }else if(_userReducer.user.userType == "HelpDesk" && _userReducer.user.userRole == "Manager" ){
-            if(selectedTicket.tktAssignedTo != null){
-                return ( <Link onClick={ () => { ticketAssignRef.current.handleClickOpen(selectedTicket.ticketId , _userReducer.user.userName) } } > Re-Assign To </Link> );
+        } else if (_userReducer.user.userType == "HelpDesk" && _userReducer.user.userRole == "Manager") {
+            if (selectedTicket.tktAssignedTo != null) {
+                return (<Link onClick={ () => { ticketAssignRef.current.handleClickOpen(selectedTicket.ticketId, _userReducer.user.userName) } } > Re-Assign To </Link>);
             }
-            return(
-                <Link onClick={ () => { ticketAssignRef.current.handleClickOpen(selectedTicket.ticketId  ) } } > Assign To </Link>  
+            return (
+                <Link onClick={ () => { ticketAssignRef.current.handleClickOpen(selectedTicket.ticketId) } } > Assign To </Link>
             );
         }
         else return null;
@@ -153,13 +155,16 @@ function DetailTicket() {
                                 <Grid item xs={ 7 }>
                                     <Box display="inline" mx={ 2 } >   { false ? <>Reassignment</> : null }  </Box >
                                     <Box display="inline" mx={ 2 } > { userAssigmentComponent() }</Box >
-                                    {/* {JSON.stringify(selectedTicket)} */}
+                                    {/* {JSON.stringify(selectedTicket)} */ }
                                     <Box display="inline" mx={ 2 } >
-                                         <Link onClick={ () => { conversationIndexRef.current.handleClickOpen(selectedTicket.ticketId) } } >Conversation</Link>
+                                        <Link onClick={ () => { conversationIndexRef.current.handleClickOpen(selectedTicket.ticketId) } } >Conversation</Link>
                                     </Box >
 
                                     <Box display="inline" mx={ 2 } >
                                         <Link onClick={ () => { ticketOwnerDetailsRef.current.handleClickOpen(selectedTicket.tktCreatedBy) } } >Ticket Owner Details</Link>
+                                    </Box >
+                                    <Box display="inline" mx={ 2 } >
+                                        <Link onClick={ () => { ticketTimelineRef.current.handleClickOpen(selectedTicket.ticketId) } } >Ticket Timeline</Link>
                                     </Box >
                                     <Box display="inline" mx={ 2 } >
                                         { deletePermission() ? (<><Button variant="contained" color="secondary" onClick={ () => {
@@ -260,8 +265,9 @@ function DetailTicket() {
             </Grid>
             <>
                 <TicketOwnerDetails ref={ ticketOwnerDetailsRef } />
-                <ConversationIndex ref = { conversationIndexRef } />
-                < TicketAssigning ref={ticketAssignRef} />
+                <ConversationIndex ref={ conversationIndexRef } />
+                < TicketAssigning ref={ ticketAssignRef } />
+                <TicketTimeline ref={ ticketTimelineRef } />
             </>
         </div >
     );
