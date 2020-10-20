@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { logOutUser } from '../redux/index'
+import { logOutUser , fetchNotifications } from '../redux/index'
 import { useHistory } from "react-router";
 
 
@@ -112,13 +112,14 @@ export default function Header() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
   const _userReducer = useSelector(state => state.user)
+
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
 
   // check token expire or not
   
-
   useEffect(() => {
     if(localStorage.getItem('Token') != null){
       if(JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).exp < new Date().getTime()/1000){
@@ -126,6 +127,8 @@ export default function Header() {
       }
     }
   }, [ ]);
+
+  
 
 
   function LoginCheck() {
