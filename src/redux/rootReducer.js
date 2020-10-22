@@ -11,6 +11,7 @@ import dashboardReducer from './Dashboard/DashbaordReducer'
 import articleReducer from './KnowledgeBase/KnowledgeBaseReducer'
 import knowledgebaseReducer from './KnowledgeBase/KnowledgeBaseReducer'
 import notificationReducer from './Notification/NotificationReducer'
+import timelineReducer from './Timeline/TimelineReducer'
 
 const rootReducer = combineReducers({
     user: userReducer,
@@ -20,10 +21,11 @@ const rootReducer = combineReducers({
     module: moduleReducer,
     brand: brandReducer,
     ticket: ticketReducer,
-    conversation : conversationReducer,
+    conversation: conversationReducer,
     dashboard: dashboardReducer,
-    knowledgebase : knowledgebaseReducer,
-    notifications : notificationReducer
+    knowledgebase: knowledgebaseReducer,
+    notifications: notificationReducer,
+    timeline: timelineReducer
 })
 
 export default rootReducer

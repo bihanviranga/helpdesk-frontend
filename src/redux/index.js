@@ -22,7 +22,7 @@ export {
     fetchTicketById,
     updateTicket,
     getTicketAttachment,
-    AssigningUser
+    AssigningUser,
 } from './Ticket/TicketAction'
 
 export {
@@ -66,13 +66,17 @@ export {
 export {
     createConversation,
     fetchConvesations
-}from './Conversation/ConversationAction'
+} from './Conversation/ConversationAction'
 
 export {
     fetchDashboard
-}from './Dashboard/DashboardAction'
+} from './Dashboard/DashboardAction'
 
 export {
     markNotification,
     fetchNotifications
 } from './Notification/NotificationAction'
+
+export {
+    getTicketTimeline
+} from './Timeline/TimelineAction'
