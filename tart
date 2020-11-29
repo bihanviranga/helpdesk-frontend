@@ -1,0 +1,731 @@
+[33mcommit 330b3d82fe5a8075ce1a4799a0e692271416829b[m[33m ([m[1;36mHEAD -> [m[1;32mdh-development[m[33m, [m[1;31mupstream/master[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 22e5052 a3501e3
+Author: Dhfernando <39521923+DhFernando@users.noreply.github.com>
+Date:   Thu Oct 22 15:15:52 2020 +0530
+
+    Merge pull request #39 from bihanviranga/timeline
+    
+    Timeline UI
+
+[33mcommit a3501e3646cb9eb8b3987e80139073d0d086e025[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Wed Oct 21 17:50:06 2020 +0530
+
+    Timeline redux+ui functional
+
+[33mcommit ea4069be7e0c35fe30e2e31bb21fb5a58a52ec49[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Tue Oct 20 17:53:59 2020 +0530
+
+    Timeline redux parts created
+
+[33mcommit 2b1f28faa85a364475f5b361ac8f36ee65dec79c[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Tue Oct 20 15:46:53 2020 +0530
+
+    Timeline UI created
+
+[33mcommit 22e50529125507a1dfb531ff85461f5f22f8c697[m
+Merge: b2d3dc5 89b759b
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Tue Oct 20 14:20:09 2020 +0530
+
+    Merge pull request #38 from DhFernando/dh-development
+    
+    Notification Display
+
+[33mcommit 89b759b0f66c17b9e79975306e33f2f9a96e4eab[m[33m ([m[1;31morigin/dh-development[m[33m)[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Oct 19 16:02:56 2020 +0530
+
+    notification
+
+[33mcommit f5222be141298033ece93d0b195b26d627df1d71[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Oct 19 00:54:26 2020 +0530
+
+    mark as read
+
+[33mcommit aa2e9f45db8bb5ee9bc23918ae8bf6f1578811c9[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Oct 19 00:37:12 2020 +0530
+
+    Notification Display
+
+[33mcommit b2d3dc58ce1a495cc40a3ae221f02d15fda2b159[m
+Merge: ea6d4ff 1542254
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Thu Oct 15 21:50:39 2020 +0530
+
+    Merge pull request #37 from DhFernando/dh-development
+    
+    fix ui add issues and dev company except udate
+
+[33mcommit 1542254f15bb11c63e3438107442ee4333bcb188[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Oct 15 20:17:36 2020 +0530
+
+    fix req changes
+
+[33mcommit f2004432b19dc8f28aa9ceb352e4511003a8bc2a[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Oct 15 17:01:55 2020 +0530
+
+    fix ui add issues and dev company except udate
+
+[33mcommit ea6d4ff9e74bcb893369fcd565f556db489e1c82[m
+Merge: 0e56be3 141c993
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Tue Oct 13 18:27:48 2020 +0530
+
+    Merge pull request #36 from DhFernando/dh-development
+    
+    delete unwanted pages and modify article
+
+[33mcommit 141c99398f2b53219d3c205fadfac8eb15c83ab2[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Oct 12 14:52:16 2020 +0530
+
+    missing some filed , Added
+
+[33mcommit f44964da10c150b7a79968705c90e3119705e629[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Oct 12 14:32:21 2020 +0530
+
+    delete unwanted pages and modify article
+
+[33mcommit 0e56be329b1a815ec0789f44e43ae477570d4924[m
+Merge: ead5fef ef0df7c
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Mon Oct 12 09:59:43 2020 +0530
+
+    Merge pull request #35 from DhFernando/dh-development
+    
+    add more specific for the article create form
+
+[33mcommit ef0df7c6f8220799fc19fe600cf85b43e9e55524[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Oct 12 09:18:28 2020 +0530
+
+    add more specific for the article create form
+
+[33mcommit ead5fef7b08aed5cd89c62499f9a6f6edc24fe72[m
+Merge: 5e8ebe5 c1bb9a3
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Sat Oct 10 14:45:37 2020 +0530
+
+    Merge pull request #33 from DhFernando/dh-development
+    
+    deve more information and article delete
+
+[33mcommit c1bb9a35e9705ac67d73fb5ed35f2611406abc04[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Fri Oct 9 17:26:37 2020 +0530
+
+    deve more information and article delete
+
+[33mcommit 5e8ebe52c5fab6b3fb9f23613bce84c3dec9ca48[m
+Merge: 9118040 cc4618d
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Fri Oct 9 16:45:31 2020 +0530
+
+    Merge pull request #32 from DhFernando/dh-development
+    
+    dev article / knowledgebase
+
+[33mcommit cc4618ddd86a5b7cb534a123463f02046623615d[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Oct 8 20:13:32 2020 +0530
+
+    dev article / knowledgebase
+
+[33mcommit 91180409459e753134b76d2675733c0ec10c8e6e[m
+Merge: 6075c65 9634069
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Wed Oct 7 14:10:11 2020 +0530
+
+    Merge pull request #31 from DhFernando/dh-development
+    
+    added icons
+
+[33mcommit 963406976c3cc6041003a6e18db19b26846172ea[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Fri Oct 2 15:26:17 2020 +0530
+
+    added icons
+
+[33mcommit 6075c650014e24191f3b24574d6e8d9dc1fe3252[m
+Merge: 8f2192a b6e15d6
+Author: Dhfernando <39521923+DhFernando@users.noreply.github.com>
+Date:   Mon Sep 28 19:59:56 2020 +0530
+
+    Merge pull request #30 from DhFernando/dh-development
+    
+    dev company list with all details
+
+[33mcommit b6e15d6ffa8638fb13317b6c8dfc8da7150949c3[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Sep 28 19:50:43 2020 +0530
+
+    remove dashboard lable
+
+[33mcommit ac236acb0435866f4c0c8df29b0a4fc3ba0b5723[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Sep 28 11:38:11 2020 +0530
+
+    dev company list with all details
+
+[33mcommit 8f2192a77247ea4a96b4a31400eedd869f3745e3[m
+Merge: 25c66e4 b3b99ba
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Sun Sep 27 10:27:33 2020 +0530
+
+    Merge pull request #29 from DhFernando/dh-development
+    
+    created user assigned
+
+[33mcommit b3b99bad207babd4461cfd9a0cd0fe1fb1dd9c6c[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Sun Sep 27 00:22:31 2020 +0530
+
+    change file structure and added more details for the dashboard
+
+[33mcommit a5235c1971200b05b91583f3218028c0fa71728a[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Sat Sep 26 01:08:56 2020 +0530
+
+    dev dashboard for managers in helpdesk
+
+[33mcommit 5e8487a4efcd6fdce26c75e6191ed40d4effa173[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Sep 3 23:56:01 2020 +0530
+
+    created user assigned
+
+[33mcommit 25c66e4fcbd9ac4a951deab9589de056a9cb7163[m
+Merge: 30cd52c 219085c
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Fri Aug 21 21:36:59 2020 +0530
+
+    Merge pull request #28 from DhFernando/dh-development
+    
+    login validation
+
+[33mcommit 219085cc02977f2551cab4a38d0dbcfb95e3dd0b[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Fri Aug 21 21:22:38 2020 +0530
+
+    login validation
+
+[33mcommit 30cd52ccd4d53debcc187873f04a3dc8d47031b7[m
+Merge: feffab2 14fb981
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Fri Aug 21 19:51:56 2020 +0530
+
+    Merge pull request #27 from DhFernando/dh-development
+    
+    conversations and other errors
+
+[33mcommit 14fb981b8ace3c78cafc6d96741844594a7e31d8[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Fri Aug 21 00:44:02 2020 +0530
+
+    fix all errors LOL :)
+
+[33mcommit 70a2317d78440bdf9893e8e8627df28fa50ee24a[m
+Merge: a66712b 5e0bf86
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Aug 20 21:02:43 2020 +0530
+
+    Merge branch 'master' into dh-development
+
+[33mcommit 5e0bf864ba63fe85ae5c79cea0d362324045a019[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Aug 20 21:02:07 2020 +0530
+
+    conversation v1
+
+[33mcommit a66712bda71adb29e60f8ee1c36b6e688eb6ac63[m
+Merge: 9dc1231 feffab2
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Fri Aug 14 21:13:20 2020 +0530
+
+    merge
+
+[33mcommit feffab29281975c6b9e7a1ec00b5414dc5ee0a20[m
+Merge: 3a5fac1 74c94e3
+Author: Dhfernando <39521923+DhFernando@users.noreply.github.com>
+Date:   Fri Aug 14 20:59:57 2020 +0530
+
+    Merge pull request #26 from bihanviranga/ticketattachmentfix
+    
+    Fixed ticket attachment filetype error
+
+[33mcommit 74c94e31c862e36474acd970d09f50c7450fccff[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Thu Aug 13 14:12:53 2020 +0530
+
+    Fixed ticket attachment filetype error
+
+[33mcommit 3a5fac14ebb541dae5784dd800d71ddc341bc03f[m
+Merge: 3cfb721 d4d4ac8
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Thu Aug 13 12:01:06 2020 +0530
+
+    Merge pull request #25 from DhFernando/master
+    
+    fix issues #24
+
+[33mcommit d4d4ac8ba5b021ce8f660ddf412e69d6c2fab4e7[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Wed Aug 12 19:19:06 2020 +0530
+
+    fix status change issue
+
+[33mcommit db2e2be1b99310b533a56bf5ff55405b1fd3eda6[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Wed Aug 12 18:41:11 2020 +0530
+
+    fix issues #24
+
+[33mcommit 3cfb7216cc9cc0b2c5506bb2d5db0217ddf50740[m
+Merge: 0078312 fad9158
+Author: Dhfernando <39521923+DhFernando@users.noreply.github.com>
+Date:   Wed Aug 12 16:45:51 2020 +0530
+
+    Merge pull request #23 from bihanviranga/ticketattachmentfix
+    
+    Attachment upload and download
+
+[33mcommit fad91582fd202d980a371c0b1fe886f9f0b4211b[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Wed Aug 12 15:52:13 2020 +0530
+
+    Add support for ticket download
+
+[33mcommit 91540f4e0c09f4b6cf72744cb47a5c9402f0629f[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Wed Aug 12 14:40:57 2020 +0530
+
+    Add support for ticket upload
+
+[33mcommit 00783125e1ec44713b1d76d5924ef3b13cfe4730[m
+Merge: 08441e5 c4c7e9d
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Wed Aug 12 12:11:42 2020 +0530
+
+    Merge pull request #22 from Dilushan96/master
+    
+    dev brand crud
+
+[33mcommit c4c7e9d08be7939bbf533ab46eee7120c5d6a435[m
+Merge: e0470fc 08441e5
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Wed Aug 12 12:05:42 2020 +0530
+
+    Merge branch 'master' into master
+
+[33mcommit 08441e58771c7bed2bb96cd81e2609cd2c6e9f8a[m
+Merge: fd68f38 0622cf2
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Wed Aug 12 12:04:00 2020 +0530
+
+    Merge pull request #21 from DhFernando/master
+    
+    view controll with permissions
+
+[33mcommit 0622cf21e5d9f37edc162fff3dcdaf657773bcdc[m
+Merge: b394a4b fd68f38
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Wed Aug 12 12:03:18 2020 +0530
+
+    Merge branch 'master' into master
+
+[33mcommit e0470fc51248d56cfdc2126d984178ecb15795c4[m
+Author: mohan <dilushan.rajapakshe@gmail.com>
+Date:   Wed Aug 12 01:44:48 2020 +0530
+
+    dev brand crud
+
+[33mcommit fd68f388954014c18308b9d664678835eb70cd75[m
+Author: mohan <dilushan.rajapakshe@gmail.com>
+Date:   Wed Aug 12 01:37:11 2020 +0530
+
+    dev brand
+
+[33mcommit 9dc1231547a72146d7600b5f96a12e4c88f2ddf8[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Aug 11 22:21:27 2020 +0530
+
+    implement brand
+
+[33mcommit b394a4bdb263f393f205d97acb682eab974385a4[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Aug 11 21:44:07 2020 +0530
+
+    fix ore view permission
+
+[33mcommit deff60df3b27145f9ecaedd9867a75a2d540704e[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Aug 11 17:44:11 2020 +0530
+
+    view controll with permissions
+
+[33mcommit ced36f0705b8489f29a28403f12ab2559830fda2[m
+Merge: 7fe2446 ba7a4ed
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Tue Aug 11 17:08:48 2020 +0530
+
+    Merge pull request #20 from DhFernando/master
+    
+    dev crud system for product , model , category
+
+[33mcommit ba7a4eda49b3cc5adb033ceb9c22023b9d9bcac4[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Aug 10 23:14:50 2020 +0530
+
+    dev crud system for product , model , category && brand will come tommorow LOL (:-0)
+
+[33mcommit 7fe24469d1b828c64fde8f4b4ddd8a2f3d6199c4[m
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Thu Aug 6 09:25:00 2020 +0530
+
+    Spelling fixes
+
+[33mcommit f94c3e91d42812e2a04cdd027dfe00fdae0b4be0[m
+Merge: 5d98740 869146e
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Thu Aug 6 09:18:28 2020 +0530
+
+    Merge pull request #19 from DhFernando/master
+    
+    check username / email exist or not
+
+[33mcommit 869146e1340984faacb630de73afafc29d2c3882[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Aug 6 09:08:14 2020 +0530
+
+    fix confirmPassword issue
+
+[33mcommit 9fa66b91a9948da97359169113a9b1b00cb142e9[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Wed Aug 5 22:39:43 2020 +0530
+
+    check username / email exist or not
+
+[33mcommit 5d987407fecc1c140a894b064511974f0fb06f23[m
+Merge: 2210919 18b2d1d
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Mon Aug 3 14:30:15 2020 +0530
+
+    Merge pull request #18 from DhFernando/master
+    
+    update , and get my tkts
+
+[33mcommit 18b2d1db736a3ac0c18b7bfd9996aa60ce3df00b[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Aug 3 03:07:47 2020 +0530
+
+    update , and get my tkts
+
+[33mcommit 2210919b871710961fa4f8ede9224c643cd02f88[m
+Merge: 7ad7df9 c0263a4
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Sun Aug 2 08:49:05 2020 +0530
+
+    Merge pull request #17 from DhFernando/master
+    
+    developed filtering logic in tkt list
+
+[33mcommit c0263a4704f253e981ad8c315207b32f878f1159[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Sun Aug 2 04:45:33 2020 +0530
+
+    developed filtering logic in tkt list
+
+[33mcommit 7ad7df93cb6ca68f5de386c990a149f6c1da38b5[m
+Merge: 47b4497 81c7d2d
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Fri Jul 31 22:19:13 2020 +0530
+
+    Merge pull request #15 from DhFernando/master
+    
+    fix all problems that we faced on meeting ...
+
+[33mcommit 81c7d2dc3d9729540f320f2329b2f1f20575a293[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Jul 30 16:15:52 2020 +0530
+
+    fix all problems that we faced on meeting ...
+
+[33mcommit 47b4497a519e0708bab403d40ff3cfd260fc8eb7[m
+Merge: 220cf74 b7f31a3
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Tue Jul 28 16:16:55 2020 +0530
+
+    Merge pull request #13 from DhFernando/master
+    
+    modify ticket view and develpo tkt delete
+
+[33mcommit b7f31a36f2968fb791249a78d31199901517c327[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Jul 28 00:57:25 2020 +0530
+
+    fix log in log out problems
+
+[33mcommit 6590d2f58a6be9ed0f8cce3d54af1eb4801ed76d[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Sat Jul 25 00:26:16 2020 +0530
+
+    modify ticket view and develpo tkt delete
+
+[33mcommit 220cf74caf17461d9b87350d076932cd9ea23671[m
+Merge: 692f0a4 915234a
+Author: Dhfernando <39521923+DhFernando@users.noreply.github.com>
+Date:   Fri Jul 24 21:35:51 2020 +0530
+
+    Merge pull request #11 from bihanviranga/dev
+    
+    Refactoring: remove hard coded API path
+
+[33mcommit 692f0a4dd8ea3e190a98f16dbb90408e3c0cc43f[m
+Merge: d7bec14 943f78c
+Author: Dhfernando <39521923+DhFernando@users.noreply.github.com>
+Date:   Fri Jul 24 21:34:15 2020 +0530
+
+    Merge pull request #12 from bihanviranga/ticket-page
+    
+    Ticket page
+
+[33mcommit 943f78ce0429a8ee9e5992773a9423a17e66efc9[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Thu Jul 23 16:46:09 2020 +0530
+
+    Add ticket links and routes
+
+[33mcommit e57c2528c24ea6ee3c0008423dbebe38c433b9d6[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Thu Jul 23 16:45:41 2020 +0530
+
+    Refactor ticket list to include ticket detail links
+
+[33mcommit 1e21b4eac8bc722363a94921efde3b6be6c2e0ad[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Thu Jul 23 16:43:45 2020 +0530
+
+    Added ticket detail page and redux actions
+
+[33mcommit 915234ae4c736c14da5c7fcd50fd6baaf5e88325[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Wed Jul 22 17:59:23 2020 +0530
+
+    Refactoring: remove hard coded API path
+
+[33mcommit d7bec14e1f0f00d376a637794202c7c57c9c38eb[m
+Merge: f3c8f16 bf8bc2f
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Tue Jul 21 13:35:38 2020 +0530
+
+    Merge pull request #10 from DhFernando/master
+    
+    fix fetch issues
+
+[33mcommit bf8bc2f63f50da374a5ceed416ebfa42ce49f3d8[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Jul 21 01:32:09 2020 +0530
+
+    make some fetching errors
+
+[33mcommit ef83d37385fb95cf62fad8f496620e9b6ffbe096[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Jul 20 22:43:27 2020 +0530
+
+    fix fetching issues
+
+[33mcommit f3c8f16dfd4bb29ef7ea45db69591aea804cc815[m
+Merge: c3a95fd 81168d9
+Author: Dhfernando <39521923+DhFernando@users.noreply.github.com>
+Date:   Mon Jul 20 20:06:24 2020 +0530
+
+    Merge pull request #9 from bihanviranga/dev
+    
+    Created Ticket list page
+
+[33mcommit 81168d9f01134c66a357c2682783d4dc09b264d5[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Sun Jul 19 16:28:12 2020 +0530
+
+    Added ticket list page
+
+[33mcommit 2806d060009f08fc9bb5e1a96cd66f7d99a20091[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Sun Jul 19 14:32:11 2020 +0530
+
+    Minor component refactor
+
+[33mcommit 008792a24e9e5bb7aadfdb6db7823dedba71eaa7[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Sun Jul 19 14:03:13 2020 +0530
+
+    Added ticket list page and component with placeholders
+
+[33mcommit c3a95fd68088f1ee39db7206939626f2b98c3e72[m
+Merge: eb2878a 6033522
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Fri Jul 17 07:02:50 2020 +0000
+
+    Merge pull request #8 from DhFernando/master
+    
+    develop logics for crontroll access
+
+[33mcommit 60335220bd4c5f0e64f3b401ec1cab2580a595a3[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Wed Jul 15 19:56:53 2020 +0530
+
+    changed code to req suggestion
+
+[33mcommit a3e8e20970384465c4be256623fe54a281c6be24[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Jul 14 08:11:51 2020 +0530
+
+    dev {product module category} pages with list all data
+
+[33mcommit 985f5ad7ea872caafafc70de228f308b6165c125[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Jul 13 20:45:36 2020 +0530
+
+    dev dynamiclly change dropdown for tkt
+
+[33mcommit ec0f87da165ebd9c4494266cee345b6d149b6fd9[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Sun Jul 12 18:01:52 2020 +0530
+
+    develop logics for crontroll access
+
+[33mcommit eb2878ab3cad9df6bb893577785fce202bcb5350[m
+Merge: 8b2901d 4d51e96
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Sat Jul 11 08:30:28 2020 +0000
+
+    Merge pull request #7 from DhFernando/master
+    
+    dev company
+
+[33mcommit 4d51e96c8caba40ee991c87a48f5e7094f6fc57b[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Fri Jul 10 00:25:13 2020 +0530
+
+    dev fontend desing
+
+[33mcommit 43428f72d8cafb7da360407aa0b1e48ce09029e0[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Wed Jul 8 23:15:13 2020 +0530
+
+    dev company
+
+[33mcommit 8b2901d7ed56746a4072eb6db3f9bff016a9248e[m
+Merge: 3b55c32 0e2625d
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Tue Jul 7 14:12:49 2020 +0530
+
+    Merge branch 'DhFernando-master'
+
+[33mcommit 0e2625dba6dcbfd066a04aed8e695c9995ca1713[m
+Merge: 3b55c32 745bc50
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Tue Jul 7 14:00:15 2020 +0530
+
+    Merge branch 'master' of github.com:DhFernando/helpdesk-frontend into DhFernando-master
+
+[33mcommit 745bc50a05fe5dec6fcb7037e7b26da895f45992[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Mon Jul 6 20:14:48 2020 +0530
+
+    fix errors & Enhance user
+
+[33mcommit 3b55c32c56f5c7887f17d816efb2255124a4ab26[m
+Merge: 3056e68 e273b05
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Sun Jul 5 11:30:36 2020 +0000
+
+    Merge pull request #5 from DhFernando/master
+    
+    fix error of user create
+
+[33mcommit e273b053ee53d834460540f2383352fbf1a586dd[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Sat Jul 4 17:00:36 2020 +0530
+
+    fix error of user create
+
+[33mcommit 3056e680b6edbf510e18e15aa536ea301637765e[m
+Merge: fdff39a 4c32954
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Thu Jul 2 07:37:33 2020 +0000
+
+    Merge pull request #4 from DhFernando/master
+    
+    Dev
+
+[33mcommit 4c32954eea561174ac45e86c4e4b2b3fb6916185[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Wed Jul 1 18:10:07 2020 +0530
+
+    add userName when tkt create
+
+[33mcommit f4439039d1a99b37114bfe7b59a20b912bf2faf5[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Wed Jul 1 17:00:07 2020 +0530
+
+    login logout and get profile
+
+[33mcommit 94288a79ebc99dd6b49f1285f8a88173bd804305[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Jun 30 21:41:48 2020 +0530
+
+    enhance create tkt page
+
+[33mcommit da09823228b7e9bd359f34867e81be23de500ebe[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Jun 30 18:39:32 2020 +0530
+
+    store token from BE in local storage
+
+[33mcommit cdd8b440016c896dcdbfef447b2abfc4c2b26fd8[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Jun 30 02:01:55 2020 +0530
+
+    dev login and register pages
+
+[33mcommit fdff39a97ef47c1cb7cb55498ae23b734290c318[m
+Merge: c662fc5 d13bc26
+Author: Bihan <bihanviranga@gmail.com>
+Date:   Sun Jun 28 14:33:58 2020 +0000
+
+    Merge pull request #3 from DhFernando/master
+    
+    Enhanced Project
+
+[33mcommit d13bc26f6650c8ebb6e6f31d6a59e377bd2cb7fc[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Jun 25 22:36:16 2020 +0530
+
+    user List
+
+[33mcommit cc008d16040081318d93d65b6f24e921cb9a1ab0[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Thu Jun 25 17:37:23 2020 +0530
+
+    Create article
+
+[33mcommit a82616909aff34e4ee79c45c749f32f463c30ea0[m
+Author: dhfernando <hdilshan.fernando11@gmail.com>
+Date:   Tue Jun 9 21:43:54 2020 +0530
+
+    init project
+
+[33mcommit c662fc53970b8832e338980830b3dc1a96ced24e[m
+Author: Bihan Viranga <bihanviranga@gmail.com>
+Date:   Mon Jun 8 16:11:16 2020 +0530
+
+    Initial commit

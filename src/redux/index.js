@@ -12,7 +12,10 @@ export {
     logOutUser,
     deleteUser,
     getUserByUserName,
-    getTktOwnerByUserName
+    getTktOwnerByUserName,
+    CheckResetPermissionAndUserAvailability,
+    MakeNullResetUser,
+    ResetPassword
 } from './User/UserAction'
 
 export {

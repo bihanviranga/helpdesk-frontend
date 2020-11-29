@@ -87,6 +87,7 @@ export const deleteTicket = (ticketId) => {
                     })
                     .catch(err => {
                         const errorMsg = err.message
+                        console.log(errorMsg);
                     })
             })
         })
