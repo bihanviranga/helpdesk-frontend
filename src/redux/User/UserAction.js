@@ -122,3 +122,48 @@ export const logOutUser = () => {
         payload: null
     }
 }
+
+export const CheckResetPermissionAndUserAvailability = (userData) =>{
+    return dispatch =>{
+        dispatch({
+            type : "CHECK_RESET_PERMISSION_ADN_USER_AVAILABILITY",
+            payload : new Promise((resolve , reject) =>{
+                Axios.post(`${API_PATH}/User/resetPassword`, userData , {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
+                })
+                    .then(response => {
+                        resolve(response.data)
+                        // history.push({ pathname:  "/" })
+                    })
+                    .catch(err => {
+                        console.log(err.response.data)
+                    })
+            })
+        })
+    }
+}
+
+export const MakeNullResetUser = () =>{
+    return {
+        type: "MAKE_NULL_RESET_USER",
+        payload: null
+    }
+}
+
+export const ResetPassword = (updatedUser) => {
+    console.log(updatedUser)
+    return{
+        type : "RESET_PASSWORD",
+        payload : new Promise((resolve , reject) => {
+            Axios.put(`${API_PATH}/User/newPassword`, updatedUser , {
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem("Token")  }
+            })
+                .then(response => {
+                    alert("User password updated")
+                })
+                .catch(err => {
+                    console.log(err.response.data)
+                })
+        })
+    }
+}

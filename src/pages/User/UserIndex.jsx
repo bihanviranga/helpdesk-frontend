@@ -1,4 +1,4 @@
-import React , {useEffect , useState} from 'react'
+import React , {useState , useEffect , useRef} from 'react';
 import {useSelector , useDispatch} from 'react-redux'
 import { fetchAllUsers , deleteUser } from '../../redux'
 import { useHistory } from "react-router";
@@ -34,6 +34,9 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 
 import {Link} from 'react-router-dom'
+
+
+import PasswordReset from './PasswordReset'
 
 
 //custom style
@@ -76,11 +79,14 @@ function UserIndex() {
     const initSelectedUser = {}
     const [selectedUser , setSelectedUser] = useState(initSelectedUser)
 
-
+    const PasswordResetRef = useRef();
+    
     useEffect(()=>{
         dispatch(fetchAllUsers())
         return () => {}
     },[])
+
+    
     
 
     // Component
@@ -95,6 +101,17 @@ function UserIndex() {
             return null
          }
 
+    }
+
+    function PasswordReset_(){
+        if(localStorage.getItem("Token") != null){
+            return JSON.parse(atob(localStorage.getItem("Token").split('.')[1])).UserRole == "Manager" ?
+                 ( <Button color="inherit" onClick={() => PasswordResetRef.current.handleClickOpen()} >User Password Reset</Button>  ) : null
+             
+         }else { 
+             history.push({ pathname:  "/UserLogin" })           
+             return null
+          }
     }
 
      // component 
@@ -193,7 +210,7 @@ function UserIndex() {
     return (
         <div>
             <h3>Users</h3>
-            <div> <UserRegistrarionButtonComponet /> </div>
+            <div> <UserRegistrarionButtonComponet /> <PasswordReset_ /></div>
             <div>
                 <TableContainer component={Paper} >
                     <Table aria-label="simple table">
@@ -217,6 +234,10 @@ function UserIndex() {
                     </Table>
                 </TableContainer>
                 
+            </div>
+
+            <div>
+                <PasswordReset  ref={PasswordResetRef} />
             </div>
             
             {/* // user information dialog box */}

@@ -5,7 +5,8 @@ const initialState = {
     },
     user:null,
     tktOwner : null,
-    login : (localStorage.getItem("Token") != null ) ? true : false
+    login : (localStorage.getItem("Token") != null ) ? true : false ,
+    resetUser : null
 }
 
 const userReducer = (state = initialState , action) => {
@@ -60,6 +61,16 @@ const userReducer = (state = initialState , action) => {
         return {
             ...state,
             tktOwner : action.payload
+        }
+    }else if(action.type == "CHECK_RESET_PERMISSION_ADN_USER_AVAILABILITY_FULFILLED"){
+        return{
+            ...state,
+            resetUser : action.payload
+        }
+    }else if( action.type == "MAKE_NULL_RESET_USER" ){
+        return{
+            ...state ,
+             resetUser : null
         }
     }else{
         return state
